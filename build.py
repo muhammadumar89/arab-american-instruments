@@ -366,20 +366,30 @@ NOTES = [
 
 # ---------------------------------------------------------------- chrome
 
-FONTS = '<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@300;400;500;600&family=Geist+Mono:wght@400;500&family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;1,6..72,300&display=swap" rel="stylesheet">'
+FONTS = '<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600&family=Inter:wght@400;500&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">'
 
-MARK = '<svg class="mark" viewBox="0 0 40 40" aria-hidden="true"><circle cx="20" cy="20" r="18.5" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M7 27 Q20 4 33 27" fill="none" stroke="currentColor" stroke-width="1.5"/><circle cx="7" cy="27" r="3" fill="var(--signal)"/><circle cx="33" cy="27" r="3" fill="var(--sand)"/></svg>'
+MARK = '<svg class="mark" viewBox="0 0 40 40" aria-hidden="true"><circle cx="20" cy="20" r="18.5" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M7 27 Q20 4 33 27" fill="none" stroke="currentColor" stroke-width="1.6"/><circle cx="7" cy="27" r="3" fill="currentColor"/><circle cx="33" cy="27" r="3" fill="currentColor"/></svg>'
 
 NAV = [("Platforms", "/platforms/"), ("Industries", "/industries/"), ("Design Lab", "/lab/"), ("Supply chain", "/supply-chain/"), ("About", "/about/")]
+
+# Cards under the home banner: what we are doing, in the codeatoms.ai card form.
+FEATURED = [
+    ("Fleet vision", "Fleet vision · Gulf", "Two cameras, AI on the device, for heavy truck fleets in the Gulf", "/platforms/drivesense/", "assets/video/dashcam-desert.jpg"),
+    ("Walker safety", "Field system · Walker safety", "A 24 byte band message that keeps thousands of walkers covered off the network", "/platforms/field-band/", "assets/video/walkers-desert.jpg"),
+    ("Own the stack", "Supply chain", "Design files, bill of materials and keys handed to the customer, not kept by us", "/supply-chain/", "assets/video/chip-macro.jpg"),
+    ("Design Lab", "Design Lab · Notes from the bench", "Why the top of a wrist band's board is empty, and what a board colour costs", "/lab/", "assets/img/products/carrier-top.jpg"),
+    ("Two headquarters", "Riyadh and Dallas", "One design house working from the Gulf and the United States", "/about/", "assets/video/dallas-sunset.jpg"),
+]
 
 
 def header(active=""):
     links = "".join(
         f'<a href="{u(h)}"{" class=on" if active == h else ""}>{n}</a>' for n, h in NAV
     )
-    return f'''<header class="top"><div class="bar">
-<a class="brand" href="{u("/")}">{MARK}<span>Arab American <b>Instruments</b></span></a>
-<nav id="nav">{links}<a class="btn small" href="{u("/build/")}">Request a build</a></nav>
+    return f'''<header class="top"><div class="pill">
+<a class="brand" href="{u("/")}">{MARK}<span>Arab American Instruments</span></a>
+<nav id="nav">{links}<a class="navcta" href="{u("/build/")}">Request a build</a></nav>
+<a class="btn small" href="{u("/build/")}">Request a build</a>
 <button class="menu" aria-label="Menu" aria-expanded="false" onclick="document.body.classList.toggle('open');this.setAttribute('aria-expanded',document.body.classList.contains('open'))"><span></span><span></span></button>
 </div></header>'''
 
@@ -388,12 +398,12 @@ def footer():
     cols = "".join(f'<a href="{u(h)}">{n}</a>' for n, h in NAV)
     prods = "".join(f'<a href="{u("/platforms/" + p["slug"] + "/")}">{e(p["name"])}</a>' for p in PRODUCTS)
     return f'''<footer class="foot"><div class="wrap">
+<div class="ftop"><p class="tag">{e(TAGLINE)}</p><a class="btn ghost" href="{u("/build/")}">Request a build</a></div>
 <div class="fgrid">
-<div><a class="brand" href="{u("/")}">{MARK}<span>Arab American <b>Instruments</b></span></a>
-<p class="tag">{e(TAGLINE)}</p></div>
 <div><h4>Company</h4>{cols}<a href="{u("/credits/")}">Credits</a></div>
 <div><h4>Platforms</h4>{prods}</div>
-<div><h4>Headquarters</h4><p>Riyadh, Saudi Arabia<br><span class="mono">24.71 N, 46.68 E</span></p><p>Dallas, Texas<br><span class="mono">32.78 N, 96.80 W</span></p></div>
+<div><h4>Riyadh</h4><p>Saudi Arabia<br><span class="mono">24.71 N, 46.68 E</span></p></div>
+<div><h4>Dallas</h4><p>Texas, United States<br><span class="mono">32.78 N, 96.80 W</span></p></div>
 </div>
 <div class="legal"><span>Arab American Instruments is a fully owned subsidiary of CodeNinja.</span><span>&copy; 2026 Arab American Instruments</span></div>
 </div></footer>'''
@@ -411,11 +421,19 @@ SCRIPT = '''<script>
       if(x.isIntersecting){ load(v); var p=v.play(); if(p&&p.catch){p.catch(function(){});} } else { v.pause(); } }); },{rootMargin:'200px 0px'});
     vids.forEach(function(v){ io.observe(v); });
   }
-  document.querySelectorAll('.card[data-film]').forEach(function(c){
-    var v=c.querySelector('video'); if(!v) return;
-    c.addEventListener('mouseenter',function(){ load(v); var p=v.play(); if(p&&p.catch){p.catch(function(){});} });
-    c.addEventListener('mouseleave',function(){ v.pause(); });
-  });
+  var track=document.querySelector('.featured .track');
+  if(track){
+    var chips=[].slice.call(document.querySelectorAll('.featured .chips a'));
+    var cards=[].slice.call(track.children);
+    function go(i){ cards[i].scrollIntoView({behavior:'smooth',inline:'start',block:'nearest'}); }
+    chips.forEach(function(c,i){ c.addEventListener('click',function(ev){ ev.preventDefault(); go(i); }); });
+    var prev=document.querySelector('.featured .prev'), next=document.querySelector('.featured .next'), cur=0;
+    function sync(){ var l=track.scrollLeft, best=0, bd=1e9; cards.forEach(function(c,i){ var d=Math.abs(c.offsetLeft-track.offsetLeft-l); if(d<bd){bd=d;best=i;} }); cur=best;
+      chips.forEach(function(c,i){ c.classList.toggle('on',i===cur); }); if(prev) prev.disabled=cur===0; if(next) next.disabled=cur===cards.length-1; }
+    track.addEventListener('scroll',sync,{passive:true}); sync();
+    if(prev) prev.addEventListener('click',function(){ go(Math.max(0,cur-1)); });
+    if(next) next.addEventListener('click',function(){ go(Math.min(cards.length-1,cur+1)); });
+  }
   var f=document.getElementById('buildform');
   if(f){ f.addEventListener('submit',function(ev){ ev.preventDefault();
     var d=new FormData(f), lines=[]; d.forEach(function(val,k){ if(val) lines.push(k+': '+val); });
@@ -437,7 +455,7 @@ def page(path, title, desc, body, active=""):
 <link rel="canonical" href="{canon}">
 <meta property="og:title" content="{e(full)}"><meta property="og:description" content="{e(desc)}">
 <meta property="og:image" content="{SITE_URL}/assets/video/home-montage.jpg"><meta name="twitter:card" content="summary_large_image">
-<meta name="theme-color" content="#0b0b0a">
+<meta name="theme-color" content="#ffffff">
 <link rel="icon" href="{u("/assets/img/mark.svg")}" type="image/svg+xml">
 {FONTS}
 <link rel="stylesheet" href="{u("/assets/site.css")}">
@@ -460,13 +478,49 @@ PAGES = []
 # ---------------------------------------------------------------- blocks
 
 
-def film(slug, inner, cls="", hero=False):
+def label(text):
+    return f'<p class="label"><span class="sq"></span>{e(text)}</p>'
+
+
+def video_tag(slug, hero=False):
     v = f"/assets/video/{slug}"
     if hero:
-        media = f'<video autoplay muted loop playsinline preload="auto" poster="{u(v + ".jpg")}" aria-hidden="true"><source src="{u(v + ".mp4")}" type="video/mp4"></video>'
-    else:
-        media = f'<video muted loop playsinline preload="none" poster="{u(v + ".jpg")}" data-src="{u(v + ".mp4")}" aria-hidden="true"></video>'
-    return f'<section class="film {cls}"><img class="poster" src="{u(v + ".jpg")}" alt="" aria-hidden="true">{media}<div class="scrim"></div><div class="inner">{inner}</div></section>'
+        return f'<video autoplay muted loop playsinline preload="auto" poster="{u(v + ".jpg")}" aria-hidden="true"><source src="{u(v + ".mp4")}" type="video/mp4"></video>'
+    return f'<video muted loop playsinline preload="none" poster="{u(v + ".jpg")}" data-src="{u(v + ".mp4")}" aria-hidden="true"></video>'
+
+
+def banner(slug, inner, cls="", hero=False):
+    """Full bleed video banner (home hero, closing call)."""
+    return f'<section class="banner {cls}"><img class="poster" src="{u("/assets/video/" + slug + ".jpg")}" alt="" aria-hidden="true">{video_tag(slug, hero)}<div class="scrim"></div><div class="inner">{inner}</div></section>'
+
+
+def split(kicker, title, text, media, links="", side="right", cls="", h="h2"):
+    """Applied style row: text column and a framed media panel, hairline between."""
+    ln = f'<div class="plinks">{links}</div>' if links else ""
+    txt = f'<div class="col text">{label(kicker) if kicker else ""}<{h}>{title}</{h}><p class="lede">{text}</p>{ln}</div>'
+    med = f'<div class="col media">{media}</div>'
+    order = txt + med if side == "right" else med + txt
+    return f'<section class="split {side} {cls}"><div class="wrap grid2">{order}</div></section>'
+
+
+def panel_video(slug, caption=""):
+    cap = f'<figcaption>{e(caption)}</figcaption>' if caption else ""
+    return f'<figure class="panel"><img src="{u("/assets/video/" + slug + ".jpg")}" alt="" loading="lazy">{video_tag(slug)}{cap}</figure>'
+
+
+def panel_img(src, alt="", caption="", contain=False):
+    cap = f'<figcaption>{e(caption)}</figcaption>' if caption else ""
+    return f'<figure class="panel{" contain" if contain else ""}"><img src="{u(src)}" alt="{e(alt)}" loading="lazy">{cap}</figure>'
+
+
+def page_head(kicker, title, text, slug=None, actions=""):
+    """White page header with an optional framed video below it."""
+    media = f'<div class="wrap">{panel_video(slug)}</div>' if slug else ""
+    return f'<section class="phead"><div class="wrap">{label(kicker)}<h1>{title}</h1><p class="lede">{text}</p>{actions}</div>{media}</section>'
+
+
+def pill(href, text, primary=False):
+    return f'<a class="btn{"" if primary else " ghost"}" href="{href}">{e(text)}</a>'
 
 
 def status_badge(p):
@@ -480,10 +534,9 @@ def product_card(p):
         cls = "card prod"
     else:
         f = p["film"]
-        media = f'<img src="{u("/assets/video/" + f + ".jpg")}" alt="" loading="lazy"><video muted loop playsinline preload="none" data-src="{u("/assets/video/" + f + ".mp4")}" aria-hidden="true"></video>'
+        media = f'<img src="{u("/assets/video/" + f + ".jpg")}" alt="" loading="lazy">{video_tag(f)}'
         cls = "card prod filmcard"
-    data = ' data-film="1"' if not img else ""
-    return f'''<a class="{cls}"{data} href="{u("/platforms/" + p["slug"] + "/")}">
+    return f'''<a class="{cls}" href="{u("/platforms/" + p["slug"] + "/")}">
 <div class="cm">{media}</div>
 <div class="cb"><div class="meta"><span class="mono">{e(LINES[p["line"]]["name"])}</span>{status_badge(p)}</div>
 <h3>{e(p["name"])}</h3><p class="kind">{e(p["kind"])}</p><p>{e(p["short"])}</p>
@@ -498,67 +551,62 @@ OWN = [
 ]
 
 
-def own_strip(light=False):
+def own_strip():
     items = "".join(f'<div><span class="mono n">0{i + 1}</span><h3>{e(a)}</h3><p>{e(b)}</p></div>' for i, (a, b) in enumerate(OWN))
-    return f'<section class="own{" light" if light else ""}"><div class="wrap"><p class="kicker">What you own when we hand over</p><div class="own4">{items}</div></div></section>'
+    return f'<section class="own"><div class="wrap">{label("What you own when we hand over")}<div class="own4">{items}</div></div></section>'
 
 
 def cta(title="Tell us what you need to sense, send or control.", film_slug="print-timelapse"):
-    return film(film_slug, f'<p class="kicker">Made to order</p><h2>{e(title)}</h2><p class="lede">No catalogue prices. We start from your site, your vehicles and your rules, and quote the build.</p><a class="btn" href="{u("/build/")}">Request a build</a>', "cta center")
+    return banner(film_slug, f'{label("Made to order")}<h2>{e(title)}</h2><p class="lede">No catalogue prices. We start from your site, your vehicles and your rules, and quote the build.</p>{pill(u("/build/"), "Request a build", True)}', "cta")
+
+
+def featured():
+    chips = "".join(f'<a href="#f{i}"{" class=on" if i == 0 else ""}>{e(c[0])}</a>' for i, c in enumerate(FEATURED))
+    cards = "".join(
+        f'<a class="fcard" id="f{i}" href="{u(c[3])}"><img src="{u("/" + c[4])}" alt="" loading="{"eager" if i < 2 else "lazy"}" draggable="false"><div class="lbl"><p class="mono">{e(c[1])}</p><h3>{e(c[2])}</h3></div></a>'
+        for i, c in enumerate(FEATURED)
+    )
+    arrows = '<div class="fnav"><button type="button" class="prev" aria-label="Previous"><svg viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M9 2 4 7l5 5" stroke="currentColor" stroke-width="1.2"/></svg></button><button type="button" class="next" aria-label="Next"><svg viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M5 2l5 5-5 5" stroke="currentColor" stroke-width="1.2"/></svg></button></div>'
+    return f'<section class="featured" aria-label="Featured"><div class="wrap fhead"><div class="chips">{chips}</div>{arrows}</div><div class="track">{cards}</div></section>'
 
 
 # ---------------------------------------------------------------- pages
 
 
 def home():
-    hero = film(
+    hero = banner(
         "home-montage",
-        f'''<p class="kicker">Arab American Instruments &middot; Riyadh and Dallas</p>
-<h1>{e(TAGLINE)}</h1>
-<p class="lede">We design the hardware. You own the supply chain. Every board, every part and every line of firmware comes with its origin and its source.</p>
-<div class="actions"><a class="btn" href="{u("/build/")}">Request a build</a><a class="btn ghost" href="{u("/platforms/")}">See the platforms</a></div>
-<p class="coords mono">RIYADH 24.71 N 46.68 E &nbsp;&middot;&nbsp; DALLAS 32.78 N 96.80 W</p>''',
+        f'<h1>{e(TAGLINE)}</h1><p class="lede">We design the hardware. You own the supply chain.</p><div class="actions">{pill(u("/build/"), "Request a build", True)}{pill(u("/platforms/"), "See the platforms")}</div><a class="down" href="#featured" aria-label="Scroll"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 4v16m0 0 6-6m-6 6-6-6" stroke="currentColor" stroke-width="1.4"/></svg></a>',
         "hero",
         hero=True,
     )
-    statement = f'''<section class="statement light"><div class="wrap narrow">
-<p class="kicker">Why we exist</p>
-<h2 class="serif">The biggest threats now sit in the hardware.</h2>
-<p>For a decade the fight over control was a software fight. It has moved down the stack. A camera on a truck, a band on a wrist, a relay on a pole: each carries chips, radios and firmware that someone else chose, from a supply chain nobody in the room can see.</p>
-<p>The phone in your pocket shows where that ends: a sealed stack you rent and never own. We think any organisation that runs critical work should own its hardware the way it already owns its data.</p>
-<p>Arab American Instruments is a hardware design company. We own our designs, publish what we learn, and build purpose built devices for each customer, so the customer leaves with the design files, the parts list and the keys.</p>
-</div></section>'''
+    feat = '<div id="featured"></div>' + featured()
+    statement = split(
+        "Why we exist",
+        "The biggest threats now sit in the hardware.",
+        "For a decade the fight over control was a software fight. It has moved down the stack. A camera on a truck, a band on a wrist, a relay on a pole: each carries chips, radios and firmware that someone else chose, from a supply chain nobody in the room can see. We think any organisation that runs critical work should own its hardware the way it already owns its data. So we design the devices, publish what we learn, and hand each customer the design files, the parts list and the keys.",
+        panel_video("aai-hardware", "Our own boards and renders: DriveSense carrier, VIM 2.0 and the Field Band."),
+        pill(u("/supply-chain/"), "How ownership works"),
+        side="right",
+    )
     lines = ""
     for i, (k, L) in enumerate(LINES.items()):
         prods = [p for p in PRODUCTS if p["line"] == k]
         plinks = "".join(f'<a href="{u("/platforms/" + p["slug"] + "/")}">{e(p["name"])} <i>&rarr;</i></a>' for p in prods)
         if k == "controls":
             plinks += f'<a href="{u("/build/")}">Custom controllers <i>&rarr;</i></a>'
-        lines += film(
-            L["film"],
-            f'<p class="kicker mono">0{i + 1} &nbsp; {e(L["name"])}</p><h2>{e(L["title"])}</h2><p class="lede">{e(L["body"])}</p><div class="plinks">{plinks}</div>',
-            "band " + ("right" if i % 2 else "left"),
-        )
-    hw = film(
-        "aai-hardware",
-        f'<p class="kicker">Designed in house</p><h2>Made to order. Never off the shelf.</h2><p class="lede">These are our own boards and renders. Each platform is a reference design we adapt to your site and build in the quantity you need.</p>',
-        "band left short",
-    )
+        lines += split(f"0{i + 1} · {L['name']}", e(L["title"]), e(L["body"]), panel_video(L["film"]), plinks, side="right" if i % 2 == 0 else "left", cls="line")
     cards = "".join(product_card(p) for p in PRODUCTS)
-    grid = f'<section class="cards"><div class="wrap"><div class="head"><h2>Platforms</h2><a href="{u("/platforms/")}">All platforms <i>&rarr;</i></a></div><div class="grid3">{cards}</div></div></section>'
+    grid = f'<section class="cards"><div class="wrap"><div class="head">{label("Platforms")}<h2>Reference designs, built to order.</h2><a class="btn ghost" href="{u("/platforms/")}">All platforms</a></div><div class="grid3">{cards}</div></div></section>'
     inds = "".join(
-        f'<a class="card ind" data-film="1" href="{u("/industries/")}#{slugify(n)}"><div class="cm"><img src="{u("/assets/video/" + f + ".jpg")}" alt="" loading="lazy"><video muted loop playsinline preload="none" data-src="{u("/assets/video/" + f + ".mp4")}" aria-hidden="true"></video></div><div class="cb"><h3>{e(n)}</h3></div></a>'
+        f'<a class="tile" href="{u("/industries/")}#{slugify(n)}"><div class="cm"><img src="{u("/assets/video/" + f + ".jpg")}" alt="" loading="lazy">{video_tag(f)}</div><h3>{e(n)}</h3></a>'
         for n, f, _, _ in INDUSTRIES
     )
-    ind = f'<section class="cards dark2"><div class="wrap"><div class="head"><h2>Where it runs</h2><a href="{u("/industries/")}">All industries <i>&rarr;</i></a></div><div class="grid4">{inds}</div></div></section>'
+    ind = f'<section class="cards grey"><div class="wrap"><div class="head">{label("Industries")}<h2>Where nothing may phone home.</h2><a class="btn ghost" href="{u("/industries/")}">All industries</a></div><div class="grid4">{inds}</div></div></section>'
     notes = "".join(note_card(n) for n in NOTES)
-    lab = f'<section class="cards light"><div class="wrap"><div class="head"><h2 class="serif">From the Design Lab</h2><a href="{u("/lab/")}">All notes <i>&rarr;</i></a></div><div class="grid3">{notes}</div></div></section>'
-    hq = f'''<section class="hq">
-{film("riyadh-day", '<p class="kicker mono">HQ 01</p><h2>Riyadh</h2><p>Design, customer engineering and field trials for the Gulf.</p>', "half")}
-{film("dallas-sunset", '<p class="kicker mono">HQ 02</p><h2>Dallas</h2><p>Design, partners and supply for the United States.</p>', "half")}
-</section>
-<section class="statement"><div class="wrap narrow center"><h2 class="serif">Two headquarters, one stack.</h2><p>The Gulf and the United States share one problem: critical systems running on hardware nobody in the room designed. We work from both and build for both.</p></div></section>'''
-    body = hero + statement + own_strip() + lines + hw + grid + ind + lab + hq + cta()
+    lab = f'<section class="cards"><div class="wrap"><div class="head">{label("Design Lab")}<h2>We publish what we learn.</h2><a class="btn ghost" href="{u("/lab/")}">All notes</a></div><div class="grid3">{notes}</div></div></section>'
+    hq = f'<section class="hq grey"><div class="wrap">{label("Headquarters")}<div class="grid2 even">{panel_video("riyadh-day", "Riyadh, Saudi Arabia. Design, customer engineering and field trials for the Gulf.")}{panel_video("dallas-sunset", "Dallas, Texas. Design, partners and supply for the United States.")}</div></div></section>'
+    body = hero + feat + statement + own_strip() + lines + grid + ind + lab + hq + cta()
     page("/", "Arab American Instruments", "Arab American Instruments designs low power edge devices for sensing, satcoms and real time control in air gapped environments. Riyadh and Dallas. You own the design and the supply chain.", body)
 
 
@@ -567,66 +615,62 @@ def slugify(s):
 
 
 def note_card(n):
-    return f'<a class="card note" href="{u("/lab/" + n["slug"] + "/")}"><div class="cm"><img src="{u("/assets/video/" + n["film"] + ".jpg")}" alt="" loading="lazy"></div><div class="cb"><span class="mono">{e(n["date"])}</span><h3 class="serif">{e(n["title"])}</h3><p>{e(n["sub"])}</p></div></a>'
+    return f'<a class="card note" href="{u("/lab/" + n["slug"] + "/")}"><div class="cm"><img src="{u("/assets/video/" + n["film"] + ".jpg")}" alt="" loading="lazy"></div><div class="cb"><span class="mono">{e(n["date"])}</span><h3>{e(n["title"])}</h3><p>{e(n["sub"])}</p></div></a>'
 
 
 def platforms():
-    hero = film("oasis-road", f'<p class="kicker">Platforms</p><h1>Reference designs, built to order.</h1><p class="lede">Three lines from one design house. Nothing here has a list price: every unit is adapted to where it will live and built for the customer who will own it.</p>', "hero mid")
+    head = page_head("Platforms", "Reference designs, built to order.", "Three lines from one design house. Nothing here has a list price: every unit is adapted to where it will live and built for the customer who will own it.", "oasis-road")
+    legend = "".join(f'<span class="badge s-{k}">{v}</span>' for k, v in STATUS.items())
+    leg = f'<section class="legend"><div class="wrap"><span class="mono">Status</span>{legend}<span class="mono">Updated 12 Nov 2026</span></div></section>'
     sections = ""
-    for k, L in LINES.items():
+    for i, (k, L) in enumerate(LINES.items()):
         prods = [p for p in PRODUCTS if p["line"] == k]
         cards = "".join(product_card(p) for p in prods)
         extra = ""
         if k == "controls":
             extra = f'<a class="card prod ask" href="{u("/build/")}"><div class="cb"><span class="mono">RT Controls</span><h3>Custom controllers</h3><p class="kind">Commissioned designs</p><p>Pumps, valves, irrigation, gates and lines. Tell us the machine and the timing budget and we design the controller around it.</p><span class="more">Start a commission <i>&rarr;</i></span></div></a>'
         tech = {"sensing": "cams-sunset", "satcoms": "antenna-sky", "controls": "scope-wave"}[k]
-        sections += f'<div id="{k}">' + film(tech, f'<p class="kicker mono">{e(L["name"])}</p><h2>{e(L["title"])}</h2>', "band short left") + '</div>'
-        sections += f'<section class="cards"><div class="wrap"><div class="head"><h2>{e(L["name"])}</h2><p>{e(L["body"])}</p></div><div class="grid3">{cards}{extra}</div></div></section>'
-    legend = "".join(f'<span class="badge s-{k}">{v}</span>' for k, v in STATUS.items())
-    leg = f'<section class="legend"><div class="wrap"><span class="mono">Status</span>{legend}<span class="mono">Updated 12 Nov 2026</span></div></section>'
-    page("/platforms/", "Platforms", "Sensing, satcoms and mesh, and real time control platforms from Arab American Instruments. Made to order, never off the shelf.", hero + leg + sections + own_strip(True) + cta(), "/platforms/")
+        sections += f'<div id="{k}">' + split(f"0{i + 1} · {L['name']}", e(L["title"]), e(L["body"]), panel_video(tech), side="right" if i % 2 == 0 else "left", cls="line") + "</div>"
+        sections += f'<section class="cards"><div class="wrap"><div class="grid3">{cards}{extra}</div></div></section>'
+    page("/platforms/", "Platforms", "Sensing, satcoms and mesh, and real time control platforms from Arab American Instruments. Made to order, never off the shelf.", head + leg + sections + own_strip() + cta(), "/platforms/")
 
 
 def product_page(p):
     L = LINES[p["line"]]
-    hero = film(
-        p["film"],
-        f'<p class="kicker"><a href="{u("/platforms/")}#{p["line"]}">{e(L["name"])}</a> &middot; {e(p["kind"])}</p><h1>{e(p["name"])}</h1><p class="lede">{e(p["short"])}</p><div class="actions">{status_badge(p)}<a class="btn" href="{u("/build/")}?platform={p["slug"]}">Request this build</a></div>',
-        "hero mid",
-    )
-    gal = ""
+    actions = f'<div class="actions">{status_badge(p)}{pill(u("/build/") + "?platform=" + p["slug"], "Request this build", True)}</div>'
+    head = page_head(f"{L['name']} · {p['kind']}", e(p["name"]), e(p["short"]), p["film"], actions)
     if p["images"]:
-        figs = "".join(f'<figure><img src="{u("/assets/img/products/" + f)}" alt="{e(c)}" loading="lazy"><figcaption>{e(c)}</figcaption></figure>' for f, c in p["images"])
-        gal = f'<section class="gallery"><div class="wrap"><p class="kicker">From the Design Lab</p><div class="gal">{figs}</div></div></section>'
+        figs = "".join(f'<figure class="panel contain"><img src="{u("/assets/img/products/" + f)}" alt="{e(c)}" loading="lazy"><figcaption>{e(c)}</figcaption></figure>' for f, c in p["images"])
+        gal = f'<section class="gallery"><div class="wrap">{label("From the Design Lab")}<div class="gal">{figs}</div></div></section>'
     else:
-        gal = f'<section class="gallery"><div class="wrap"><p class="note-pending">Renders for {e(p["name"])} are in progress. This page describes the reference concept as designed today; parts are shortlisted, not final.</p></div></section>'
+        gal = f'<section class="gallery"><div class="wrap"><p class="pending">Renders for {e(p["name"])} are in progress. This page describes the reference concept as designed today; parts are shortlisted, not final.</p></div></section>'
     secs = "".join(f'<div class="feat"><h3>{e(h)}</h3><ul>{"".join("<li>" + e(i) + "</li>" for i in items)}</ul></div>' for h, items in p["sections"])
     specs = "".join(f"<tr><th>{e(a)}</th><td>{e(b)}</td></tr>" for a, b in p["specs"])
     pairs = "".join(product_card(PBY[s]) for s in p.get("pairs", []))
     body = (
-        hero
+        head
         + gal
-        + f'<section class="detail light"><div class="wrap"><div class="cols"><div><p class="kicker">What it does</p><div class="feats">{secs}</div></div><aside><p class="kicker">Reference specification</p><table class="spec">{specs}</table><p class="fine">Figures marked estimate are design targets, set conservatively, and will be confirmed in field trials. Every unit is adapted to the customer, so the delivered specification may differ.</p></aside></div></div></section>'
+        + f'<section class="detail grey"><div class="wrap"><div class="cols"><div>{label("What it does")}<div class="feats">{secs}</div></div><aside>{label("Reference specification")}<table class="spec">{specs}</table><p class="fine">Figures marked estimate are design targets, set conservatively, and will be confirmed in field trials. Every unit is adapted to the customer, so the delivered specification may differ.</p></aside></div></div></section>'
         + own_strip()
-        + (f'<section class="cards"><div class="wrap"><div class="head"><h2>Works with</h2></div><div class="grid3">{pairs}</div></div></section>' if pairs else "")
+        + (f'<section class="cards"><div class="wrap"><div class="head">{label("Works with")}</div><div class="grid3">{pairs}</div></div></section>' if pairs else "")
         + cta(f"Build {p['name']} for your site.")
     )
     page(f"/platforms/{p['slug']}/", p["name"], f"{p['name']}: {p['short']}", body, "/platforms/")
 
 
 def industries():
-    hero = film("desert-drone", '<p class="kicker">Industries</p><h1>Where nothing may phone home.</h1><p class="lede">We build for work that runs far from the network or must stay off it: fleets, crowds, energy, water, grids and closed sites across the Gulf and the United States.</p>', "hero mid")
+    head = page_head("Industries", "Where nothing may phone home.", "We build for work that runs far from the network or must stay off it: fleets, crowds, energy, water, grids and closed sites across the Gulf and the United States.", "desert-drone")
     rows = ""
     for i, (n, f, d, ps) in enumerate(INDUSTRIES):
         links = "".join(f'<a href="{u("/platforms/" + s + "/")}">{e(PBY[s]["name"])} <i>&rarr;</i></a>' for s in ps) or f'<a href="{u("/build/")}">Commission a design <i>&rarr;</i></a>'
-        rows += f'<div id="{slugify(n)}">' + film(f, f'<p class="kicker mono">0{i + 1}</p><h2>{e(n)}</h2><p class="lede">{e(d)}</p><div class="plinks">{links}</div>', "band short " + ("right" if i % 2 else "left")) + "</div>"
-    page("/industries/", "Industries", "Industries served by Arab American Instruments: fleets, crowd safety, energy, utilities, agriculture, remote sites, telecom and ports.", hero + rows + cta(), "/industries/")
+        rows += f'<div id="{slugify(n)}">' + split(f"0{i + 1}", e(n), e(d), panel_video(f), links, side="right" if i % 2 == 0 else "left", cls="line") + "</div>"
+    page("/industries/", "Industries", "Industries served by Arab American Instruments: fleets, crowd safety, energy, utilities, agriculture, remote sites, telecom and ports.", head + rows + cta(), "/industries/")
 
 
 def lab():
-    hero = film("smt-line", '<p class="kicker">Design Lab</p><h1>We publish what we learn.</h1><p class="lede">Short notes from the bench: the decisions behind our boards, the numbers behind our links, and what we got wrong. Our customers own their designs; the method we share with everyone.</p>', "hero mid")
+    head = page_head("Design Lab", "We publish what we learn.", "Short notes from the bench: the decisions behind our boards, the numbers behind our links, and what we got wrong. Our customers own their designs; the method we share with everyone.", "smt-line")
     notes = "".join(note_card(n) for n in NOTES)
-    page("/lab/", "Design Lab", "Notes from the Arab American Instruments Design Lab on edge hardware, LoRa links, vehicle data and board design.", hero + f'<section class="cards light"><div class="wrap"><div class="grid3">{notes}</div></div></section>' + cta(), "/lab/")
+    page("/lab/", "Design Lab", "Notes from the Arab American Instruments Design Lab on edge hardware, LoRa links, vehicle data and board design.", head + f'<section class="cards grey"><div class="wrap"><div class="grid3">{notes}</div></div></section>' + cta(), "/lab/")
     for n in NOTES:
         out = ""
         for kind, val in n["body"]:
@@ -635,16 +679,16 @@ def lab():
             elif kind == "h":
                 out += f"<h2>{e(val)}</h2>"
             elif kind == "table":
-                head = "".join(f"<th>{e(c)}</th>" for c in val[0])
+                hd = "".join(f"<th>{e(c)}</th>" for c in val[0])
                 rows = "".join("<tr>" + "".join(f"<td>{e(c)}</td>" for c in r) + "</tr>" for r in val[1:])
-                out += f'<div class="tw"><table class="data"><thead><tr>{head}</tr></thead><tbody>{rows}</tbody></table></div>'
-        hero = film(n["film"], f'<p class="kicker"><a href="{u("/lab/")}">Design Lab</a> &middot; {e(n["date"])}</p><h1 class="serif">{e(n["title"])}</h1><p class="lede">{e(n["sub"])}</p>', "hero mid")
-        art = f'<article class="article light"><div class="wrap narrow">{out}<p class="byline mono">Design Lab, Arab American Instruments</p></div></article>'
-        page(f"/lab/{n['slug']}/", n["title"], n["sub"], hero + art + cta(), "/lab/")
+                out += f'<div class="tw"><table class="data"><thead><tr>{hd}</tr></thead><tbody>{rows}</tbody></table></div>'
+        head = page_head(f"Design Lab · {n['date']}", e(n["title"]), e(n["sub"]), n["film"])
+        art = f'<article class="article"><div class="wrap narrow">{out}<p class="byline mono">Design Lab, Arab American Instruments</p></div></article>'
+        page(f"/lab/{n['slug']}/", n["title"], n["sub"], head + art + cta(), "/lab/")
 
 
 def supply():
-    hero = film("terminal-timelapse", '<p class="kicker">Supply chain</p><h1>Own the stack, down to the part.</h1><p class="lede">Most edge devices arrive as sealed boxes from a supply chain you cannot see. Ours arrive with their design, their parts list and their keys.</p>', "hero mid")
+    head = page_head("Supply chain", "Own the stack, down to the part.", "Most edge devices arrive as sealed boxes from a supply chain you cannot see. Ours arrive with their design, their parts list and their keys.", "terminal-timelapse")
     steps = [
         ("Requirement", "What must be sensed, sent or controlled, where, for how long, and what may never leave the site."),
         ("Reference design", "We start from the closest platform and show you the tradeoffs: battery, range, size, cost."),
@@ -655,25 +699,25 @@ def supply():
     ]
     st = "".join(f'<li><span class="mono n">0{i + 1}</span><h3>{e(a)}</h3><p>{e(b)}</p></li>' for i, (a, b) in enumerate(steps))
     body = (
-        hero
-        + f'<section class="statement light"><div class="wrap narrow"><p class="kicker">How we work</p><h2 class="serif">We own the design. You own the supply chain.</h2><p>We work the way a design house does. We keep and improve our reference designs, publish what we learn in the Design Lab, and for each customer we build a purpose built device on top of them. When the work is done, the customer holds everything needed to build it again without us.</p></div></section>'
-        + f'<section class="steps"><div class="wrap"><ol>{st}</ol></div></section>'
-        + own_strip(True)
-        + film("robot-lab", '<p class="kicker">Built where you trust</p><h2>Your fab, your line, your country.</h2><p class="lede">After the pilot, the next thousand units can be built by any qualified manufacturer you choose, in the Gulf, in the United States or anywhere else you trust.</p>', "band right short")
-        + film("chip-macro", '<p class="kicker">Traceable by default</p><h2>Every part with its maker and its origin.</h2><p class="lede">Each bill of materials we hand over names the maker of every part and where it was made, so your security team can audit the device the way it audits code.</p>', "band left short")
+        head
+        + split("How we work", "We own the design. You own the supply chain.", "We work the way a design house does. We keep and improve our reference designs, publish what we learn in the Design Lab, and for each customer we build a purpose built device on top of them. When the work is done, the customer holds everything needed to build it again without us.", panel_video("engineer-board"), side="right")
+        + f'<section class="steps grey"><div class="wrap">{label("Six steps")}<ol>{st}</ol></div></section>'
+        + own_strip()
+        + split("Built where you trust", "Your fab, your line, your country.", "After the pilot, the next thousand units can be built by any qualified manufacturer you choose, in the Gulf, in the United States or anywhere else you trust.", panel_video("robot-lab"), side="left")
+        + split("Traceable by default", "Every part with its maker and its origin.", "Each bill of materials we hand over names the maker of every part and where it was made, so your security team can audit the device the way it audits code.", panel_video("chip-macro"), side="right")
         + cta()
     )
     page("/supply-chain/", "Supply chain", "How Arab American Instruments hands customers their design files, parts list, firmware and keys so they own their hardware supply chain.", body, "/supply-chain/")
 
 
 def about():
-    hero = film("alula", f'<p class="kicker">About</p><h1>A hardware design company for sovereign systems.</h1><p class="lede">{e(TAGLINE)}</p>', "hero mid")
+    head = page_head("About", "A hardware design company for sovereign systems.", e(TAGLINE), "alula")
     body = (
-        hero
-        + '<section class="statement light"><div class="wrap narrow"><p class="kicker">The idea</p><h2 class="serif">Counterbalance the sealed stack.</h2><p>Technology keeps concentrating. More and more of what runs a country, a fleet or a field sits on hardware designed by a few companies, sealed so that the people who rely on it cannot look inside or change it.</p><p>We think that is a risk every organisation should be able to remove. Arab American Instruments designs edge devices for sensing, satellite and mesh links, and real time control, and builds them so that the customer owns the design and the supply chain, not us and not anyone else.</p><p>We do not chase a catalogue. We keep reference designs, publish what we learn, and build purpose built hardware for each customer, from a single pilot to a national fleet.</p></div></section>'
-        + film("engineer-board", '<p class="kicker">The bench</p><h2>Engineers who own the whole board.</h2><p class="lede">Schematic, layout, firmware and shell under one roof, so every decision on the device is one we can explain and hand over.</p>', "band left short")
-        + '<section class="hq">' + film("riyadh-day", '<p class="kicker mono">HQ 01</p><h2>Riyadh</h2><p>Saudi Arabia</p>', "half") + film("dallas-dusk", '<p class="kicker mono">HQ 02</p><h2>Dallas</h2><p>Texas, United States</p>', "half") + '</section>'
-        + '<section class="statement"><div class="wrap narrow center"><p class="kicker">Ownership</p><h2 class="serif">A fully owned subsidiary of CodeNinja.</h2><p>Arab American Instruments brings hardware design into the CodeNinja group, alongside its work on sovereign AI systems for governments and enterprises.</p></div></section>'
+        head
+        + split("The idea", "Counterbalance the sealed stack.", "Technology keeps concentrating. More and more of what runs a country, a fleet or a field sits on hardware designed by a few companies, sealed so that the people who rely on it cannot look inside or change it. We think that is a risk every organisation should be able to remove. We design edge devices for sensing, satellite and mesh links, and real time control, and build them so that the customer owns the design and the supply chain, not us and not anyone else.", panel_video("aai-hardware"), side="right")
+        + split("The bench", "Engineers who own the whole board.", "Schematic, layout, firmware and shell under one roof, so every decision on the device is one we can explain and hand over. We do not chase a catalogue. We keep reference designs, publish what we learn, and build purpose built hardware for each customer, from a single pilot to a national fleet.", panel_video("engineer-board"), side="left")
+        + f'<section class="hq grey"><div class="wrap">{label("Headquarters")}<div class="grid2 even">{panel_video("riyadh-day", "Riyadh, Saudi Arabia")}{panel_video("dallas-sunset", "Dallas, Texas, United States")}</div></div></section>'
+        + split("Ownership", "A fully owned subsidiary of CodeNinja.", "Arab American Instruments brings hardware design into the CodeNinja group, alongside its work on sovereign AI systems for governments and enterprises.", panel_video("desert-aerial"), side="right")
         + cta()
     )
     page("/about/", "About", "Arab American Instruments is a hardware design company headquartered in Riyadh and Dallas, a fully owned subsidiary of CodeNinja.", body, "/about/")
@@ -685,10 +729,11 @@ def build_page():
     qopts = "".join(f'<label class="opt"><input type="radio" name="Quantity" value="{e(q)}"{" checked" if c else ""}><span>{e(q)}</span></label>' for q, c in qty)
     env = [("Air gapped: nothing may leave the site (recommended default)", True), ("Private network or private cloud", False), ("Public cellular or satellite is acceptable", False), ("Not known yet", False)]
     eopts = "".join(f'<label class="opt"><input type="radio" name="Connectivity" value="{e(q)}"{" checked" if c else ""}><span>{e(q)}</span></label>' for q, c in env)
-    form = f'''<section class="formwrap light"><div class="wrap narrow">
-<p class="kicker">Request a build</p><h2 class="serif">Tell us the job. We design the device.</h2>
-<p>No prices on this site, because every unit is made for its owner. Send the outline below and an engineer replies with questions, a reference design and a plan for a pilot.</p>
-<form id="buildform">
+    form = f'''<section class="formwrap grey"><div class="wrap grid2">
+<div class="col text">{label("Request a build")}<h2>Tell us the job. We design the device.</h2>
+<p class="lede">No prices on this site, because every unit is made for its owner. Send the outline and an engineer replies with questions, a reference design and a plan for a pilot.</p>
+{panel_video("print-timelapse")}</div>
+<div class="col"><form id="buildform">
 <div class="two"><label>Name<input name="Name" required autocomplete="name"></label><label>Organisation<input name="Organisation" required autocomplete="organization"></label></div>
 <div class="two"><label>Work email<input type="email" name="Email" required autocomplete="email"></label><label>Country<input name="Country" placeholder="Saudi Arabia, United States, ..."></label></div>
 <label>Closest platform<select name="Platform"><option value="Not sure yet">Not sure yet, recommend one</option>{opts}<option value="Custom controller">Custom controller</option></select></label>
@@ -699,16 +744,16 @@ def build_page():
 <button class="btn" type="submit">Send the request</button>
 <p class="fine">This opens your email app with the request filled in, addressed to {CONTACT}. Nothing is stored on this site.</p>
 <p class="sent" hidden>Your email app should now be open. If it did not open, write to {CONTACT}.</p>
-</form></div></section>
+</form></div></div></section>
 <script>(function(){{var m=location.search.match(/platform=([a-z-]+)/);if(!m)return;var map={json.dumps({p["slug"]: p["name"] for p in PRODUCTS})};var s=document.querySelector('select[name=Platform]');if(map[m[1]])s.value=map[m[1]];}})();</script>'''
-    hero = film("print-timelapse", '<p class="kicker">Made to order</p><h1>Request a build.</h1><p class="lede">From a single pilot to a national fleet. You keep the design, the parts list and the keys.</p>', "hero short")
-    page("/build/", "Request a build", "Request a made to order edge device from Arab American Instruments.", hero + form, "")
+    head = page_head("Made to order", "Request a build.", "From a single pilot to a national fleet. You keep the design, the parts list and the keys.")
+    page("/build/", "Request a build", "Request a made to order edge device from Arab American Instruments.", head + form, "")
 
 
 def credits():
     lines = open(os.path.join(ROOT, "assets/video/CREDITS.md")).read().splitlines()
     items = "".join(f"<li>{e(l[2:])}</li>" for l in lines if l.startswith("- "))
-    body = f'<section class="article light" style="padding-top:140px"><div class="wrap narrow"><h1 class="serif">Credits</h1><p>Every banner video on this site is real world footage from Pexels under the Pexels License, checked frame by frame for brands and signage before use. Product images are our own renders and board layouts.</p><ul class="credits">{items}</ul></div></section>'
+    body = page_head("Credits", "Credits.", "Every banner video on this site is real world footage from Pexels under the Pexels License, checked frame by frame for brands and signage before use. Product images are our own renders and board layouts.") + f'<section class="article"><div class="wrap narrow"><ul class="credits">{items}</ul></div></section>'
     page("/credits/", "Credits", "Video and image credits for the Arab American Instruments site.", body)
 
 
