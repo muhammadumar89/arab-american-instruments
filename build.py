@@ -520,7 +520,7 @@ FEATURED = [
     ("Worker safety", "Worker Safety · Field band", "A 24 byte band message that keeps thousands of walkers covered off the network", "/products/workforce/", "assets/video/walkers-desert.jpg"),
     ("Own the stack", "Security and Sovereignty", "Design files, bill of materials and keys handed to the customer, not kept by us", "/solutions/security/", "assets/video/chip-macro.jpg"),
     ("Design Lab", "Design Lab · Notes from the bench", "Why the top of a wrist band's board is empty, and what a board colour costs", "/lab/", "assets/img/products/carrier-top.jpg"),
-    ("Two headquarters", "Riyadh and Dallas", "One design house working from the Gulf and the United States", "/about/", "assets/video/dallas-sunset.jpg"),
+    ("Two headquarters", "Riyadh and Dallas", "One technology company working from the Gulf and the United States", "/about/", "assets/video/dallas-sunset.jpg"),
 ]
 
 
@@ -536,7 +536,7 @@ def menu_solutions():
 
 
 def menu_company():
-    items = [("/about/", "About", "A hardware design company for sovereign systems"), ("/supply-chain/", "Supply chain", "How you end up owning the stack"), ("/lab/", "Design Lab", "Notes from the bench"), ("/credits/", "Credits", "Footage and image credits")]
+    items = [("/about/", "About", "A technology company for sovereign hardware"), ("/supply-chain/", "Supply chain", "How you end up owning the stack"), ("/lab/", "Design Lab", "Notes from the bench"), ("/credits/", "Credits", "Footage and image credits")]
     return '<div class="ddgrid one"><div class="ddcol">' + "".join(f'<a href="{u(h)}"><b>{t}</b><span>{d}</span></a>' for h, t, d in items) + "</div></div>"
 
 
@@ -955,7 +955,7 @@ def supply():
     st = "".join(f'<li><span class="mono n">0{i + 1}</span><h3>{e(a)}</h3><p>{e(b)}</p></li>' for i, (a, b) in enumerate(steps))
     body = (
         head
-        + split("How we work", "We own the design. You own the supply chain.", "We work the way a design house does. We keep and improve our reference designs, publish what we learn in the Design Lab, and for each customer we build a purpose built device on top of them. When the work is done, the customer holds everything needed to build it again without us.", panel_video("engineer-board"), side="right")
+        + split("How we work", "We own the design. You own the supply chain.", "We are a technology company that owns its hardware designs. We keep and improve our reference designs, publish what we learn in the Design Lab, and for each customer we build a purpose built device on top of them. When the work is done, the customer holds everything needed to build it again without us.", panel_video("engineer-board"), side="right")
         + f'<section class="steps grey"><div class="wrap">{label("Six steps")}<ol>{st}</ol></div></section>'
         + own_strip()
         + split("Built where you trust", "Your fab, your line, your country.", "After the pilot, the next thousand units can be built by any qualified manufacturer you choose, in the Gulf, in the United States or anywhere else you trust.", panel_video("robot-lab"), side="left")
@@ -966,7 +966,7 @@ def supply():
 
 
 def about():
-    head = page_head("About", "A hardware design company for sovereign systems.", e(TAGLINE), "alula")
+    head = page_head("About", "A technology company for sovereign hardware.", e(TAGLINE), "alula")
     body = (
         head
         + split("The idea", "Counterbalance the sealed stack.", "Technology keeps concentrating. More and more of what runs a country, a fleet or a field sits on hardware designed by a few companies, sealed so that the people who rely on it cannot look inside or change it. We think that is a risk every organisation should be able to remove. We design edge devices for sensing, satellite and mesh links, and real time control, and build them so that the customer owns the design and the supply chain, not us and not anyone else.", panel_video("aai-hardware"), side="right")
@@ -975,7 +975,7 @@ def about():
         + split("Ownership", "A fully owned subsidiary of CodeNinja.", "Arab American Instruments brings hardware design into the CodeNinja group, alongside its work on sovereign AI systems for governments and enterprises.", panel_video("desert-aerial"), side="right")
         + cta()
     )
-    page("/about/", "About", "Arab American Instruments is a hardware design company headquartered in Riyadh and Dallas, a fully owned subsidiary of CodeNinja.", body, "/about/")
+    page("/about/", "About", "Arab American Instruments is a technology company headquartered in Riyadh and Dallas, a fully owned subsidiary of CodeNinja.", body, "/about/")
 
 
 def build_page():
