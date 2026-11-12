@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Request a build | Arab American Instruments</title>
+<meta name="description" content="Request a made to order edge device from Arab American Instruments.">
+<link rel="canonical" href="https://arabamericaninstruments.com/build/">
+<meta property="og:title" content="Request a build | Arab American Instruments"><meta property="og:description" content="Request a made to order edge device from Arab American Instruments.">
+<meta property="og:image" content="https://arabamericaninstruments.com/assets/video/home-montage.jpg"><meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#0b0b0a">
+<link rel="icon" href="/assets/img/mark.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@300;400;500;600&family=Geist+Mono:wght@400;500&family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;1,6..72,300&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/site.css">
+</head><body>
+<header class="top"><div class="bar">
+<a class="brand" href="/"><svg class="mark" viewBox="0 0 40 40" aria-hidden="true"><circle cx="20" cy="20" r="18.5" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M7 27 Q20 4 33 27" fill="none" stroke="currentColor" stroke-width="1.5"/><circle cx="7" cy="27" r="3" fill="var(--signal)"/><circle cx="33" cy="27" r="3" fill="var(--sand)"/></svg><span>Arab American <b>Instruments</b></span></a>
+<nav id="nav"><a href="/platforms/">Platforms</a><a href="/industries/">Industries</a><a href="/lab/">Design Lab</a><a href="/supply-chain/">Supply chain</a><a href="/about/">About</a><a class="btn small" href="/build/">Request a build</a></nav>
+<button class="menu" aria-label="Menu" aria-expanded="false" onclick="document.body.classList.toggle('open');this.setAttribute('aria-expanded',document.body.classList.contains('open'))"><span></span><span></span></button>
+</div></header>
+<main><section class="film hero short"><img class="poster" src="/assets/video/print-timelapse.jpg" alt="" aria-hidden="true"><video muted loop playsinline preload="none" poster="/assets/video/print-timelapse.jpg" data-src="/assets/video/print-timelapse.mp4" aria-hidden="true"></video><div class="scrim"></div><div class="inner"><p class="kicker">Made to order</p><h1>Request a build.</h1><p class="lede">From a single pilot to a national fleet. You keep the design, the parts list and the keys.</p></div></section><section class="formwrap light"><div class="wrap narrow">
+<p class="kicker">Request a build</p><h2 class="serif">Tell us the job. We design the device.</h2>
+<p>No prices on this site, because every unit is made for its owner. Send the outline below and an engineer replies with questions, a reference design and a plan for a pilot.</p>
+<form id="buildform">
+<div class="two"><label>Name<input name="Name" required autocomplete="name"></label><label>Organisation<input name="Organisation" required autocomplete="organization"></label></div>
+<div class="two"><label>Work email<input type="email" name="Email" required autocomplete="email"></label><label>Country<input name="Country" placeholder="Saudi Arabia, United States, ..."></label></div>
+<label>Closest platform<select name="Platform"><option value="Not sure yet">Not sure yet, recommend one</option><option value="DriveSense 2.0">DriveSense 2.0 (Fleet vision unit)</option><option value="VIM 2.0">VIM 2.0 (Vehicle Interface Module)</option><option value="Field Band">Field Band (LoRa wrist band for people in the field)</option><option value="Guide Hub">Guide Hub (Backpack gateway)</option><option value="Vehicle Gateway">Vehicle Gateway (Roof unit for patrol and safety vehicles)</option><option value="Solar Relay">Solar Relay (Pole mounted mesh relay)</option><option value="Charging Dock">Charging Dock (Camp dock for Field Bands)</option><option value="Custom controller">Custom controller</option></select></label>
+<label>What must it sense, send or control?<textarea name="Requirement" rows="4" required placeholder="For example: driver and road cameras for 800 heavy trucks, vehicle data from the FMS port, events over LTE."></textarea></label>
+<fieldset><legend>Where will the data go?</legend><label class="opt"><input type="radio" name="Connectivity" value="Air gapped: nothing may leave the site (recommended default)" checked><span>Air gapped: nothing may leave the site (recommended default)</span></label><label class="opt"><input type="radio" name="Connectivity" value="Private network or private cloud"><span>Private network or private cloud</span></label><label class="opt"><input type="radio" name="Connectivity" value="Public cellular or satellite is acceptable"><span>Public cellular or satellite is acceptable</span></label><label class="opt"><input type="radio" name="Connectivity" value="Not known yet"><span>Not known yet</span></label></fieldset>
+<fieldset><legend>How many units to start?</legend><label class="opt"><input type="radio" name="Quantity" value="Pilot run, 10 to 100 units (recommended first step)" checked><span>Pilot run, 10 to 100 units (recommended first step)</span></label><label class="opt"><input type="radio" name="Quantity" value="Prototype, under 10 units"><span>Prototype, under 10 units</span></label><label class="opt"><input type="radio" name="Quantity" value="Production, 100 to 1,000 units"><span>Production, 100 to 1,000 units</span></label><label class="opt"><input type="radio" name="Quantity" value="Fleet or national scale, over 1,000 units"><span>Fleet or national scale, over 1,000 units</span></label></fieldset>
+<label>Timeline<input name="Timeline" placeholder="For example: pilot in Q1 2027"></label>
+<button class="btn" type="submit">Send the request</button>
+<p class="fine">This opens your email app with the request filled in, addressed to hello@codeninjaconsulting.com. Nothing is stored on this site.</p>
+<p class="sent" hidden>Your email app should now be open. If it did not open, write to hello@codeninjaconsulting.com.</p>
+</form></div></section>
+<script>(function(){var m=location.search.match(/platform=([a-z-]+)/);if(!m)return;var map={"drivesense": "DriveSense 2.0", "vim": "VIM 2.0", "field-band": "Field Band", "guide-hub": "Guide Hub", "vehicle-gateway": "Vehicle Gateway", "solar-relay": "Solar Relay", "charging-dock": "Charging Dock"};var s=document.querySelector('select[name=Platform]');if(map[m[1]])s.value=map[m[1]];})();</script></main>
+<footer class="foot"><div class="wrap">
+<div class="fgrid">
+<div><a class="brand" href="/"><svg class="mark" viewBox="0 0 40 40" aria-hidden="true"><circle cx="20" cy="20" r="18.5" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M7 27 Q20 4 33 27" fill="none" stroke="currentColor" stroke-width="1.5"/><circle cx="7" cy="27" r="3" fill="var(--signal)"/><circle cx="33" cy="27" r="3" fill="var(--sand)"/></svg><span>Arab American <b>Instruments</b></span></a>
+<p class="tag">Low-power edge devices for sensing, Satcoms and RT controls in Air Gapped Environments.</p></div>
+<div><h4>Company</h4><a href="/platforms/">Platforms</a><a href="/industries/">Industries</a><a href="/lab/">Design Lab</a><a href="/supply-chain/">Supply chain</a><a href="/about/">About</a><a href="/credits/">Credits</a></div>
+<div><h4>Platforms</h4><a href="/platforms/drivesense/">DriveSense 2.0</a><a href="/platforms/vim/">VIM 2.0</a><a href="/platforms/field-band/">Field Band</a><a href="/platforms/guide-hub/">Guide Hub</a><a href="/platforms/vehicle-gateway/">Vehicle Gateway</a><a href="/platforms/solar-relay/">Solar Relay</a><a href="/platforms/charging-dock/">Charging Dock</a></div>
+<div><h4>Headquarters</h4><p>Riyadh, Saudi Arabia<br><span class="mono">24.71 N, 46.68 E</span></p><p>Dallas, Texas<br><span class="mono">32.78 N, 96.80 W</span></p></div>
+</div>
+<div class="legal"><span>Arab American Instruments is a fully owned subsidiary of CodeNinja.</span><span>&copy; 2026 Arab American Instruments</span></div>
+</div></footer>
+<script>
+(function(){
+  function solid(){ document.body.classList.toggle('scrolled', window.scrollY>40); }
+  solid(); window.addEventListener('scroll', solid, {passive:true});
+  var vids=[].slice.call(document.querySelectorAll('video[data-src]'));
+  var reduce=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  function load(v){ if(!v.src){ v.src=v.getAttribute('data-src'); } }
+  if(!reduce && 'IntersectionObserver' in window){
+    var io=new IntersectionObserver(function(es){ es.forEach(function(x){ var v=x.target;
+      if(x.isIntersecting){ load(v); var p=v.play(); if(p&&p.catch){p.catch(function(){});} } else { v.pause(); } }); },{rootMargin:'200px 0px'});
+    vids.forEach(function(v){ io.observe(v); });
+  }
+  document.querySelectorAll('.card[data-film]').forEach(function(c){
+    var v=c.querySelector('video'); if(!v) return;
+    c.addEventListener('mouseenter',function(){ load(v); var p=v.play(); if(p&&p.catch){p.catch(function(){});} });
+    c.addEventListener('mouseleave',function(){ v.pause(); });
+  });
+  var f=document.getElementById('buildform');
+  if(f){ f.addEventListener('submit',function(ev){ ev.preventDefault();
+    var d=new FormData(f), lines=[]; d.forEach(function(val,k){ if(val) lines.push(k+': '+val); });
+    var subj='Build request: '+(d.get('Organisation')||'')+' '+(d.get('Platform')||'');
+    window.location.href='mailto:hello@codeninjaconsulting.com?subject='+encodeURIComponent(subj)+'&body='+encodeURIComponent(lines.join('\n'));
+    f.querySelector('.sent').hidden=false; }); }
+})();
+</script>
+</body></html>
