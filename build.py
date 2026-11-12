@@ -364,46 +364,210 @@ NOTES = [
     },
 ]
 
+# ---------------------------------------------------------------- positioning data
+
+# A fixed site camera unit joins the line: same compute as DriveSense, on a pole or a wall.
+PRODUCTS.append({
+    "slug": "site-camera",
+    "name": "Site Camera",
+    "line": "sensing",
+    "status": "concept",
+    "kind": "Fixed AI camera for yards, gates and sites",
+    "film": "cams-sunset",
+    "short": "The DriveSense compute and camera stack in a fixed housing. Watches a gate, a yard or a line, runs the models on the unit and keeps the video on site.",
+    "images": [],
+    "sections": [
+        ("What it watches", [
+            "People and vehicles in zones you draw, at any hour",
+            "Gates, loading bays and perimeter lines",
+            "Safety vests, helmets and restricted areas",
+            "Plates at close range",
+        ]),
+        ("How it stays yours", [
+            "Models run on the unit; only events and clips leave it, and only to where you say",
+            "Continuous recording kept on the unit, pulled on request",
+            "Works over LoRa for events alone, or over your own network for video",
+        ]),
+    ],
+    "specs": [
+        ("Compute", "The DriveSense compute module in a fixed, sealed housing"),
+        ("Power", "Mains, PoE or the Solar Relay's panel and battery"),
+        ("Links", "Your network, cellular, or LoRa for events only"),
+    ],
+    "pairs": ["drivesense", "solar-relay"],
+})
+PBY = {p["slug"]: p for p in PRODUCTS}
+
+# Product categories, Samsara style. Each holds devices from PRODUCTS.
+CATEGORIES = [
+    {
+        "slug": "cameras", "name": "Cameras and Vision", "film": "dashcam-desert",
+        "tag": "AI cameras for the cab, the road and the site",
+        "title": "See the cab, the road and the site, on the device.",
+        "body": "Dual dash cameras that watch the driver and the road, and fixed cameras that watch gates, yards and lines. The models run on the unit, so only events and short clips leave it, and the video stays yours.",
+        "devices": ["drivesense", "site-camera"],
+        "outcomes": ["safety", "security", "compliance"],
+    },
+    {
+        "slug": "telematics", "name": "Vehicle Telematics", "film": "night-highway",
+        "tag": "GPS, vehicle data, fuel and faults from the truck's own port",
+        "title": "Every truck's own data, on your terms.",
+        "body": "A small gateway that plugs into the 16 pin diagnostic or 12 pin FMS port, reads speed, fuel, faults, hours and load, adds GPS, and powers the camera unit. Where the truck gives nothing, GPS fills in.",
+        "devices": ["vim"],
+        "outcomes": ["efficiency", "compliance", "security"],
+    },
+    {
+        "slug": "workforce", "name": "Worker Safety", "film": "walker-desert",
+        "tag": "Wearables and hubs for people far from the network",
+        "title": "Know where every person is, and that they are well.",
+        "body": "A sealed wrist band that reports position, heart rate and skin temperature for days on a charge, calls for help with one button, and keeps working when there is no phone signal at all.",
+        "devices": ["field-band", "guide-hub", "charging-dock"],
+        "outcomes": ["safety", "coverage"],
+    },
+    {
+        "slug": "network", "name": "Mesh and Satcoms", "film": "dish-sunset",
+        "tag": "Relays, vehicle gateways and uplinks for places with no coverage",
+        "title": "Links that hold when the network does not.",
+        "body": "LoRa mesh between devices, solar relays pole to pole, vehicle gateways with cellular and satellite, and one uplink where there is finally a connection. Every message queues and catches up; nothing is dropped.",
+        "devices": ["solar-relay", "vehicle-gateway", "guide-hub"],
+        "outcomes": ["coverage", "security"],
+    },
+    {
+        "slug": "command", "name": "Command", "film": "scope-wave",
+        "tag": "The self hosted platform where everything lands",
+        "title": "One screen for the whole operation, hosted by you.",
+        "body": "Live map, events and clips, alerts, trips and search mode, running in your data centre, on a site server, or on a laptop in camp. It speaks the devices' own protocol, so the stack stays yours end to end.",
+        "devices": [],
+        "outcomes": ["efficiency", "compliance", "security"],
+        "features": [
+            ("Live map", "Every vehicle, person and relay, with trips, stops and routes."),
+            ("Events and clips", "Drowsiness, collision warnings, SOS and falls, each with its video and position."),
+            ("Search mode", "A missing band reports every few seconds; the screen reads warmer and colder."),
+            ("Alerts and reports", "Spoken alerts in the cab, dashboard alerts in the room, reports you can export."),
+            ("Device health", "Online, signal, storage, temperature, tamper and power loss for every unit."),
+            ("Your hosting", "Air gapped by default. Your servers, your keys, your retention rules."),
+        ],
+    },
+]
+CBY = {c["slug"]: c for c in CATEGORIES}
+CAT_OF = {d: c["slug"] for c in CATEGORIES for d in c["devices"]}
+
+# Solutions by outcome, Samsara style.
+SOLUTIONS = [
+    {
+        "slug": "safety", "name": "Safety and Risk", "film": "dashcam-desert",
+        "tag": "Fewer accidents on the road and in the field",
+        "title": "Catch the drowsy driver and the fallen walker before it matters.",
+        "body": "The driver camera sees eyes closing, phone use and a missing seatbelt and speaks up in the cab. The road camera warns of a collision ahead. The band feels a fall and sends an SOS on every path at once.",
+        "points": ["Drowsiness, distraction, phone use and seatbelt alerts spoken in the cab", "Forward collision, tailgating and lane departure warnings", "Harsh braking, cornering and impact events with video", "Falls, stillness and SOS from the wrist, confirmed back to the wearer"],
+        "devices": ["drivesense", "field-band", "guide-hub"],
+        "industries": ["Fleets and logistics", "Crowd and walker safety", "Energy and pipelines"],
+    },
+    {
+        "slug": "security", "name": "Security and Sovereignty", "film": "chip-macro",
+        "tag": "Protect the assets, and the stack they run on",
+        "title": "Tamper proof devices, on a stack nobody else holds the keys to.",
+        "body": "Case opened, unit unmounted, camera covered, power cut, a knock while parked: the unit reports each one, and sends a last message before it goes dark. Underneath, every part is traced, the firmware is yours and the keys never leave you.",
+        "points": ["Tamper, unmount and camera blocked alerts", "Parked impact and tow away detection", "A last message on power loss", "Design files, bill of materials and signing keys handed to the customer", "Air gapped operation with no vendor cloud in the loop"],
+        "devices": ["drivesense", "vim", "site-camera"],
+        "industries": ["Remote and closed sites", "Utilities and grid", "Ports and supply chain"],
+    },
+    {
+        "slug": "compliance", "name": "Compliance and Records", "film": "terminal-timelapse",
+        "tag": "Trips, hours, video and audits you can stand behind",
+        "title": "A record of every trip, every event and every part.",
+        "body": "Driver hours from the tachograph, odometer and engine hours from the truck, continuous recording on the unit for any time later, and a bill of materials that names the maker of every component.",
+        "points": ["Trips with start, end, distance, duration, stops and idling", "Driver hours where a tachograph is fitted, and who was driving", "Continuous recording on the unit, pulled for any time later", "Event clips with position and time", "A traceable bill of materials for the device itself"],
+        "devices": ["vim", "drivesense"],
+        "industries": ["Fleets and logistics", "Ports and supply chain", "Utilities and grid"],
+    },
+    {
+        "slug": "efficiency", "name": "Efficiency and Cost", "film": "trucks-highway" if False else "truck-desert",
+        "tag": "Fuel, idling, service and utilisation from the source",
+        "title": "Cut fuel and downtime with numbers from the truck itself.",
+        "body": "Live fuel rate, total fuel used, idling, engine load and distance to next service, read from the FMS port rather than estimated. Routes and utilisation from GPS on every vehicle and relay.",
+        "points": ["Fuel level, live fuel rate and economy", "Idling and harsh driving by driver", "Fault codes, warning lamps and distance to next service", "Odometer, engine hours and axle weight", "Routes and utilisation across the fleet"],
+        "devices": ["vim", "drivesense"],
+        "industries": ["Fleets and logistics", "Agriculture and water", "Energy and pipelines"],
+    },
+    {
+        "slug": "coverage", "name": "Coverage Off the Network", "film": "solar-desert",
+        "tag": "Keep working where there is no signal",
+        "title": "The desert, the sea and the closed site, all covered.",
+        "body": "Devices store everything with no signal and send it when coverage returns. Bands reach hubs, hubs reach cars, relays pass messages pole to pole, and one uplink reaches the world by cellular, satellite or microwave.",
+        "points": ["Store and forward on every device", "LoRa mesh between bands, hubs, cars and poles", "Solar relays that run for days without sun", "Cellular, satellite or microwave uplink where there is finally a link", "Under 1 kbit/s for 300 wearers"],
+        "devices": ["solar-relay", "vehicle-gateway", "guide-hub", "field-band"],
+        "industries": ["Crowd and walker safety", "Remote and closed sites", "Telecom and satellite"],
+    },
+]
+SBY = {s["slug"]: s for s in SOLUTIONS}
+
+PROOF = [
+    ("On the device", "2", "cameras, models run on the unit, only events leave it"),
+    ("Per band message", "24", "bytes, every five minutes, encrypted per band"),
+    ("For 300 wearers", "under 1", "kbit/s, less than an old 2G link"),
+    ("Handed over", "100%", "of the design: files, parts list, firmware and keys"),
+]
+
 # ---------------------------------------------------------------- chrome
 
 FONTS = '<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600&family=Inter:wght@400;500&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">'
 
 MARK = '<svg class="mark" viewBox="0 0 40 40" aria-hidden="true"><circle cx="20" cy="20" r="18.5" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M7 27 Q20 4 33 27" fill="none" stroke="currentColor" stroke-width="1.6"/><circle cx="7" cy="27" r="3" fill="currentColor"/><circle cx="33" cy="27" r="3" fill="currentColor"/></svg>'
 
-NAV = [("Platforms", "/platforms/"), ("Industries", "/industries/"), ("Design Lab", "/lab/"), ("Supply chain", "/supply-chain/"), ("About", "/about/")]
-
-# Cards under the home banner: what we are doing, in the codeatoms.ai card form.
 FEATURED = [
-    ("Fleet vision", "Fleet vision · Gulf", "Two cameras, AI on the device, for heavy truck fleets in the Gulf", "/platforms/drivesense/", "assets/video/dashcam-desert.jpg"),
-    ("Walker safety", "Field system · Walker safety", "A 24 byte band message that keeps thousands of walkers covered off the network", "/platforms/field-band/", "assets/video/walkers-desert.jpg"),
-    ("Own the stack", "Supply chain", "Design files, bill of materials and keys handed to the customer, not kept by us", "/supply-chain/", "assets/video/chip-macro.jpg"),
+    ("Fleet vision", "Cameras and Vision · Gulf fleets", "Two cameras, AI on the device, for heavy truck fleets in the Gulf", "/products/cameras/", "assets/video/dashcam-desert.jpg"),
+    ("Worker safety", "Worker Safety · Field band", "A 24 byte band message that keeps thousands of walkers covered off the network", "/products/workforce/", "assets/video/walkers-desert.jpg"),
+    ("Own the stack", "Security and Sovereignty", "Design files, bill of materials and keys handed to the customer, not kept by us", "/solutions/security/", "assets/video/chip-macro.jpg"),
     ("Design Lab", "Design Lab · Notes from the bench", "Why the top of a wrist band's board is empty, and what a board colour costs", "/lab/", "assets/img/products/carrier-top.jpg"),
     ("Two headquarters", "Riyadh and Dallas", "One design house working from the Gulf and the United States", "/about/", "assets/video/dallas-sunset.jpg"),
 ]
 
 
+def menu_products():
+    cats = "".join(f'<a href="{u("/products/" + c["slug"] + "/")}"><b>{e(c["name"])}</b><span>{e(c["tag"])}</span></a>' for c in CATEGORIES)
+    return f'<div class="ddgrid"><div class="ddcol">{cats}</div><div class="ddside"><p class="mono">Hardware</p><a href="{u("/hardware/")}"><b>All hardware</b><span>Every device, its status and its reference specification</span></a><a href="{u("/products/")}"><b>Products overview</b><span>How the categories fit together</span></a><a href="{u("/build/")}"><b>Request a build</b><span>Made to order, from a pilot to a fleet</span></a></div></div>'
+
+
+def menu_solutions():
+    sols = "".join(f'<a href="{u("/solutions/" + s["slug"] + "/")}"><b>{e(s["name"])}</b><span>{e(s["tag"])}</span></a>' for s in SOLUTIONS)
+    inds = "".join(f'<a href="{u("/industries/")}#{slugify(n)}"><b>{e(n)}</b></a>' for n, _, _, _ in INDUSTRIES)
+    return f'<div class="ddgrid"><div class="ddcol">{sols}</div><div class="ddside"><p class="mono">Industries</p>{inds}</div></div>'
+
+
+def menu_company():
+    items = [("/about/", "About", "A hardware design company for sovereign systems"), ("/supply-chain/", "Supply chain", "How you end up owning the stack"), ("/lab/", "Design Lab", "Notes from the bench"), ("/credits/", "Credits", "Footage and image credits")]
+    return '<div class="ddgrid one"><div class="ddcol">' + "".join(f'<a href="{u(h)}"><b>{t}</b><span>{d}</span></a>' for h, t, d in items) + "</div></div>"
+
+
 def header(active=""):
-    links = "".join(
-        f'<a href="{u(h)}"{" class=on" if active == h else ""}>{n}</a>' for n, h in NAV
-    )
+    def grp(name, href, menu):
+        on = " on" if active.startswith(href) else ""
+        return f'<div class="grp"><a class="tab{on}" href="{u(href)}">{name}<svg viewBox="0 0 10 6" aria-hidden="true"><path d="M1 1l4 4 4-4" fill="none" stroke="currentColor" stroke-width="1.2"/></svg></a><div class="dd">{menu}</div></div>'
+    nav = grp("Products", "/products/", menu_products()) + grp("Solutions", "/solutions/", menu_solutions()) + f'<a class="tab{" on" if active == "/lab/" else ""}" href="{u("/lab/")}">Design Lab</a>' + grp("Company", "/about/", menu_company())
+    mobile = ""
+    for title, items in [("Products", [(c["name"], "/products/" + c["slug"] + "/") for c in CATEGORIES] + [("All hardware", "/hardware/")]), ("Solutions", [(s["name"], "/solutions/" + s["slug"] + "/") for s in SOLUTIONS] + [("Industries", "/industries/")]), ("Company", [("Design Lab", "/lab/"), ("About", "/about/"), ("Supply chain", "/supply-chain/")])]:
+        mobile += f'<p class="mono">{title}</p>' + "".join(f'<a href="{u(h)}">{e(n)}</a>' for n, h in items)
     return f'''<header class="top"><div class="pill">
 <a class="brand" href="{u("/")}">{MARK}<span>Arab American Instruments</span></a>
-<nav id="nav">{links}<a class="navcta" href="{u("/build/")}">Request a build</a></nav>
+<nav id="nav">{nav}</nav>
 <a class="btn small" href="{u("/build/")}">Request a build</a>
-<button class="menu" aria-label="Menu" aria-expanded="false" onclick="document.body.classList.toggle('open');this.setAttribute('aria-expanded',document.body.classList.contains('open'))"><span></span><span></span></button>
-</div></header>'''
+<button class="menu" aria-label="Menu" aria-expanded="false"><span></span><span></span></button>
+</div>
+<div class="mnav" id="mnav">{mobile}<a class="btn" href="{u("/build/")}">Request a build</a></div></header>'''
 
 
 def footer():
-    cols = "".join(f'<a href="{u(h)}">{n}</a>' for n, h in NAV)
-    prods = "".join(f'<a href="{u("/platforms/" + p["slug"] + "/")}">{e(p["name"])}</a>' for p in PRODUCTS)
+    prods = "".join(f'<a href="{u("/products/" + c["slug"] + "/")}">{e(c["name"])}</a>' for c in CATEGORIES) + f'<a href="{u("/hardware/")}">All hardware</a>'
+    sols = "".join(f'<a href="{u("/solutions/" + s["slug"] + "/")}">{e(s["name"])}</a>' for s in SOLUTIONS) + f'<a href="{u("/industries/")}">Industries</a>'
+    comp = "".join(f'<a href="{u(h)}">{n}</a>' for n, h in [("About", "/about/"), ("Supply chain", "/supply-chain/"), ("Design Lab", "/lab/"), ("Request a build", "/build/"), ("Credits", "/credits/")])
     return f'''<footer class="foot"><div class="wrap">
 <div class="ftop"><p class="tag">{e(TAGLINE)}</p><a class="btn ghost" href="{u("/build/")}">Request a build</a></div>
 <div class="fgrid">
-<div><h4>Company</h4>{cols}<a href="{u("/credits/")}">Credits</a></div>
-<div><h4>Platforms</h4>{prods}</div>
-<div><h4>Riyadh</h4><p>Saudi Arabia<br><span class="mono">24.71 N, 46.68 E</span></p></div>
-<div><h4>Dallas</h4><p>Texas, United States<br><span class="mono">32.78 N, 96.80 W</span></p></div>
+<div><h4>Products</h4>{prods}</div>
+<div><h4>Solutions</h4>{sols}</div>
+<div><h4>Company</h4>{comp}</div>
+<div><h4>Headquarters</h4><p>Riyadh, Saudi Arabia<br><span class="mono">24.71 N, 46.68 E</span></p><p>Dallas, Texas, United States<br><span class="mono">32.78 N, 96.80 W</span></p></div>
 </div>
 <div class="legal"><span>Arab American Instruments is a fully owned subsidiary of CodeNinja.</span><span>&copy; 2026 Arab American Instruments</span></div>
 </div></footer>'''
@@ -413,6 +577,12 @@ SCRIPT = '''<script>
 (function(){
   function solid(){ document.body.classList.toggle('scrolled', window.scrollY>40); }
   solid(); window.addEventListener('scroll', solid, {passive:true});
+  var mb=document.querySelector('.menu');
+  if(mb){ mb.addEventListener('click',function(){ var o=document.body.classList.toggle('open'); mb.setAttribute('aria-expanded',o); }); }
+  var grps=[].slice.call(document.querySelectorAll('.grp'));
+  grps.forEach(function(g){ var t=g.querySelector('.tab');
+    t.addEventListener('click',function(ev){ if(window.matchMedia('(hover: none)').matches||ev.detail===0){ ev.preventDefault(); var was=g.classList.contains('open'); grps.forEach(function(x){x.classList.remove('open')}); if(!was) g.classList.add('open'); } }); });
+  document.addEventListener('click',function(ev){ if(!ev.target.closest('.grp')) grps.forEach(function(x){x.classList.remove('open')}); });
   var vids=[].slice.call(document.querySelectorAll('video[data-src]'));
   var reduce=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   function load(v){ if(!v.src){ v.src=v.getAttribute('data-src'); } }
@@ -434,6 +604,9 @@ SCRIPT = '''<script>
     if(prev) prev.addEventListener('click',function(){ go(Math.max(0,cur-1)); });
     if(next) next.addEventListener('click',function(){ go(Math.min(cards.length-1,cur+1)); });
   }
+  var acc=document.querySelector('.acc');
+  if(acc){ var items=[].slice.call(acc.querySelectorAll('.ai')), panes=[].slice.call(document.querySelectorAll('.accmedia .panel'));
+    items.forEach(function(it,i){ it.querySelector('h3').addEventListener('click',function(){ items.forEach(function(x,j){ x.classList.toggle('open',j===i); }); panes.forEach(function(p,j){ p.classList.toggle('show',j===i); var v=p.querySelector('video'); if(v){ if(j===i){ load(v); var pr=v.play(); if(pr&&pr.catch){pr.catch(function(){});} } else v.pause(); } }); }); }); }
   var f=document.getElementById('buildform');
   if(f){ f.addEventListener('submit',function(ev){ ev.preventDefault();
     var d=new FormData(f), lines=[]; d.forEach(function(val,k){ if(val) lines.push(k+': '+val); });
@@ -473,6 +646,13 @@ def page(path, title, desc, body, active=""):
     PAGES.append(path)
 
 
+def redirect(path, to):
+    dest = os.path.join(OUT, path.strip("/"), "index.html")
+    os.makedirs(os.path.dirname(dest), exist_ok=True)
+    with open(dest, "w") as fh:
+        fh.write(f'<!doctype html><html lang="en"><head><meta charset="utf-8"><title>Moved</title><meta http-equiv="refresh" content="0;url={u(to)}"><link rel="canonical" href="{SITE_URL}{to}"><meta name="robots" content="noindex"></head><body><p>This page has moved to <a href="{u(to)}">{to}</a>.</p></body></html>')
+
+
 PAGES = []
 
 # ---------------------------------------------------------------- blocks
@@ -490,12 +670,10 @@ def video_tag(slug, hero=False):
 
 
 def banner(slug, inner, cls="", hero=False):
-    """Full bleed video banner (home hero, closing call)."""
     return f'<section class="banner {cls}"><img class="poster" src="{u("/assets/video/" + slug + ".jpg")}" alt="" aria-hidden="true">{video_tag(slug, hero)}<div class="scrim"></div><div class="inner">{inner}</div></section>'
 
 
 def split(kicker, title, text, media, links="", side="right", cls="", h="h2"):
-    """Applied style row: text column and a framed media panel, hairline between."""
     ln = f'<div class="plinks">{links}</div>' if links else ""
     txt = f'<div class="col text">{label(kicker) if kicker else ""}<{h}>{title}</{h}><p class="lede">{text}</p>{ln}</div>'
     med = f'<div class="col media">{media}</div>'
@@ -508,13 +686,7 @@ def panel_video(slug, caption=""):
     return f'<figure class="panel"><img src="{u("/assets/video/" + slug + ".jpg")}" alt="" loading="lazy">{video_tag(slug)}{cap}</figure>'
 
 
-def panel_img(src, alt="", caption="", contain=False):
-    cap = f'<figcaption>{e(caption)}</figcaption>' if caption else ""
-    return f'<figure class="panel{" contain" if contain else ""}"><img src="{u(src)}" alt="{e(alt)}" loading="lazy">{cap}</figure>'
-
-
 def page_head(kicker, title, text, slug=None, actions=""):
-    """White page header with an optional framed video below it."""
     media = f'<div class="wrap">{panel_video(slug)}</div>' if slug else ""
     return f'<section class="phead"><div class="wrap">{label(kicker)}<h1>{title}</h1><p class="lede">{text}</p>{actions}</div>{media}</section>'
 
@@ -527,6 +699,10 @@ def status_badge(p):
     return f'<span class="badge s-{p["status"]}">{STATUS[p["status"]]}</span>'
 
 
+def dev_url(p):
+    return u("/hardware/" + p["slug"] + "/")
+
+
 def product_card(p):
     img = p["images"][0][0] if p["images"] else None
     if img:
@@ -536,11 +712,22 @@ def product_card(p):
         f = p["film"]
         media = f'<img src="{u("/assets/video/" + f + ".jpg")}" alt="" loading="lazy">{video_tag(f)}'
         cls = "card prod filmcard"
-    return f'''<a class="{cls}" href="{u("/platforms/" + p["slug"] + "/")}">
+    cat = CBY[CAT_OF[p["slug"]]]["name"] if p["slug"] in CAT_OF else LINES[p["line"]]["name"]
+    return f'''<a class="{cls}" href="{dev_url(p)}">
 <div class="cm">{media}</div>
-<div class="cb"><div class="meta"><span class="mono">{e(LINES[p["line"]]["name"])}</span>{status_badge(p)}</div>
+<div class="cb"><div class="meta"><span class="mono">{e(cat)}</span>{status_badge(p)}</div>
 <h3>{e(p["name"])}</h3><p class="kind">{e(p["kind"])}</p><p>{e(p["short"])}</p>
 <span class="more">Made to order <i>&rarr;</i></span></div></a>'''
+
+
+def cat_card(c):
+    n = len(c["devices"])
+    count = f'{n} device{"s" if n != 1 else ""}' if n else "Self hosted software"
+    return f'<a class="card cat" href="{u("/products/" + c["slug"] + "/")}"><div class="cm"><img src="{u("/assets/video/" + c["film"] + ".jpg")}" alt="" loading="lazy">{video_tag(c["film"])}</div><div class="cb"><span class="mono">{count}</span><h3>{e(c["name"])}</h3><p>{e(c["tag"])}</p><span class="more">Explore <i>&rarr;</i></span></div></a>'
+
+
+def sol_card(s):
+    return f'<a class="card sol" href="{u("/solutions/" + s["slug"] + "/")}"><div class="cm"><img src="{u("/assets/video/" + s["film"] + ".jpg")}" alt="" loading="lazy">{video_tag(s["film"])}</div><div class="cb"><h3>{e(s["name"])}</h3><p>{e(s["tag"])}</p><span class="more">See the solution <i>&rarr;</i></span></div></a>'
 
 
 OWN = [
@@ -553,11 +740,16 @@ OWN = [
 
 def own_strip():
     items = "".join(f'<div><span class="mono n">0{i + 1}</span><h3>{e(a)}</h3><p>{e(b)}</p></div>' for i, (a, b) in enumerate(OWN))
-    return f'<section class="own"><div class="wrap">{label("What you own when we hand over")}<div class="own4">{items}</div></div></section>'
+    return f'<section class="own"><div class="wrap">{label("Designed by us. Owned by you.")}<div class="own4">{items}</div></div></section>'
+
+
+def proof_strip():
+    items = "".join(f'<div><span class="mono">{e(k)}</span><strong>{e(n)}</strong><p>{e(t)}</p></div>' for k, n, t in PROOF)
+    return f'<section class="proof"><div class="wrap">{label("Built for the field")}<h2>Purpose built. Owned outright.</h2><p class="lede">Cameras, gateways, wearables, relays and the platform they report to, designed as one stack and handed over whole.</p><div class="proof4">{items}</div></div></section>'
 
 
 def cta(title="Tell us what you need to sense, send or control.", film_slug="print-timelapse"):
-    return banner(film_slug, f'{label("Made to order")}<h2>{e(title)}</h2><p class="lede">No catalogue prices. We start from your site, your vehicles and your rules, and quote the build.</p>{pill(u("/build/"), "Request a build", True)}', "cta")
+    return banner(film_slug, f'{label("Made to order")}<h2>{e(title)}</h2><p class="lede">No catalogue prices. We start from your site, your vehicles and your rules, and quote the build.</p><div class="actions">{pill(u("/build/"), "Request a build", True)}{pill(u("/hardware/"), "See all hardware")}</div>', "cta")
 
 
 def featured():
@@ -570,44 +762,15 @@ def featured():
     return f'<section class="featured" aria-label="Featured"><div class="wrap fhead"><div class="chips">{chips}</div>{arrows}</div><div class="track">{cards}</div></section>'
 
 
-# ---------------------------------------------------------------- pages
-
-
-def home():
-    hero = banner(
-        "home-montage",
-        f'<h1>{e(TAGLINE)}</h1><p class="lede">We design the hardware. You own the supply chain.</p><div class="actions">{pill(u("/build/"), "Request a build", True)}{pill(u("/platforms/"), "See the platforms")}</div><a class="down" href="#featured" aria-label="Scroll"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 4v16m0 0 6-6m-6 6-6-6" stroke="currentColor" stroke-width="1.4"/></svg></a>',
-        "hero",
-        hero=True,
-    )
-    feat = '<div id="featured"></div>' + featured()
-    statement = split(
-        "Why we exist",
-        "The biggest threats now sit in the hardware.",
-        "For a decade the fight over control was a software fight. It has moved down the stack. A camera on a truck, a band on a wrist, a relay on a pole: each carries chips, radios and firmware that someone else chose, from a supply chain nobody in the room can see. We think any organisation that runs critical work should own its hardware the way it already owns its data. So we design the devices, publish what we learn, and hand each customer the design files, the parts list and the keys.",
-        panel_video("aai-hardware", "Our own boards and renders: DriveSense carrier, VIM 2.0 and the Field Band."),
-        pill(u("/supply-chain/"), "How ownership works"),
-        side="right",
-    )
-    lines = ""
-    for i, (k, L) in enumerate(LINES.items()):
-        prods = [p for p in PRODUCTS if p["line"] == k]
-        plinks = "".join(f'<a href="{u("/platforms/" + p["slug"] + "/")}">{e(p["name"])} <i>&rarr;</i></a>' for p in prods)
-        if k == "controls":
-            plinks += f'<a href="{u("/build/")}">Custom controllers <i>&rarr;</i></a>'
-        lines += split(f"0{i + 1} · {L['name']}", e(L["title"]), e(L["body"]), panel_video(L["film"]), plinks, side="right" if i % 2 == 0 else "left", cls="line")
-    cards = "".join(product_card(p) for p in PRODUCTS)
-    grid = f'<section class="cards"><div class="wrap"><div class="head">{label("Platforms")}<h2>Reference designs, built to order.</h2><a class="btn ghost" href="{u("/platforms/")}">All platforms</a></div><div class="grid3">{cards}</div></div></section>'
-    inds = "".join(
-        f'<a class="tile" href="{u("/industries/")}#{slugify(n)}"><div class="cm"><img src="{u("/assets/video/" + f + ".jpg")}" alt="" loading="lazy">{video_tag(f)}</div><h3>{e(n)}</h3></a>'
-        for n, f, _, _ in INDUSTRIES
-    )
-    ind = f'<section class="cards grey"><div class="wrap"><div class="head">{label("Industries")}<h2>Where nothing may phone home.</h2><a class="btn ghost" href="{u("/industries/")}">All industries</a></div><div class="grid4">{inds}</div></div></section>'
-    notes = "".join(note_card(n) for n in NOTES)
-    lab = f'<section class="cards"><div class="wrap"><div class="head">{label("Design Lab")}<h2>We publish what we learn.</h2><a class="btn ghost" href="{u("/lab/")}">All notes</a></div><div class="grid3">{notes}</div></div></section>'
-    hq = f'<section class="hq grey"><div class="wrap">{label("Headquarters")}<div class="grid2 even">{panel_video("riyadh-day", "Riyadh, Saudi Arabia. Design, customer engineering and field trials for the Gulf.")}{panel_video("dallas-sunset", "Dallas, Texas. Design, partners and supply for the United States.")}</div></div></section>'
-    body = hero + feat + statement + own_strip() + lines + grid + ind + lab + hq + cta()
-    page("/", "Arab American Instruments", "Arab American Instruments designs low power edge devices for sensing, satcoms and real time control in air gapped environments. Riyadh and Dallas. You own the design and the supply chain.", body)
+def accordion():
+    """Samsara style 'one stack' block: categories on the left, media switching on the right."""
+    items = ""
+    panes = ""
+    for i, c in enumerate(CATEGORIES):
+        devs = ", ".join(PBY[d]["name"] for d in c["devices"]) or "Runs on your servers"
+        items += f'<div class="ai{" open" if i == 0 else ""}"><h3><span>{e(c["name"])}</span><i aria-hidden="true"></i></h3><div class="ab"><p>{e(c["body"])}</p><p class="mono devs">{e(devs)}</p><a class="btn small" href="{u("/products/" + c["slug"] + "/")}">Learn more</a></div></div>'
+        panes += f'<figure class="panel{" show" if i == 0 else ""}"><img src="{u("/assets/video/" + c["film"] + ".jpg")}" alt="" loading="lazy">{video_tag(c["film"])}</figure>'
+    return f'<section class="stack grey"><div class="wrap">{label("One stack")}<h2>Every device, one operation.</h2><p class="lede">Cameras, telematics, wearables and relays that speak one protocol and report to one platform you host.</p><div class="accwrap"><div class="acc">{items}</div><div class="accmedia">{panes}</div></div></div></section>'
 
 
 def slugify(s):
@@ -618,53 +781,145 @@ def note_card(n):
     return f'<a class="card note" href="{u("/lab/" + n["slug"] + "/")}"><div class="cm"><img src="{u("/assets/video/" + n["film"] + ".jpg")}" alt="" loading="lazy"></div><div class="cb"><span class="mono">{e(n["date"])}</span><h3>{e(n["title"])}</h3><p>{e(n["sub"])}</p></div></a>'
 
 
-def platforms():
-    head = page_head("Platforms", "Reference designs, built to order.", "Three lines from one design house. Nothing here has a list price: every unit is adapted to where it will live and built for the customer who will own it.", "oasis-road")
+# ---------------------------------------------------------------- pages
+
+
+def home():
+    hero = banner(
+        "home-montage",
+        f'<h1>{e(TAGLINE)}</h1><p class="lede">Purpose built cameras, gateways, wearables and relays for operations that run far from the network, or must stay off it. Designed by us. Owned by you.</p><div class="actions">{pill(u("/build/"), "Request a build", True)}{pill(u("/hardware/"), "See all hardware")}</div><a class="down" href="#featured" aria-label="Scroll"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 4v16m0 0 6-6m-6 6-6-6" stroke="currentColor" stroke-width="1.4"/></svg></a>',
+        "hero",
+        hero=True,
+    )
+    feat = '<div id="featured"></div>' + featured()
+    sols = "".join(sol_card(s) for s in SOLUTIONS)
+    solsec = f'<section class="cards"><div class="wrap"><div class="head">{label("Solutions")}<h2>Built for the outcomes operators are measured on.</h2><a class="btn ghost" href="{u("/solutions/")}">All solutions</a></div><div class="grid5">{sols}</div></div></section>'
+    why = split(
+        "Why we exist",
+        "The biggest threats now sit in the hardware.",
+        "For a decade the fight over control was a software fight. It has moved down the stack. A camera on a truck, a band on a wrist, a relay on a pole: each carries chips, radios and firmware that someone else chose, from a supply chain nobody in the room can see. We think any organisation that runs critical work should own its hardware the way it already owns its data. So we design the devices, publish what we learn, and hand each customer the design files, the parts list and the keys.",
+        panel_video("aai-hardware", "Our own boards and renders: DriveSense carrier, VIM 2.0 and the Field Band."),
+        pill(u("/supply-chain/"), "How ownership works"),
+        side="right",
+    )
+    cards = "".join(product_card(p) for p in PRODUCTS if p["status"] != "concept")
+    grid = f'<section class="cards"><div class="wrap"><div class="head">{label("Hardware")}<h2>In design and at fab today.</h2><a class="btn ghost" href="{u("/hardware/")}">All hardware</a></div><div class="grid3">{cards}</div></div></section>'
+    inds = "".join(
+        f'<a class="tile" href="{u("/industries/")}#{slugify(n)}"><div class="cm"><img src="{u("/assets/video/" + f + ".jpg")}" alt="" loading="lazy">{video_tag(f)}</div><h3>{e(n)}</h3></a>'
+        for n, f, _, _ in INDUSTRIES
+    )
+    ind = f'<section class="cards grey"><div class="wrap"><div class="head">{label("Industries")}<h2>Where nothing may phone home.</h2><a class="btn ghost" href="{u("/industries/")}">All industries</a></div><div class="grid4">{inds}</div></div></section>'
+    notes = "".join(note_card(n) for n in NOTES)
+    lab = f'<section class="cards"><div class="wrap"><div class="head">{label("Design Lab")}<h2>We publish what we learn.</h2><a class="btn ghost" href="{u("/lab/")}">All notes</a></div><div class="grid3">{notes}</div></div></section>'
+    hq = f'<section class="hq grey"><div class="wrap">{label("Headquarters")}<div class="grid2 even">{panel_video("riyadh-day", "Riyadh, Saudi Arabia. Design, customer engineering and field trials for the Gulf.")}{panel_video("dallas-sunset", "Dallas, Texas. Design, partners and supply for the United States.")}</div></div></section>'
+    body = hero + feat + proof_strip() + accordion() + solsec + why + own_strip() + grid + ind + lab + hq + cta()
+    page("/", "Arab American Instruments", "Arab American Instruments designs purpose built cameras, telematics, wearables and relays for air gapped operations. Riyadh and Dallas. You own the design and the supply chain.", body)
+
+
+def products():
+    head = page_head("Products", "One stack to run your physical operation, hosted by you.", "Cameras, telematics, worker safety, mesh and satcoms, and the Command platform they report to. Every device is a reference design we build to order, and the customer keeps the design.", "oasis-road", f'<div class="actions">{pill(u("/build/"), "Request a build", True)}{pill(u("/hardware/"), "See all hardware")}</div>')
+    jump = '<section class="jump"><div class="wrap"><p class="mono">Explore the products</p><div class="jumps">' + "".join(f'<a href="#{c["slug"]}">{e(c["name"])} <i>&darr;</i></a>' for c in CATEGORIES) + f'<a href="{u("/hardware/")}">All hardware <i>&rarr;</i></a></div></div></section>'
+    secs = ""
+    for i, c in enumerate(CATEGORIES):
+        devs = "".join(product_card(PBY[d]) for d in c["devices"])
+        if c["slug"] == "command":
+            devs = "".join(f'<div class="card flat"><div class="cb"><h3>{e(a)}</h3><p>{e(b)}</p></div></div>' for a, b in c["features"])
+        secs += f'<div id="{c["slug"]}">' + split(f"0{i + 1} · {c['name']}", e(c["title"]), e(c["body"]), panel_video(c["film"]), pill(u("/products/" + c["slug"] + "/"), "Learn more"), side="right" if i % 2 == 0 else "left", cls="line") + f'<section class="cards tight"><div class="wrap"><div class="grid3">{devs}</div></div></section></div>'
+    page("/products/", "Products", "Arab American Instruments products: cameras and vision, vehicle telematics, worker safety, mesh and satcoms, and the self hosted Command platform.", head + jump + secs + own_strip() + cta(), "/products/")
+
+
+def category_page(c):
+    head = page_head(f"Products · {c['name']}", e(c["title"]), e(c["body"]), c["film"], f'<div class="actions">{pill(u("/build/"), "Request a build", True)}{pill(u("/hardware/"), "All hardware")}</div>')
+    if c["devices"]:
+        devs = "".join(product_card(PBY[d]) for d in c["devices"])
+        devsec = f'<section class="cards"><div class="wrap"><div class="head">{label("Devices")}<h2>{e(c["name"])} hardware.</h2></div><div class="grid3">{devs}</div></div></section>'
+    else:
+        feats = "".join(f'<div class="card flat"><div class="cb"><h3>{e(a)}</h3><p>{e(b)}</p></div></div>' for a, b in c["features"])
+        devsec = f'<section class="cards"><div class="wrap"><div class="head">{label("What Command does")}<h2>Everything the devices send, on one screen you host.</h2></div><div class="grid3">{feats}</div><p class="fine">Command is a reference design today. It is built around the devices\' own protocol and runs wherever you put it: a data centre, a site server, or a laptop in camp.</p></div></section>'
+    sols = "".join(sol_card(SBY[s]) for s in c["outcomes"])
+    solsec = f'<section class="cards grey"><div class="wrap"><div class="head">{label("Solutions")}<h2>What it is for.</h2></div><div class="grid3">{sols}</div></div></section>'
+    others = "".join(cat_card(o) for o in CATEGORIES if o["slug"] != c["slug"])
+    more = f'<section class="cards"><div class="wrap"><div class="head">{label("The rest of the stack")}<h2>Works with</h2></div><div class="grid4">{others}</div></div></section>'
+    page(f"/products/{c['slug']}/", c["name"], c["tag"], head + devsec + solsec + own_strip() + more + cta(), "/products/")
+
+
+def hardware():
+    head = page_head("All hardware", "Every device, its status and its reference specification.", "Nothing here has a list price. Each unit is adapted to where it will live and built for the customer who will own it. Status is updated as boards go to fab and come back.", "smt-line", f'<div class="actions">{pill(u("/build/"), "Request a build", True)}</div>')
     legend = "".join(f'<span class="badge s-{k}">{v}</span>' for k, v in STATUS.items())
     leg = f'<section class="legend"><div class="wrap"><span class="mono">Status</span>{legend}<span class="mono">Updated 12 Nov 2026</span></div></section>'
-    sections = ""
-    for i, (k, L) in enumerate(LINES.items()):
-        prods = [p for p in PRODUCTS if p["line"] == k]
-        cards = "".join(product_card(p) for p in prods)
-        extra = ""
-        if k == "controls":
-            extra = f'<a class="card prod ask" href="{u("/build/")}"><div class="cb"><span class="mono">RT Controls</span><h3>Custom controllers</h3><p class="kind">Commissioned designs</p><p>Pumps, valves, irrigation, gates and lines. Tell us the machine and the timing budget and we design the controller around it.</p><span class="more">Start a commission <i>&rarr;</i></span></div></a>'
-        tech = {"sensing": "cams-sunset", "satcoms": "antenna-sky", "controls": "scope-wave"}[k]
-        sections += f'<div id="{k}">' + split(f"0{i + 1} · {L['name']}", e(L["title"]), e(L["body"]), panel_video(tech), side="right" if i % 2 == 0 else "left", cls="line") + "</div>"
-        sections += f'<section class="cards"><div class="wrap"><div class="grid3">{cards}{extra}</div></div></section>'
-    page("/platforms/", "Platforms", "Sensing, satcoms and mesh, and real time control platforms from Arab American Instruments. Made to order, never off the shelf.", head + leg + sections + own_strip() + cta(), "/platforms/")
+    rows = ""
+    for c in CATEGORIES:
+        for d in c["devices"]:
+            p = PBY[d]
+            if any(r.startswith(f'<tr data-s="{d}"') for r in [rows]):
+                continue
+            if f'data-s="{d}"' in rows:
+                continue
+            spec = "; ".join(f"{a}: {b}" for a, b in p["specs"][:3])
+            rows += f'<tr data-s="{d}"><td><a href="{dev_url(p)}"><b>{e(p["name"])}</b><br><span>{e(p["kind"])}</span></a></td><td>{e(c["name"])}</td><td>{status_badge(p)}</td><td class="specs">{e(spec)}</td></tr>'
+    table = f'<section class="hwtable"><div class="wrap"><div class="tw"><table class="data"><thead><tr><th>Device</th><th>Category</th><th>Status</th><th>Reference specification</th></tr></thead><tbody>{rows}</tbody></table></div></div></section>'
+    cards = "".join(product_card(p) for p in PRODUCTS)
+    grid = f'<section class="cards"><div class="wrap"><div class="grid3">{cards}</div></div></section>'
+    page("/hardware/", "All hardware", "Every Arab American Instruments device with its status and reference specification.", head + leg + table + grid + own_strip() + cta(), "/products/")
 
 
 def product_page(p):
-    L = LINES[p["line"]]
+    c = CBY[CAT_OF[p["slug"]]]
     actions = f'<div class="actions">{status_badge(p)}{pill(u("/build/") + "?platform=" + p["slug"], "Request this build", True)}</div>'
-    head = page_head(f"{L['name']} · {p['kind']}", e(p["name"]), e(p["short"]), p["film"], actions)
+    head = page_head(f"{c['name']} · {p['kind']}", e(p["name"]), e(p["short"]), p["film"], actions)
     if p["images"]:
-        figs = "".join(f'<figure class="panel contain"><img src="{u("/assets/img/products/" + f)}" alt="{e(c)}" loading="lazy"><figcaption>{e(c)}</figcaption></figure>' for f, c in p["images"])
+        figs = "".join(f'<figure class="panel contain"><img src="{u("/assets/img/products/" + f)}" alt="{e(cp)}" loading="lazy"><figcaption>{e(cp)}</figcaption></figure>' for f, cp in p["images"])
         gal = f'<section class="gallery"><div class="wrap">{label("From the Design Lab")}<div class="gal">{figs}</div></div></section>'
     else:
         gal = f'<section class="gallery"><div class="wrap"><p class="pending">Renders for {e(p["name"])} are in progress. This page describes the reference concept as designed today; parts are shortlisted, not final.</p></div></section>'
     secs = "".join(f'<div class="feat"><h3>{e(h)}</h3><ul>{"".join("<li>" + e(i) + "</li>" for i in items)}</ul></div>' for h, items in p["sections"])
     specs = "".join(f"<tr><th>{e(a)}</th><td>{e(b)}</td></tr>" for a, b in p["specs"])
     pairs = "".join(product_card(PBY[s]) for s in p.get("pairs", []))
+    sols = "".join(sol_card(s) for s in SOLUTIONS if p["slug"] in s["devices"])
     body = (
         head
         + gal
         + f'<section class="detail grey"><div class="wrap"><div class="cols"><div>{label("What it does")}<div class="feats">{secs}</div></div><aside>{label("Reference specification")}<table class="spec">{specs}</table><p class="fine">Figures marked estimate are design targets, set conservatively, and will be confirmed in field trials. Every unit is adapted to the customer, so the delivered specification may differ.</p></aside></div></div></section>'
+        + (f'<section class="cards"><div class="wrap"><div class="head">{label("Solutions")}<h2>What it is for.</h2></div><div class="grid3">{sols}</div></div></section>' if sols else "")
         + own_strip()
-        + (f'<section class="cards"><div class="wrap"><div class="head">{label("Works with")}</div><div class="grid3">{pairs}</div></div></section>' if pairs else "")
+        + (f'<section class="cards grey"><div class="wrap"><div class="head">{label("Works with")}<h2>Part of one stack.</h2></div><div class="grid3">{pairs}</div></div></section>' if pairs else "")
         + cta(f"Build {p['name']} for your site.")
     )
-    page(f"/platforms/{p['slug']}/", p["name"], f"{p['name']}: {p['short']}", body, "/platforms/")
+    page(f"/hardware/{p['slug']}/", p["name"], f"{p['name']}: {p['short']}", body, "/products/")
+
+
+def solutions():
+    head = page_head("Solutions", "Solutions built for physical operations, on hardware you own.", "Safety, security, compliance, efficiency and coverage: the outcomes operators are measured on, delivered by devices that run on the unit and report to a platform you host.", "truck-desert", f'<div class="actions">{pill(u("/build/"), "Request a build", True)}</div>')
+    cards = "".join(sol_card(s) for s in SOLUTIONS)
+    grid = f'<section class="cards"><div class="wrap"><div class="grid3">{cards}</div></div></section>'
+    inds = "".join(f'<a class="tile" href="{u("/industries/")}#{slugify(n)}"><div class="cm"><img src="{u("/assets/video/" + f + ".jpg")}" alt="" loading="lazy">{video_tag(f)}</div><h3>{e(n)}</h3></a>' for n, f, _, _ in INDUSTRIES)
+    ind = f'<section class="cards grey"><div class="wrap"><div class="head">{label("Industries")}<h2>Where it runs.</h2><a class="btn ghost" href="{u("/industries/")}">All industries</a></div><div class="grid4">{inds}</div></div></section>'
+    page("/solutions/", "Solutions", "Arab American Instruments solutions: safety and risk, security and sovereignty, compliance and records, efficiency and cost, coverage off the network.", head + grid + ind + own_strip() + cta(), "/solutions/")
+
+
+def solution_page(s):
+    head = page_head(f"Solutions · {s['name']}", e(s["title"]), e(s["body"]), s["film"], f'<div class="actions">{pill(u("/build/"), "Request a build", True)}</div>')
+    pts = "".join(f"<li>{e(x)}</li>" for x in s["points"])
+    devs = "".join(product_card(PBY[d]) for d in s["devices"])
+    ibys = {n: f for n, f, _, _ in INDUSTRIES}
+    inds = "".join(f'<a class="tile" href="{u("/industries/")}#{slugify(n)}"><div class="cm"><img src="{u("/assets/video/" + ibys[n] + ".jpg")}" alt="" loading="lazy">{video_tag(ibys[n])}</div><h3>{e(n)}</h3></a>' for n in s["industries"])
+    body = (
+        head
+        + f'<section class="detail"><div class="wrap"><div class="cols"><div>{label("What you get")}<ul class="points">{pts}</ul></div><aside>{label("How it stays yours")}<p>The models run on the device. Events and clips go only where you send them. Command runs on your servers. The design files, the bill of materials and the keys are handed over at the end of the build.</p>{pill(u("/supply-chain/"), "How ownership works")}</aside></div></div></section>'
+        + f'<section class="cards grey"><div class="wrap"><div class="head">{label("Hardware")}<h2>The devices behind it.</h2><a class="btn ghost" href="{u("/hardware/")}">All hardware</a></div><div class="grid3">{devs}</div></div></section>'
+        + f'<section class="cards"><div class="wrap"><div class="head">{label("Industries")}<h2>Where it runs.</h2></div><div class="grid3">{inds}</div></div></section>'
+        + cta()
+    )
+    page(f"/solutions/{s['slug']}/", s["name"], s["tag"], body, "/solutions/")
 
 
 def industries():
     head = page_head("Industries", "Where nothing may phone home.", "We build for work that runs far from the network or must stay off it: fleets, crowds, energy, water, grids and closed sites across the Gulf and the United States.", "desert-drone")
     rows = ""
     for i, (n, f, d, ps) in enumerate(INDUSTRIES):
-        links = "".join(f'<a href="{u("/platforms/" + s + "/")}">{e(PBY[s]["name"])} <i>&rarr;</i></a>' for s in ps) or f'<a href="{u("/build/")}">Commission a design <i>&rarr;</i></a>'
+        links = "".join(f'<a href="{dev_url(PBY[s])}">{e(PBY[s]["name"])} <i>&rarr;</i></a>' for s in ps) or f'<a href="{u("/build/")}">Commission a design <i>&rarr;</i></a>'
         rows += f'<div id="{slugify(n)}">' + split(f"0{i + 1}", e(n), e(d), panel_video(f), links, side="right" if i % 2 == 0 else "left", cls="line") + "</div>"
-    page("/industries/", "Industries", "Industries served by Arab American Instruments: fleets, crowd safety, energy, utilities, agriculture, remote sites, telecom and ports.", head + rows + cta(), "/industries/")
+    page("/industries/", "Industries", "Industries served by Arab American Instruments: fleets, crowd safety, energy, utilities, agriculture, remote sites, telecom and ports.", head + rows + cta(), "/solutions/")
 
 
 def lab():
@@ -707,7 +962,7 @@ def supply():
         + split("Traceable by default", "Every part with its maker and its origin.", "Each bill of materials we hand over names the maker of every part and where it was made, so your security team can audit the device the way it audits code.", panel_video("chip-macro"), side="right")
         + cta()
     )
-    page("/supply-chain/", "Supply chain", "How Arab American Instruments hands customers their design files, parts list, firmware and keys so they own their hardware supply chain.", body, "/supply-chain/")
+    page("/supply-chain/", "Supply chain", "How Arab American Instruments hands customers their design files, parts list, firmware and keys so they own their hardware supply chain.", body, "/about/")
 
 
 def about():
@@ -736,7 +991,7 @@ def build_page():
 <div class="col"><form id="buildform">
 <div class="two"><label>Name<input name="Name" required autocomplete="name"></label><label>Organisation<input name="Organisation" required autocomplete="organization"></label></div>
 <div class="two"><label>Work email<input type="email" name="Email" required autocomplete="email"></label><label>Country<input name="Country" placeholder="Saudi Arabia, United States, ..."></label></div>
-<label>Closest platform<select name="Platform"><option value="Not sure yet">Not sure yet, recommend one</option>{opts}<option value="Custom controller">Custom controller</option></select></label>
+<label>Closest device<select name="Platform"><option value="Not sure yet">Not sure yet, recommend one</option>{opts}<option value="Command platform">Command platform</option><option value="Custom controller">Custom controller</option></select></label>
 <label>What must it sense, send or control?<textarea name="Requirement" rows="4" required placeholder="For example: driver and road cameras for 800 heavy trucks, vehicle data from the FMS port, events over LTE."></textarea></label>
 <fieldset><legend>Where will the data go?</legend>{eopts}</fieldset>
 <fieldset><legend>How many units to start?</legend>{qopts}</fieldset>
@@ -766,6 +1021,10 @@ def extras():
     with open(os.path.join(OUT, "robots.txt"), "w") as fh:
         fh.write(f"User-agent: *\nAllow: /\nSitemap: {SITE_URL}/sitemap.xml\n")
     open(os.path.join(OUT, ".nojekyll"), "w").close()
+    # Old URLs from the first release.
+    redirect("/platforms/", "/products/")
+    for p in PRODUCTS:
+        redirect(f"/platforms/{p['slug']}/", f"/hardware/{p['slug']}/")
 
 
 def main():
@@ -773,9 +1032,13 @@ def main():
         shutil.rmtree(OUT)
     os.makedirs(OUT)
     shutil.copytree(os.path.join(ROOT, "assets"), os.path.join(OUT, "assets"), ignore=shutil.ignore_patterns("CREDITS.md"))
-    home(); platforms()
+    home(); products(); hardware(); solutions()
+    for c in CATEGORIES:
+        category_page(c)
     for p in PRODUCTS:
         product_page(p)
+    for s in SOLUTIONS:
+        solution_page(s)
     industries(); lab(); supply(); about(); build_page(); credits(); extras()
     print(f"built {len(PAGES)} pages into {OUT}")
 
