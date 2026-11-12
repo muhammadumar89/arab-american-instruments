@@ -14,8 +14,9 @@ import shutil
 
 ROOT = os.path.dirname(os.path.abspath(__file__))
 OUT = os.path.join(ROOT, "site")
-BASE = ""  # set to "/sub/path" if served below a domain root
-SITE_URL = "https://arabamericaninstruments.com"  # placeholder until a domain is chosen
+# GitHub Pages project site by default; AAI_BASE="" for a local preview at the server root.
+BASE = os.environ.get("AAI_BASE", "/arab-american-instruments")
+SITE_URL = os.environ.get("AAI_SITE_URL", "https://muhammadumar89.github.io/arab-american-instruments")
 CONTACT = "hello@codeninjaconsulting.com"  # inbound router; change when AAI has its own mailbox
 
 TAGLINE = "Low-power edge devices for sensing, Satcoms and RT controls in Air Gapped Environments."
