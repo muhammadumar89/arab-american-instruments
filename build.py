@@ -473,7 +473,7 @@ FEATURED = [
     ("Own the stack", "Security and Sovereignty", "Design files, bill of materials and keys handed to the customer, not kept by us", "/solutions/security/", "assets/video/chip-macro.jpg"),
     ("Design Lab", "Design Lab · Notes from the bench", "What a truck will tell you: the honest table of vehicle data", "/lab/", "assets/img/stock/chips-macro.jpg"),
     ("Defence", "Defence and government", "Field hardware on air gapped links, auditable part by part", "/industries/#defence-and-government", "assets/video/military-exercise.jpg"),
-    ("Two headquarters", "Riyadh and Dallas", "One technology company working from the Gulf and the United States", "/about/", "assets/video/dallas-sunset.jpg"),
+    ("Two headquarters", "Riyadh and Dallas", "One technology company working from the Gulf, Pakistan and the United States", "/about/", "assets/video/dallas-sunset.jpg"),
 ]
 
 
@@ -871,7 +871,7 @@ def solution_page(s):
 
 
 def industries():
-    head = page_head("Industries", "Where nothing may phone home.", "We build for work that runs far from the network or must stay off it: fleets, crowds, energy, water, grids and closed sites across the Gulf and the United States.", "desert-drone")
+    head = page_head("Industries", "Where nothing may phone home.", "We build for work that runs far from the network or must stay off it: fleets, crowds, energy, water, grids and closed sites across the Gulf, Pakistan and the United States.", "desert-drone")
     rows = ""
     for i, (n, f, d, ps) in enumerate(INDUSTRIES):
         links = "".join(f'<a href="{dev_url(PBY[s])}">{e(PBY[s]["name"])} <i>&rarr;</i></a>' for s in ps) or f'<a href="{u("/build/")}">Commission a design <i>&rarr;</i></a>'
