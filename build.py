@@ -489,7 +489,7 @@ PILLARS = [
     ("sovereignty", "Sovereign by design", "You own the design, the parts, the firmware and the keys. We hand it all over with the build.", "chip-macro", "/solutions/sovereignty/"),
     ("airgap", "Air gapped by default", "Models on the device, mesh between devices, Command on your servers. Nothing leaves that you did not choose.", "solar-desert", "/solutions/airgap/"),
     ("edge", "AI at the edge", "Vision and language models run on the hardware itself, on our own AI platform, with no cloud in the loop.", "engineer-scope", "/platform/"),
-    ("field", "Built for the field", "Low power, sealed, store and forward, made to order for your vehicles, your sites and your heat.", "truck-desert", "/hardware/"),
+    ("field", "Built for the field", "Low power, sealed, store and forward, built inside your perimeter for your vehicles, your sites and your heat.", "truck-desert", "/hardware/"),
 ]
 
 # Our AI platform. The parent stack, named.
@@ -514,7 +514,7 @@ MARK = '<svg class="mark" viewBox="0 0 40 40" aria-hidden="true"><circle cx="20"
 
 def menu_products():
     cats = "".join(f'<a href="{u("/products/" + c["slug"] + "/")}"><b>{e(c["name"])}</b><span>{e(c["tag"])}</span></a>' for c in CATEGORIES)
-    return f'<div class="ddgrid"><div class="ddcol">{cats}</div><div class="ddside"><span class="mono">Hardware</span><a href="{u("/hardware/")}"><b>All hardware</b><span>Every device in the stack</span></a><a href="{u("/platform/")}"><b>AI platform</b><span>The models and the stack that run on the hardware</span></a><a href="{u("/build/")}"><b>Request a build</b><span>Made to order, from a pilot to a fleet</span></a></div></div>'
+    return f'<div class="ddgrid"><div class="ddcol">{cats}</div><div class="ddside"><span class="mono">Hardware</span><a href="{u("/hardware/")}"><b>All hardware</b><span>Every device in the stack</span></a><a href="{u("/platform/")}"><b>AI platform</b><span>The models and the stack that run on the hardware</span></a><a href="{u("/build/")}"><b>Request a deployment</b><span>From a pilot to a fleet, inside your perimeter</span></a></div></div>'
 
 
 def menu_solutions():
@@ -539,18 +539,18 @@ def header(active=""):
     return f'''<header class="top"><div class="pill">
 <a class="brand" href="{u("/")}">{MARK}<span>Arab American Instruments</span></a>
 <nav id="nav">{nav}</nav>
-<a class="btn small" href="{u("/build/")}">Request a build</a>
+<a class="btn small" href="{u("/build/")}">Request a deployment</a>
 <button class="menu" aria-label="Menu" aria-expanded="false"><span></span><span></span></button>
 </div></header>
-<div class="mnav" id="mnav">{mobile}<a class="btn" href="{u("/build/")}">Request a build</a></div>'''
+<div class="mnav" id="mnav">{mobile}<a class="btn" href="{u("/build/")}">Request a deployment</a></div>'''
 
 
 def footer():
     prods = "".join(f'<a href="{u("/products/" + c["slug"] + "/")}">{e(c["name"])}</a>' for c in CATEGORIES) + f'<a href="{u("/hardware/")}">All hardware</a><a href="{u("/platform/")}">AI platform</a>'
     sols = "".join(f'<a href="{u("/solutions/" + s["slug"] + "/")}">{e(s["name"])}</a>' for s in SOLUTIONS) + f'<a href="{u("/industries/")}">Industries</a>'
-    comp = "".join(f'<a href="{u(h)}">{n}</a>' for n, h in [("About", "/about/"), ("Supply chain", "/supply-chain/"), ("Design Lab", "/lab/"), ("Request a build", "/build/"), ("Credits", "/credits/")])
+    comp = "".join(f'<a href="{u(h)}">{n}</a>' for n, h in [("About", "/about/"), ("Supply chain", "/supply-chain/"), ("Design Lab", "/lab/"), ("Request a deployment", "/build/"), ("Credits", "/credits/")])
     return f'''<footer class="foot"><div class="wrap">
-<div class="ftop"><p class="tag">{e(TAGLINE)}</p><a class="btn ghost" href="{u("/build/")}">Request a build</a></div>
+<div class="ftop"><p class="tag">{e(TAGLINE)}</p><a class="btn ghost" href="{u("/build/")}">Request a deployment</a></div>
 <div class="fgrid">
 <div><h4>Products</h4>{prods}</div>
 <div><h4>Solutions</h4>{sols}</div>
@@ -692,7 +692,7 @@ def product_card(p):
 <div class="cm">{media}</div>
 <div class="cb"><div class="meta"><span class="mono">{e(cat)}</span></div>
 <h3>{e(p["name"])}</h3><p class="kind">{e(TAGLINES.get(p["slug"], p["kind"]))}</p><p>{e(p["short"])}</p>
-<span class="more">Made to order <i>&rarr;</i></span></div></a>'''
+<span class="more">Deployment details <i>&rarr;</i></span></div></a>'''
 
 
 def cat_card(c):
@@ -742,7 +742,7 @@ def mosaic():
             media = f'<img src="{u("/assets/video/" + p["film"] + ".jpg")}" alt="" loading="lazy">{video_tag(p["film"])}'
         tiles += f'<a class="tile {cls}" href="{dev_url(p)}">{media}<div class="tt"><span class="cat">{e(CBY[CAT_OF[slug]]["name"])}</span><span class="name">{e(p["name"])}</span><span class="tag">{e(TAGLINES[slug])}</span></div></a>'
     cmd = f'<a class="tile wide" href="{u("/products/command/")}"><img src="{u("/assets/video/control-room.jpg")}" alt="" loading="lazy">{video_tag("control-room")}<div class="tt"><span class="cat">Platform</span><span class="name">Command</span><span class="tag">The whole operation, inside your perimeter.</span></div></a>'
-    return f'<section class="sec" style="border-top:0;padding-bottom:0"><div class="wrap"><div class="head">{label("Hardware")}<h2>Every device made to order. Every one of them yours.</h2><a class="btn ghost" href="{u("/hardware/")}">All hardware</a></div></div></section><section class="mosaic">{tiles}{cmd}</section>'
+    return f'<section class="sec" style="border-top:0;padding-bottom:0"><div class="wrap"><div class="head">{label("Hardware")}<h2>Every device built inside your perimeter. Every one of them yours.</h2><a class="btn ghost" href="{u("/hardware/")}">All hardware</a></div></div></section><section class="mosaic">{tiles}{cmd}</section>'
 
 
 def platform_block(full=False):
@@ -753,7 +753,7 @@ def platform_block(full=False):
 
 
 def cta(title="Tell us what you need to sense, send or control.", film_slug="print-timelapse"):
-    return banner(film_slug, f'{label("Made to order")}<h2>{e(title)}</h2><p class="lede">No catalogue prices. We start from your site, your vehicles and your rules, and quote the build.</p><div class="actions">{pill(u("/build/"), "Request a build", True)}{pill(u("/hardware/"), "See all hardware")}</div>', "cta")
+    return banner(film_slug, f'{label("Deployments")}<h2>{e(title)}</h2><p class="lede">No catalogue prices. We start from your site, your vehicles and your rules, and scope the deployment.</p><div class="actions">{pill(u("/build/"), "Request a deployment", True)}{pill(u("/hardware/"), "See all hardware")}</div>', "cta")
 
 
 def slugify(s):
@@ -770,7 +770,7 @@ def note_card(n):
 def home():
     hero = banner(
         "home-montage",
-        f'<h1>{e(TAGLINE)}</h1><p class="lede">Hardware that runs vision and language models on the device, on a stack the customer owns outright. Commercial operations and national ones, from the Gulf, Pakistan and the United States.</p><div class="actions">{pill(u("/build/"), "Request a build", True)}{pill(u("/hardware/"), "All hardware")}</div><span class="coords">Riyadh 24.71 N 46.68 E &nbsp;&middot;&nbsp; Dallas 32.78 N 96.80 W</span>',
+        f'<h1>{e(TAGLINE)}</h1><p class="lede">Hardware that runs vision and language models on the device, on a stack the customer owns outright. Commercial operations and national ones, from the Gulf, Pakistan and the United States.</p><div class="actions">{pill(u("/build/"), "Request a deployment", True)}{pill(u("/hardware/"), "All hardware")}</div><span class="coords">Riyadh 24.71 N 46.68 E &nbsp;&middot;&nbsp; Dallas 32.78 N 96.80 W</span>',
         "hero",
         hero=True,
     )
@@ -794,7 +794,7 @@ def home():
 
 
 def platform_page():
-    head = film_head("control-room", "AI platform", "AI at the edge.", "Vision on the device. Language on your servers. One stack, inside your perimeter.", "Our hardware is different because of what runs on it. The parent company's AI platform designs the system, holds the object model, runs the models and keeps the memory, with no cloud in the loop.", f'<div class="actions">{pill(u("/build/"), "Request a build", True)}{pill(u("/hardware/"), "All hardware")}</div>')
+    head = film_head("control-room", "AI platform", "AI at the edge.", "Vision on the device. Language on your servers. One stack, inside your perimeter.", "Our hardware is different because of what runs on it. The parent company's AI platform designs the system, holds the object model, runs the models and keeps the memory, with no cloud in the loop.", f'<div class="actions">{pill(u("/build/"), "Request a deployment", True)}{pill(u("/hardware/"), "All hardware")}</div>')
     body = (
         head
         + platform_block(full=True)
@@ -808,7 +808,7 @@ def platform_page():
 
 
 def products():
-    head = film_head("oasis-road", "Products", "One stack, inside your perimeter.", "Cameras, telematics, wearables, air gapped links and the platform they report to.", "Every device is a reference design we build to order and hand over whole. The models run on the hardware, the data stays on your site, and the design stays with you.", f'<div class="actions">{pill(u("/build/"), "Request a build", True)}{pill(u("/hardware/"), "See all hardware")}</div>')
+    head = film_head("oasis-road", "Products", "One stack, inside your perimeter.", "Cameras, telematics, wearables, air gapped links and the platform they report to.", "Every device is a reference design we build to order and hand over whole. The models run on the hardware, the data stays on your site, and the design stays with you.", f'<div class="actions">{pill(u("/build/"), "Request a deployment", True)}{pill(u("/hardware/"), "See all hardware")}</div>')
     jump = '<section class="jump"><div class="wrap"><span class="mono">Explore the products</span><div class="jumps">' + "".join(f'<a href="#{c["slug"]}">{e(c["name"])} <i>&darr;</i></a>' for c in CATEGORIES) + f'<a href="{u("/hardware/")}">All hardware <i>&rarr;</i></a><a href="{u("/platform/")}">AI platform <i>&rarr;</i></a></div></div></section>'
     secs = ""
     for i, c in enumerate(CATEGORIES):
@@ -820,7 +820,7 @@ def products():
 
 
 def category_page(c):
-    head = film_head(c["film"], f"Products · {c['name']}", e(c["name"]), c["title"], e(c["body"]), f'<div class="actions">{pill(u("/build/"), "Request a build", True)}{pill(u("/hardware/"), "All hardware")}</div>')
+    head = film_head(c["film"], f"Products · {c['name']}", e(c["name"]), c["title"], e(c["body"]), f'<div class="actions">{pill(u("/build/"), "Request a deployment", True)}{pill(u("/hardware/"), "All hardware")}</div>')
     if c["devices"]:
         devs = "".join(product_card(PBY[d]) for d in c["devices"])
         devsec = f'<section class="cards"><div class="wrap"><div class="head">{label("Devices")}<h2>{e(c["name"])} hardware.</h2></div><div class="grid3">{devs}</div></div></section>'
@@ -835,7 +835,7 @@ def category_page(c):
 
 
 def hardware():
-    head = film_head("smt-line", "All hardware", "Every device in the stack.", "Made to order. Owned outright.", "Nothing here has a list price. Each unit is adapted to where it will live and built for the customer who will own it.", f'<div class="actions">{pill(u("/build/"), "Request a build", True)}</div>')
+    head = film_head("smt-line", "All hardware", "Every device in the stack.", "Built inside your perimeter. Owned outright.", "Nothing here has a list price. Each deployment is scoped to where it will live and built for the customer who will own it.", f'<div class="actions">{pill(u("/build/"), "Request a deployment", True)}</div>')
     rows = ""
     for c in CATEGORIES:
         for d in c["devices"]:
@@ -852,7 +852,7 @@ def hardware():
 
 def product_page(p):
     c = CBY[CAT_OF[p["slug"]]]
-    actions = f'<div class="actions">{pill(u("/build/") + "?platform=" + p["slug"], "Request this build", True)}{pill(u("/hardware/"), "All hardware")}</div>'
+    actions = f'<div class="actions">{pill(u("/build/") + "?platform=" + p["slug"], "Request this deployment", True)}{pill(u("/hardware/"), "All hardware")}</div>'
     head = film_head(p["film"], f"{c['name']} · {p['kind']}", e(p["name"]), TAGLINES.get(p["slug"], ""), e(p["short"]), actions)
     gal = ""
     if p["images"]:
@@ -869,13 +869,13 @@ def product_page(p):
         + (f'<section class="cards"><div class="wrap"><div class="head">{label("Solutions")}<h2>What it is for.</h2></div><div class="grid3">{sols}</div></div></section>' if sols else "")
         + own_strip()
         + (f'<section class="cards"><div class="wrap"><div class="head">{label("Works with")}<h2>Part of one stack.</h2></div><div class="grid3">{pairs}</div></div></section>' if pairs else "")
-        + cta(f"Build {p['name']} for your site.")
+        + cta(f"Deploy {p['name']} inside your perimeter.")
     )
     page(f"/hardware/{p['slug']}/", p["name"], f"{p['name']}: {p['short']}", body, "/products/")
 
 
 def solutions():
-    head = film_head("truck-desert", "Solutions", "Sovereignty first.", "Then safety, security, records, cost and coverage, on hardware you own.", "The outcomes operators are measured on, delivered by devices that run their models on the unit and report to a platform you host.", f'<div class="actions">{pill(u("/build/"), "Request a build", True)}</div>')
+    head = film_head("truck-desert", "Solutions", "Sovereignty first.", "Then safety, security, records, cost and coverage, on hardware you own.", "The outcomes operators are measured on, delivered by devices that run their models on the unit and report to a platform you host.", f'<div class="actions">{pill(u("/build/"), "Request a deployment", True)}</div>')
     cards = "".join(sol_card(s) for s in SOLUTIONS)
     grid = f'<section class="cards"><div class="wrap"><div class="grid3">{cards}</div></div></section>'
     inds = "".join(ind_tile(n, f) for n, f, _, _ in INDUSTRIES)
@@ -884,7 +884,7 @@ def solutions():
 
 
 def solution_page(s):
-    head = film_head(s["film"], f"Solutions · {s['name']}", e(s["name"]), s["title"], e(s["body"]), f'<div class="actions">{pill(u("/build/"), "Request a build", True)}</div>')
+    head = film_head(s["film"], f"Solutions · {s['name']}", e(s["name"]), s["title"], e(s["body"]), f'<div class="actions">{pill(u("/build/"), "Request a deployment", True)}</div>')
     pts = "".join(f"<li>{e(x)}</li>" for x in s["points"])
     devs = "".join(product_card(PBY[d]) for d in s["devices"])
     ibys = {n: f for n, f, _, _ in INDUSTRIES}
@@ -1014,8 +1014,8 @@ def build_page():
     env = [("Air gapped: nothing may leave the site (recommended default)", True), ("Private network or private cloud", False), ("Public cellular or satellite is acceptable", False), ("Not known yet", False)]
     eopts = "".join(f'<label class="opt"><input type="radio" name="Connectivity" value="{e(q)}"{" checked" if c else ""}><span>{e(q)}</span></label>' for q, c in env)
     form = f'''<section class="formwrap paper"><div class="wrap grid2">
-<div class="col text">{label("Request a build")}<h2>Tell us the job. We design the device.</h2>
-<p class="lede">No prices on this site, because every unit is made for its owner. Send the outline and an engineer replies with questions, a reference design and a plan for a pilot.</p>
+<div class="col text">{label("Request a deployment")}<h2>Tell us the job. We scope the deployment.</h2>
+<p class="lede">No prices on this site, because every deployment is scoped to the site it will run on. Send the outline and an engineer replies with questions, a reference design and a plan for a pilot.</p>
 {panel_video("print-timelapse")}</div>
 <div class="col"><form id="buildform">
 <div class="two"><label>Name<input name="Name" required autocomplete="name"></label><label>Organisation<input name="Organisation" required autocomplete="organization"></label></div>
@@ -1030,8 +1030,8 @@ def build_page():
 <p class="sent" hidden>Your email app should now be open. If it did not open, write to {CONTACT}.</p>
 </form></div></div></section>
 <script>(function(){{var m=location.search.match(/platform=([a-z-]+)/);if(!m)return;var map={json.dumps({p["slug"]: p["name"] for p in PRODUCTS})};var s=document.querySelector('select[name=Platform]');if(map[m[1]])s.value=map[m[1]];}})();</script>'''
-    head = page_head("Made to order", "Request a build.", "From a single pilot to a national fleet. You keep the design, the parts list and the keys.")
-    page("/build/", "Request a build", "Request a made to order edge device from Arab American Instruments.", head + form, "")
+    head = page_head("Deployments", "Request a deployment.", "From a single pilot to a national fleet, built inside your perimeter. You keep the design, the parts list and the keys.")
+    page("/build/", "Request a deployment", "Request a deployment of Arab American Instruments edge devices.", head + form, "")
 
 
 def credits():
