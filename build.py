@@ -14,9 +14,10 @@ import shutil
 
 ROOT = os.path.dirname(os.path.abspath(__file__))
 OUT = os.path.join(ROOT, "site")
-# GitHub Pages project site by default; AAI_BASE="" for a local preview at the server root.
-BASE = os.environ.get("AAI_BASE", "/arab-american-instruments")
-SITE_URL = os.environ.get("AAI_SITE_URL", "https://muhammadumar89.github.io/arab-american-instruments")
+# Served at the domain root (GitHub Pages with the custom domain arabamerican.ai).
+BASE = os.environ.get("AAI_BASE", "")
+SITE_URL = os.environ.get("AAI_SITE_URL", "https://arabamerican.ai")
+DOMAIN = "arabamerican.ai"
 CONTACT = "hello@codeninjaconsulting.com"  # inbound router; change when AAI has its own mailbox
 
 TAGLINE = "Low-power edge devices for sensing, Satcoms and RT controls in Air Gapped Environments."
@@ -937,6 +938,12 @@ LEADERS = [
      "link": "https://pk.linkedin.com/in/helloibrar"},
 ]
 
+BOARD = [
+    {"slug": "ahsan-jamil", "name": "Ahsan Jamil", "title": "Board Member. Managing General Partner, sAi Venture Capital",
+     "bio": "Mr. Jamil is the Managing General Partner of sAi Venture Capital, a Lahore based technology venture investor backing frontier technology companies that serve large global enterprises. He joined the CodeNinja board in December 2023, when sAi led the company's investment round.",
+     "link": "https://saiventurecap.com/our-team/"},
+]
+
 MISSION = [
     "The most important assets of nation states, governments and enterprises, our defence institutions, our energy grids, our border controls, our oil and gas facilities, all exist in the physical world. Every one of them is now watched, connected and controlled by hardware: cameras, gateways, radios and controllers.",
     "While we are passionate about instrumenting all this physical infrastructure, we cannot simply outsource the devices it runs on to one or two extremely centralised hardware vendors, with sealed firmware and supply chains nobody in the room can see. The only way to defend these institutions and this critical infrastructure is to own the hardware stack: the design, the parts, the firmware and the keys.",
@@ -953,16 +960,23 @@ def about():
         pan = f'<div class="lpanel"><h3>{e(L["name"])}</h3><p class="role">{e(L["title"])}</p><p class="bio">{e(L["bio"])}</p><a class="in" href="{L["link"]}" rel="noopener" target="_blank">LinkedIn</a></div>'
         rows += f'<div class="leader{" flip" if i % 2 else ""}">{fig}{pan}</div>'
     team = f'<section class="team grey"><div class="wrap"><div class="head">{label("Founding team")}<h2>Led by the founders of CodeNinja.</h2></div>{rows}</div></section>'
+    brows = ""
+    for L in BOARD:
+        fig = f'<figure><img src="{u("/assets/img/team/" + L["slug"] + ".jpg")}" alt="{e(L["name"])}" loading="lazy" width="900" height="750"></figure>'
+        pan = f'<div class="lpanel"><h3>{e(L["name"])}</h3><p class="role">{e(L["title"])}</p><p class="bio">{e(L["bio"])}</p><a class="in" href="{L["link"]}" rel="noopener" target="_blank">sAi Venture Capital</a></div>'
+        brows += f'<div class="leader">{fig}{pan}</div>'
+    board = f'<section class="team"><div class="wrap"><div class="head">{label("Board")}<h2>Backed by sAi Venture Capital.</h2><p class="lede">sAi Venture Capital led CodeNinja\'s investment round in December 2023 and holds a seat on the board.</p></div>{brows}</div></section>'
     body = (
         head
         + mission
         + split("What we do", "Purpose built hardware, owned by the customer.", "We design edge devices for sensing, satellite and mesh links, and real time control, and build them to order so that the customer owns the design and the supply chain, not us and not anyone else. We keep reference designs, publish what we learn, and build for each customer from a single pilot to a national fleet.", panel_img("/assets/img/stock/technician-solder.jpg", "Schematic, layout, firmware and shell under one roof."), side="right")
         + team
+        + board
         + f'<section class="hq"><div class="wrap">{label("Headquarters")}<div class="grid2 even">{panel_video("riyadh-day", "Riyadh, Saudi Arabia")}{panel_video("dallas-sunset", "Dallas, Texas, United States")}</div></div></section>'
         + split("Ownership", "A fully owned subsidiary of CodeNinja.", "Arab American Instruments brings hardware into the CodeNinja group, alongside its work on sovereign AI systems for governments and enterprises.", panel_video("engineer-scope"), side="right")
         + cta()
     )
-    page("/about/", "About", "Arab American Instruments is a technology company headquartered in Riyadh and Dallas, a fully owned subsidiary of CodeNinja, led by its founders.", body, "/about/")
+    page("/about/", "About", "Arab American Instruments is a technology company headquartered in Riyadh and Dallas, a fully owned subsidiary of CodeNinja, led by its founders and backed by sAi Venture Capital.", body, "/about/")
 
 
 def build_page():
@@ -1008,6 +1022,8 @@ def extras():
     with open(os.path.join(OUT, "robots.txt"), "w") as fh:
         fh.write(f"User-agent: *\nAllow: /\nSitemap: {SITE_URL}/sitemap.xml\n")
     open(os.path.join(OUT, ".nojekyll"), "w").close()
+    with open(os.path.join(OUT, "CNAME"), "w") as fh:
+        fh.write(DOMAIN + "\n")
     # Old URLs from the first release.
     redirect("/platforms/", "/products/")
     OLD = {"drivesense": "fleet-vision-unit", "vim": "vehicle-interface-module", "vehicle-gateway": "patrol-gateway"}

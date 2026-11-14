@@ -65,3 +65,4 @@ Pexels License, chosen 14 Nov 2026, gated for brands, signage and insignia. Reje
 - `trucks-parked.jpg`: pexels-3245123, "Aerial Photography of Parked Trucks", by Tom Fisk, https://www.pexels.com/photo/3245123/
 
 Team portraits in assets/img/team are the founders' own photographs, as used on codeatoms.ai/about.
+- `assets/img/team/ahsan-jamil.jpg`: portrait from https://saiventurecap.com/our-team/, used with the board member's role on CodeNinja's board.

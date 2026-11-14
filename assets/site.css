@@ -154,6 +154,7 @@ nav a.on{text-decoration:underline;text-underline-offset:6px;text-decoration-thi
 .head{display:grid;grid-template-columns:1fr auto;align-items:end;gap:8px 32px;margin-bottom:32px}
 .head .label{grid-column:1/-1;margin-bottom:4px}
 .head h2{margin:0;max-width:720px}
+.head .lede{grid-column:1/-1;margin:6px 0 0}
 .grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
 .grid4{display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
 @media(max-width:1000px){.grid3{grid-template-columns:1fr 1fr}.grid4{grid-template-columns:1fr 1fr}}
