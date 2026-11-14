@@ -4,7 +4,7 @@
 Run: python3 build.py
 Pages, products and Design Lab notes live in this file as data. Videos are in
 assets/video (credits in assets/video/CREDITS.md); product images in
-assets/img/products. House style: no hyphens or dashes in copy, no prices,
+assets/img/stock (Pexels photos of the use case, never our own boards). House style: no hyphens or dashes in copy, no prices,
 no customer names, every banner a real world video.
 """
 import html
@@ -68,9 +68,9 @@ PRODUCTS = [
         "film": "dashcam-desert",
         "short": "Two cameras on the windscreen, AI on the device, events over LTE. Watches the driver and the road and reads the truck's own data.",
         "images": [
-            ("carrier-top.jpg", "Windscreen carrier board, top, with the compute module footprint and LTE modem"),
-            ("carrier-bottom.jpg", "Windscreen carrier board, bottom"),
-            ("carrier-bare.jpg", "Windscreen carrier board, bare layout"),
+            ("driving.jpg", "The road camera sees what the driver sees, and warns before a collision"),
+            ("truck-driver-2.jpg", "The cab camera watches for drowsiness, distraction and phone use, day and night"),
+            ("trucks-parked.jpg", "One unit per truck, from a pilot batch to a national fleet"),
         ],
         "sections": [
             ("Driver, day and night", [
@@ -102,6 +102,7 @@ PRODUCTS = [
         ],
         "specs": [
             ("Compute", "RK3576 class compute module on our own carrier board"),
+            ("Operating system", "Linux or Android, your choice, signed with keys you hold"),
             ("Cameras", "Two: driver facing RGB IR for night, and road facing"),
             ("Links", "LTE and GPS; stores everything with no signal and sends when coverage returns"),
             ("Vehicle data", "Through VIM 2.0 on the truck's diagnostic or FMS port"),
@@ -119,8 +120,8 @@ PRODUCTS = [
         "film": "night-highway",
         "short": "A small box that plugs into the truck, reads its data buses and powers the camera unit. Works on light trucks and heavy fleets alike.",
         "images": [
-            ("vim-top.jpg", "VIM 2.0 board, top, with CAN, ignition and power headers"),
-            ("vim-bottom.jpg", "VIM 2.0 board, bottom"),
+            ("truck-cab-bw.jpg", "The module sits out of sight below the dash and plugs into the truck's own port"),
+            ("cluster.jpg", "Speed, fuel, faults and hours read from the vehicle, not estimated"),
         ],
         "sections": [
             ("Any truck", [
@@ -158,12 +159,9 @@ PRODUCTS = [
         "film": "walker-desert",
         "short": "A slim, sealed band that reports position, heart rate and skin temperature over LoRa, calls for help with one button and lasts days on a charge.",
         "images": [
-            ("band-wrist.jpg", "Field Band on the wrist"),
-            ("band-angle.jpg", "Field Band, three quarter view with the hidden light ring"),
-            ("band-loop.jpg", "Field Band strap and loop"),
-            ("band-under.jpg", "Field Band underside, heart rate window and charging contacts"),
-            ("band-mainboard.jpg", "Main board, top: GPS antenna area kept clear"),
-            ("band-sensor.jpg", "Sensor board for heart rate, temperature and charging"),
+            ("watch-1.jpg", "A sealed band on the wrist reports position, heart rate and skin temperature for days"),
+            ("watch-3.jpg", "One recessed button calls for help on every path at once"),
+            ("tablet-engineer.jpg", "Guides and supervisors see their group on a hub or a tablet, with no network needed"),
         ],
         "sections": [
             ("What it reports", [
@@ -200,7 +198,7 @@ PRODUCTS = [
         "kind": "Backpack gateway",
         "film": "radio-site",
         "short": "Carried at the front and back of a group, it collects every band in range and sends the data on by cellular, or by satellite when there is nothing else.",
-        "images": [],
+        "images": [("radio-1.jpg", "The guide at the back of every group carries the hub and stays in touch"), ("tablet-engineer.jpg", "A phone or tablet app shows the guide every band in the group")],
         "sections": [
             ("Inside", [
                 "LoRa gateway for the group's bands",
@@ -224,7 +222,7 @@ PRODUCTS = [
         "kind": "Roof unit for patrol and safety vehicles",
         "film": "mojave-hwy",
         "short": "Reaches much further than a backpack. In search mode a missing band reports every few seconds and the screen counts down as the vehicle closes in.",
-        "images": [],
+        "images": [("truck-cab-bw.jpg", "A roof antenna on a magnetic mount and a rugged tablet in the cab"), ("radio-tower.jpg", "Cellular and satellite links reach out where the mesh ends")],
         "sections": [
             ("Inside", [
                 "Multi channel LoRa gateway with a magnetic roof antenna",
@@ -244,7 +242,7 @@ PRODUCTS = [
         "kind": "Pole mounted mesh relay",
         "film": "solar-desert",
         "short": "Bolts onto a pole, runs on the sun and passes data pole to pole until it reaches one with a real uplink.",
-        "images": [],
+        "images": [("solar-cam-1.jpg", "A sealed box, a panel and a battery on any pole"), ("weather-station.jpg", "Sensors and relays share the same pole and the same link"), ("radio-tower.jpg", "The last pole carries the uplink")],
         "sections": [
             ("Inside", [
                 "LoRa gateway for nearby bands and sensors",
@@ -268,7 +266,7 @@ PRODUCTS = [
         "kind": "Camp dock for Field Bands",
         "film": "soldering",
         "short": "Charges, tests and pairs bands in one tray, and refuses anything that is not ours.",
-        "images": [],
+        "images": [("radios.jpg", "Every unit charged, tested and paired in one place before it goes out")],
         "sections": [
             ("Inside", [
                 "10 to 20 slots with sealed 3 pin contacts",
@@ -284,11 +282,12 @@ PRODUCTS = [
 PBY = {p["slug"]: p for p in PRODUCTS}
 
 INDUSTRIES = [
-    ("Fleets and logistics", "truck-desert", "Driver safety, vehicle data and video for fleets running thousands of heavy trucks.", ["drivesense", "vim"]),
+    ("Fleets and logistics", "truck-depot", "Driver safety, vehicle data and video for fleets running thousands of heavy trucks.", ["drivesense", "vim"]),
     ("Crowd and walker safety", "walkers-desert", "Bands, hubs and relays that keep large groups covered on long routes far from the network.", ["field-band", "guide-hub", "solar-relay"]),
     ("Energy and pipelines", "pumpjacks-desert", "Sensing and control on wells, valves and lines, on links you own.", ["solar-relay", "vim"]),
     ("Utilities and grid", "substation", "Monitoring and control near the equipment, isolated from the public internet.", []),
     ("Agriculture and water", "irrigation", "Low power sensing and pump control across fields and wells.", ["solar-relay"]),
+    ("Defence and government", "military-exercise", "Vehicles, people and sites in the field, on air gapped links, with hardware you can audit part by part.", ["drivesense", "field-band", "vehicle-gateway", "solar-relay"]),
     ("Remote and closed sites", "desert-aerial", "Border, camp and range sites where nothing may leave the perimeter.", ["vehicle-gateway", "guide-hub"]),
     ("Telecom and satellite", "cell-tower", "Edge radios, relays and terminals for networks that must keep running.", ["solar-relay", "vehicle-gateway"]),
     ("Ports and supply chain", "harbor-night", "Tracking and sensing for yards, terminals and the trucks that serve them.", ["drivesense"]),
@@ -329,7 +328,7 @@ NOTES = [
         "date": "10 Nov 2026",
         "film": "walker-desert",
         "body": [
-            ("p", "A band on a wrist has a small battery and a long way to shout. So the message has to be tiny. Ours is 24 bytes."),
+            ("p", "A band on a wrist has a small battery and a long way to reach. So the message has to be tiny. Ours is 24 bytes."),
             ("table", [
                 ["Field", "Bytes"],
                 ["Band ID", "4"],
@@ -352,13 +351,13 @@ NOTES = [
     {
         "slug": "small-decisions-on-a-small-board",
         "title": "Small decisions on a small board",
-        "sub": "Why the top of the band's board is nearly empty, and what a board colour costs.",
+        "sub": "Why the top of the band's board is kept clear, and how the other small decisions get made.",
         "date": "11 Nov 2026",
         "film": "pcb-macro",
         "body": [
             ("p", "Look at the main board of the Field Band and the top is almost bare. That is on purpose. The GPS antenna is a thin patch, and anything switching nearby makes it deaf. So the electronics live underneath and the top is kept clear for the sky."),
             ("p", "The sensor board sits at the very bottom, against the skin, where the heart rate sensor and the charging contacts need to be. Today it is about 2 by 2 cm and the main board about 4 by 2.7 cm. Those numbers will move as the requirements settle."),
-            ("p", "Colour is a choice too. A black solder mask costs about $3.30 more per board than the standard green. It photographs beautifully. Inside a sealed shell nobody sees it, so for a production run green is usually the right answer, and the customer decides."),
+            ("p", "Colour is a choice too. A black solder mask costs more per board than the standard green and looks better in photographs. Inside a sealed shell nobody sees it, so for a production run green is usually the right answer, and the customer decides."),
             ("p", "We write these down because the customer owns the design. Every one of these choices is in the files they keep."),
         ],
     },
@@ -375,7 +374,7 @@ PRODUCTS.append({
     "kind": "Fixed AI camera for yards, gates and sites",
     "film": "cams-sunset",
     "short": "The DriveSense compute and camera stack in a fixed housing. Watches a gate, a yard or a line, runs the models on the unit and keeps the video on site.",
-    "images": [],
+    "images": [("solar-cam-2.jpg", "A fixed unit on a pole, powered by the sun where there is no mains"), ("pole-cam-2.jpg", "Gates, yards and perimeter lines watched around the clock")],
     "sections": [
         ("What it watches", [
             "People and vehicles in zones you draw, at any hour",
@@ -391,6 +390,7 @@ PRODUCTS.append({
     ],
     "specs": [
         ("Compute", "The DriveSense compute module in a fixed, sealed housing"),
+        ("Operating system", "Linux or Android, your choice, signed with keys you hold"),
         ("Power", "Mains, PoE or the Solar Relay's panel and battery"),
         ("Links", "Your network, cellular, or LoRa for events only"),
     ],
@@ -433,7 +433,7 @@ CATEGORIES = [
         "outcomes": ["coverage", "security"],
     },
     {
-        "slug": "command", "name": "Command", "film": "scope-wave",
+        "slug": "command", "name": "Command", "film": "control-room",
         "tag": "The self hosted platform where everything lands",
         "title": "One screen for the whole operation, hosted by you.",
         "body": "Live map, events and clips, alerts, trips and search mode, running in your data centre, on a site server, or on a laptop in camp. It speaks the devices' own protocol, so the stack stays yours end to end.",
@@ -461,16 +461,16 @@ SOLUTIONS = [
         "body": "The driver camera sees eyes closing, phone use and a missing seatbelt and speaks up in the cab. The road camera warns of a collision ahead. The band feels a fall and sends an SOS on every path at once.",
         "points": ["Drowsiness, distraction, phone use and seatbelt alerts spoken in the cab", "Forward collision, tailgating and lane departure warnings", "Harsh braking, cornering and impact events with video", "Falls, stillness and SOS from the wrist, confirmed back to the wearer"],
         "devices": ["drivesense", "field-band", "guide-hub"],
-        "industries": ["Fleets and logistics", "Crowd and walker safety", "Energy and pipelines"],
+        "industries": ["Fleets and logistics", "Defence and government", "Crowd and walker safety"],
     },
     {
-        "slug": "security", "name": "Security and Sovereignty", "film": "chip-macro",
+        "slug": "security", "name": "Security and Sovereignty", "film": "tactical",
         "tag": "Protect the assets, and the stack they run on",
         "title": "Tamper proof devices, on a stack nobody else holds the keys to.",
         "body": "Case opened, unit unmounted, camera covered, power cut, a knock while parked: the unit reports each one, and sends a last message before it goes dark. Underneath, every part is traced, the firmware is yours and the keys never leave you.",
         "points": ["Tamper, unmount and camera blocked alerts", "Parked impact and tow away detection", "A last message on power loss", "Design files, bill of materials and signing keys handed to the customer", "Air gapped operation with no vendor cloud in the loop"],
         "devices": ["drivesense", "vim", "site-camera"],
-        "industries": ["Remote and closed sites", "Utilities and grid", "Ports and supply chain"],
+        "industries": ["Defence and government", "Remote and closed sites", "Utilities and grid"],
     },
     {
         "slug": "compliance", "name": "Compliance and Records", "film": "terminal-timelapse",
@@ -497,7 +497,7 @@ SOLUTIONS = [
         "body": "Devices store everything with no signal and send it when coverage returns. Bands reach hubs, hubs reach cars, relays pass messages pole to pole, and one uplink reaches the world by cellular, satellite or microwave.",
         "points": ["Store and forward on every device", "LoRa mesh between bands, hubs, cars and poles", "Solar relays that run for days without sun", "Cellular, satellite or microwave uplink where there is finally a link", "Under 1 kbit/s for 300 wearers"],
         "devices": ["solar-relay", "vehicle-gateway", "guide-hub", "field-band"],
-        "industries": ["Crowd and walker safety", "Remote and closed sites", "Telecom and satellite"],
+        "industries": ["Defence and government", "Crowd and walker safety", "Remote and closed sites"],
     },
 ]
 SBY = {s["slug"]: s for s in SOLUTIONS}
@@ -519,7 +519,8 @@ FEATURED = [
     ("Fleet vision", "Cameras and Vision · Gulf fleets", "Two cameras, AI on the device, for heavy truck fleets in the Gulf", "/products/cameras/", "assets/video/dashcam-desert.jpg"),
     ("Worker safety", "Worker Safety · Field band", "A 24 byte band message that keeps thousands of walkers covered off the network", "/products/workforce/", "assets/video/walkers-desert.jpg"),
     ("Own the stack", "Security and Sovereignty", "Design files, bill of materials and keys handed to the customer, not kept by us", "/solutions/security/", "assets/video/chip-macro.jpg"),
-    ("Design Lab", "Design Lab · Notes from the bench", "Why the top of a wrist band's board is empty, and what a board colour costs", "/lab/", "assets/img/products/carrier-top.jpg"),
+    ("Design Lab", "Design Lab · Notes from the bench", "Why the antenna gets the whole top of a wrist band's board", "/lab/", "assets/img/stock/chips-macro.jpg"),
+    ("Defence", "Defence and government", "Field hardware on air gapped links, auditable part by part", "/industries/#defence-and-government", "assets/video/military-exercise.jpg"),
     ("Two headquarters", "Riyadh and Dallas", "One technology company working from the Gulf and the United States", "/about/", "assets/video/dallas-sunset.jpg"),
 ]
 
@@ -686,6 +687,11 @@ def panel_video(slug, caption=""):
     return f'<figure class="panel"><img src="{u("/assets/video/" + slug + ".jpg")}" alt="" loading="lazy">{video_tag(slug)}{cap}</figure>'
 
 
+def panel_img(src, caption="", alt=""):
+    cap = f'<figcaption>{e(caption)}</figcaption>' if caption else ""
+    return f'<figure class="panel"><img src="{u(src)}" alt="{e(alt or caption)}" loading="lazy">{cap}</figure>'
+
+
 def page_head(kicker, title, text, slug=None, actions=""):
     media = f'<div class="wrap">{panel_video(slug)}</div>' if slug else ""
     return f'<section class="phead"><div class="wrap">{label(kicker)}<h1>{title}</h1><p class="lede">{text}</p>{actions}</div>{media}</section>'
@@ -706,7 +712,7 @@ def dev_url(p):
 def product_card(p):
     img = p["images"][0][0] if p["images"] else None
     if img:
-        media = f'<img src="{u("/assets/img/products/" + img)}" alt="{e(p["images"][0][1])}" loading="lazy">'
+        media = f'<img src="{u("/assets/img/stock/" + img)}" alt="{e(p["images"][0][1])}" loading="lazy">'
         cls = "card prod"
     else:
         f = p["film"]
@@ -798,7 +804,7 @@ def home():
         "Why we exist",
         "The biggest threats now sit in the hardware.",
         "For a decade the fight over control was a software fight. It has moved down the stack. A camera on a truck, a band on a wrist, a relay on a pole: each carries chips, radios and firmware that someone else chose, from a supply chain nobody in the room can see. We think any organisation that runs critical work should own its hardware the way it already owns its data. So we design the devices, publish what we learn, and hand each customer the design files, the parts list and the keys.",
-        panel_video("aai-hardware", "Our own boards and renders: DriveSense carrier, VIM 2.0 and the Field Band."),
+        panel_video("engineer-scope", "Every device is designed, tested and documented so the customer can build it again without us."),
         pill(u("/supply-chain/"), "How ownership works"),
         side="right",
     )
@@ -868,7 +874,7 @@ def product_page(p):
     actions = f'<div class="actions">{status_badge(p)}{pill(u("/build/") + "?platform=" + p["slug"], "Request this build", True)}</div>'
     head = page_head(f"{c['name']} · {p['kind']}", e(p["name"]), e(p["short"]), p["film"], actions)
     if p["images"]:
-        figs = "".join(f'<figure class="panel contain"><img src="{u("/assets/img/products/" + f)}" alt="{e(cp)}" loading="lazy"><figcaption>{e(cp)}</figcaption></figure>' for f, cp in p["images"])
+        figs = "".join(f'<figure class="panel"><img src="{u("/assets/img/stock/" + f)}" alt="{e(cp)}" loading="lazy"><figcaption>{e(cp)}</figcaption></figure>' for f, cp in p["images"])
         gal = f'<section class="gallery"><div class="wrap">{label("From the Design Lab")}<div class="gal">{figs}</div></div></section>'
     else:
         gal = f'<section class="gallery"><div class="wrap"><p class="pending">Renders for {e(p["name"])} are in progress. This page describes the reference concept as designed today; parts are shortlisted, not final.</p></div></section>'
@@ -923,7 +929,7 @@ def industries():
 
 
 def lab():
-    head = page_head("Design Lab", "We publish what we learn.", "Short notes from the bench: the decisions behind our boards, the numbers behind our links, and what we got wrong. Our customers own their designs; the method we share with everyone.", "smt-line")
+    head = page_head("Design Lab", "We publish what we learn.", "Short notes from the bench: the decisions behind our boards, the numbers behind our links, and the tradeoffs we weighed. Our customers own their designs; the method we share with everyone.", "smt-line")
     notes = "".join(note_card(n) for n in NOTES)
     page("/lab/", "Design Lab", "Notes from the Arab American Instruments Design Lab on edge hardware, LoRa links, vehicle data and board design.", head + f'<section class="cards grey"><div class="wrap"><div class="grid3">{notes}</div></div></section>' + cta(), "/lab/")
     for n in NOTES:
@@ -955,7 +961,7 @@ def supply():
     st = "".join(f'<li><span class="mono n">0{i + 1}</span><h3>{e(a)}</h3><p>{e(b)}</p></li>' for i, (a, b) in enumerate(steps))
     body = (
         head
-        + split("How we work", "We own the design. You own the supply chain.", "We are a technology company that owns its hardware designs. We keep and improve our reference designs, publish what we learn in the Design Lab, and for each customer we build a purpose built device on top of them. When the work is done, the customer holds everything needed to build it again without us.", panel_video("engineer-board"), side="right")
+        + split("How we work", "We own the design. You own the supply chain.", "We are a technology company that owns its hardware designs. We keep and improve our reference designs, publish what we learn in the Design Lab, and for each customer we build a purpose built device on top of them. When the work is done, the customer holds everything needed to build it again without us.", panel_video("engineer-scope"), side="right")
         + f'<section class="steps grey"><div class="wrap">{label("Six steps")}<ol>{st}</ol></div></section>'
         + own_strip()
         + split("Built where you trust", "Your fab, your line, your country.", "After the pilot, the next thousand units can be built by any qualified manufacturer you choose, in the Gulf, in the United States or anywhere else you trust.", panel_video("robot-lab"), side="left")
@@ -965,17 +971,47 @@ def supply():
     page("/supply-chain/", "Supply chain", "How Arab American Instruments hands customers their design files, parts list, firmware and keys so they own their hardware supply chain.", body, "/about/")
 
 
+LEADERS = [
+    {"slug": "mukhtar-ahmad-baig", "name": "Mukhtar Ahmad Baig", "title": "Co-Founder and Chief Executive Officer",
+     "bio": "Mr. Baig is one of the co-founders of CodeNinja and serves as its Chief Executive Officer. CodeNinja began as an engineering firm in Lahore in 2014 and now builds systems for enterprises, governments and critical operations across the United States and the Gulf.",
+     "link": "https://www.linkedin.com/in/mukhtarahmadbaig/"},
+    {"slug": "adil-khalil", "name": "Adil Khalil", "title": "Co-Founder and Chief Technology Officer",
+     "bio": "Mr. Khalil is one of the co-founders of CodeNinja and serves as its Chief Technology Officer, responsible for the engineering behind CodeNinja's sovereign systems.",
+     "link": "https://www.linkedin.com/in/adilkhalil/"},
+    {"slug": "muhammad-umar-bilal", "name": "Muhammad Umar", "title": "Co-Founder and Chief Operating Officer",
+     "bio": "Mr. Umar is one of the co-founders of CodeNinja and serves as its Chief Operating Officer. He works on Hyper Anthologies, the memory and interpretability layer underneath CodeNinja's enterprise AI deployments, and is the author of the Own the Loop research series.",
+     "link": "https://www.linkedin.com/in/muhammadumargiki/"},
+    {"slug": "ibrar-hussain", "name": "Ibrar Hussain", "title": "Co-Founder and Chief Product Officer",
+     "bio": "Mr. Hussain is one of the co-founders of CodeNinja and serves as its Chief Product Officer. Mr. Hussain holds a B.S. in Computer Science from the University of the Punjab.",
+     "link": "https://pk.linkedin.com/in/helloibrar"},
+]
+
+MISSION = [
+    "The most important assets of nation states, governments and enterprises, our defence institutions, our energy grids, our border controls, our oil and gas facilities, all exist in the physical world. Every one of them is now watched, connected and controlled by hardware: cameras, gateways, radios and controllers.",
+    "While we are passionate about instrumenting all this physical infrastructure, we cannot simply outsource the devices it runs on to one or two extremely centralised hardware vendors, with sealed firmware and supply chains nobody in the room can see. The only way to defend these institutions and this critical infrastructure is to own the hardware stack: the design, the parts, the firmware and the keys.",
+    "And that is the mission of Arab American Instruments.",
+]
+
+
 def about():
     head = page_head("About", "A technology company for sovereign hardware.", e(TAGLINE), "alula")
+    mission = '<section class="mission"><div class="wrap"><div class="mgrid">' + label("Our mission") + '<div>' + "".join(f'<p class="stmt">{e(x)}</p>' for x in MISSION) + '</div></div></div></section>'
+    rows = ""
+    for i, L in enumerate(LEADERS):
+        fig = f'<figure><img src="{u("/assets/img/team/" + L["slug"] + ".jpg")}" alt="{e(L["name"])}" loading="lazy" width="900" height="750"></figure>'
+        pan = f'<div class="lpanel"><h3>{e(L["name"])}</h3><p class="role">{e(L["title"])}</p><p class="bio">{e(L["bio"])}</p><a class="in" href="{L["link"]}" rel="noopener" target="_blank">LinkedIn</a></div>'
+        rows += f'<div class="leader{" flip" if i % 2 else ""}">{fig}{pan}</div>'
+    team = f'<section class="team grey"><div class="wrap"><div class="head">{label("Founding team")}<h2>Led by the founders of CodeNinja.</h2></div>{rows}</div></section>'
     body = (
         head
-        + split("The idea", "Counterbalance the sealed stack.", "Technology keeps concentrating. More and more of what runs a country, a fleet or a field sits on hardware designed by a few companies, sealed so that the people who rely on it cannot look inside or change it. We think that is a risk every organisation should be able to remove. We design edge devices for sensing, satellite and mesh links, and real time control, and build them so that the customer owns the design and the supply chain, not us and not anyone else.", panel_video("aai-hardware"), side="right")
-        + split("The bench", "Engineers who own the whole board.", "Schematic, layout, firmware and shell under one roof, so every decision on the device is one we can explain and hand over. We do not chase a catalogue. We keep reference designs, publish what we learn, and build purpose built hardware for each customer, from a single pilot to a national fleet.", panel_video("engineer-board"), side="left")
-        + f'<section class="hq grey"><div class="wrap">{label("Headquarters")}<div class="grid2 even">{panel_video("riyadh-day", "Riyadh, Saudi Arabia")}{panel_video("dallas-sunset", "Dallas, Texas, United States")}</div></div></section>'
-        + split("Ownership", "A fully owned subsidiary of CodeNinja.", "Arab American Instruments brings hardware design into the CodeNinja group, alongside its work on sovereign AI systems for governments and enterprises.", panel_video("desert-aerial"), side="right")
+        + mission
+        + split("What we do", "Purpose built hardware, owned by the customer.", "We design edge devices for sensing, satellite and mesh links, and real time control, and build them to order so that the customer owns the design and the supply chain, not us and not anyone else. We keep reference designs, publish what we learn, and build for each customer from a single pilot to a national fleet.", panel_img("/assets/img/stock/technician-solder.jpg", "Schematic, layout, firmware and shell under one roof."), side="right")
+        + team
+        + f'<section class="hq"><div class="wrap">{label("Headquarters")}<div class="grid2 even">{panel_video("riyadh-day", "Riyadh, Saudi Arabia")}{panel_video("dallas-sunset", "Dallas, Texas, United States")}</div></div></section>'
+        + split("Ownership", "A fully owned subsidiary of CodeNinja.", "Arab American Instruments brings hardware into the CodeNinja group, alongside its work on sovereign AI systems for governments and enterprises.", panel_video("engineer-scope"), side="right")
         + cta()
     )
-    page("/about/", "About", "Arab American Instruments is a technology company headquartered in Riyadh and Dallas, a fully owned subsidiary of CodeNinja.", body, "/about/")
+    page("/about/", "About", "Arab American Instruments is a technology company headquartered in Riyadh and Dallas, a fully owned subsidiary of CodeNinja, led by its founders.", body, "/about/")
 
 
 def build_page():
