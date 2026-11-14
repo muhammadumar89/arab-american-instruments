@@ -748,7 +748,7 @@ def mosaic():
 def platform_block(full=False):
     stack = "".join(f'<div><span class="mono">{n}</span><h3>{e(a)}</h3><p>{e(b)}</p></div>' for n, a, b in PLATFORM)
     models = "".join(f'<div><h3>{e(a)}</h3><p>{e(b)}</p></div>' for a, b in MODELS)
-    head = f'<div class="head">{label("AI at the edge")}<h2>Not a camera company. A hardware company that runs AI on the device.</h2>{"" if full else f"<a class=\'btn ghost\' href=\'{u("/platform/")}\'>The platform</a>"}<p class="lede">Vision models on the unit. Language models on your servers. One AI platform, built by our parent CodeNinja, designs the system, holds the object model, runs the models and keeps the memory, all inside your perimeter.</p></div>'
+    head = f'<div class="head">{label("AI at the edge")}<h2>Hardware that runs the models where the work is.</h2>{"" if full else f"<a class=\'btn ghost\' href=\'{u("/platform/")}\'>The platform</a>"}<p class="lede">Vision models on the unit. Language models on your servers. One AI platform, built by our parent CodeNinja, designs the system, holds the object model, runs the models and keeps the memory, all inside your perimeter. The hardware is designed around what runs on it.</p></div>'
     return f'<section class="platform"><div class="wrap">{head}<div class="stack4">{stack}</div><div class="models">{models}</div></div></section>'
 
 
@@ -770,7 +770,7 @@ def note_card(n):
 def home():
     hero = banner(
         "home-montage",
-        f'<h1>{e(TAGLINE)}</h1><div class="side"><p class="lede">A hardware company that runs vision and language models on the device, on a stack the customer owns outright. Commercial operations and national ones, from the Gulf, Pakistan and the United States.</p><div class="actions" style="margin:0">{pill(u("/build/"), "Request a build", True)}{pill(u("/hardware/"), "All hardware")}</div><span class="coords">Riyadh 24.71 N 46.68 E &nbsp;&middot;&nbsp; Dallas 32.78 N 96.80 W</span></div>',
+        f'<h1>{e(TAGLINE)}</h1><p class="lede">Hardware that runs vision and language models on the device, on a stack the customer owns outright. Commercial operations and national ones, from the Gulf, Pakistan and the United States.</p><div class="actions">{pill(u("/build/"), "Request a build", True)}{pill(u("/hardware/"), "All hardware")}</div><span class="coords">Riyadh 24.71 N 46.68 E &nbsp;&middot;&nbsp; Dallas 32.78 N 96.80 W</span>',
         "hero",
         hero=True,
     )
