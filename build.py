@@ -60,104 +60,99 @@ STATUS = {
 
 PRODUCTS = [
     {
-        "slug": "drivesense",
-        "name": "DriveSense 2.0",
+        "slug": "fleet-vision-unit",
+        "name": "Fleet Vision Unit",
         "line": "sensing",
         "status": "fab",
-        "kind": "Fleet vision unit",
+        "kind": "AI cameras for the cab and the road",
         "film": "dashcam-desert",
-        "short": "Two cameras on the windscreen, AI on the device, events over LTE. Watches the driver and the road and reads the truck's own data.",
+        "short": "Watches the driver and the road, runs the models on the unit and sends events and clips to your platform. Reads the vehicle's own data through the Vehicle Interface Module.",
         "images": [
-            ("driving.jpg", "The road camera sees what the driver sees, and warns before a collision"),
-            ("truck-driver-2.jpg", "The cab camera watches for drowsiness, distraction and phone use, day and night"),
-            ("trucks-parked.jpg", "One unit per truck, from a pilot batch to a national fleet"),
+            ("driving.jpg", "The road view: collision warnings, following distance and lane departure"),
+            ("truck-driver-2.jpg", "The cab view: drowsiness, distraction and phone use, day and night"),
+            ("trucks-parked.jpg", "One unit per vehicle, from a pilot batch to a national fleet"),
         ],
         "sections": [
             ("Driver, day and night", [
-                "Drowsiness: eyes closing, long blinks, yawning, head nodding",
-                "Distraction: eyes or head off the road for too long",
-                "Phone use, smoking, eating and drinking",
+                "Drowsiness, distraction and phone use",
                 "Seatbelt on or off",
-                "Who is driving, matched to enrolled drivers, and driver swaps",
-                "No driver in the seat, passenger present, camera covered",
+                "Who is driving, matched to enrolled drivers",
+                "Camera covered or no driver in the seat",
             ]),
             ("Road", [
                 "Forward collision warning for vehicles, pedestrians and animals",
                 "Following distance, lane departure and swerving",
                 "Speed limit signs and traffic lights",
-                "Number plates at close range",
             ]),
             ("Location and driving", [
                 "Live position, speed, heading and route history",
                 "Trips, stops and idling",
                 "Harsh braking, acceleration and cornering",
-                "Crash, impact and rollover; a knock while parked",
+                "Crash, impact and rollover, and a knock while parked",
             ]),
             ("Video and status", [
-                "A short clip from both cameras with every event, and on a button press",
+                "A short clip with every event, and on a button press",
                 "Continuous recording on the unit, pulled for any time later",
-                "Live view from either camera on request, with cabin audio",
-                "A last message when power is cut; alerts when the case is opened or a camera is blocked",
+                "Live view on request",
+                "Tamper, power loss and camera blocked alerts",
             ]),
         ],
         "specs": [
-            ("Compute", "RK3576 class compute module on our own carrier board"),
+            ("Where it runs", "On the unit; only events and clips leave the vehicle"),
             ("Operating system", "Linux or Android, your choice, signed with keys you hold"),
-            ("Cameras", "Two: driver facing RGB IR for night, and road facing"),
-            ("Links", "LTE and GPS; stores everything with no signal and sends when coverage returns"),
-            ("Vehicle data", "Through VIM 2.0 on the truck's diagnostic or FMS port"),
+            ("Links", "Cellular and GPS, with store and forward when there is no signal"),
+            ("Vehicle data", "Through the Vehicle Interface Module"),
             ("In the cab", "Spoken alerts and a driver button"),
-            ("Shell", "Printed nylon housing, built for desert heat"),
+            ("Environment", "Sealed housing, built for desert heat"),
         ],
-        "pairs": ["vim"],
+        "pairs": ["vehicle-interface-module"],
     },
     {
-        "slug": "vim",
-        "name": "VIM 2.0",
+        "slug": "vehicle-interface-module",
+        "name": "Vehicle Interface Module",
         "line": "controls",
         "status": "final",
-        "kind": "Vehicle Interface Module",
+        "kind": "Vehicle data and power gateway",
         "film": "night-highway",
-        "short": "A small box that plugs into the truck, reads its data buses and powers the camera unit. Works on light trucks and heavy fleets alike.",
+        "short": "Plugs into the vehicle's own port, reads speed, fuel, faults, hours and load, and powers the camera unit. Works on light trucks and heavy fleets alike.",
         "images": [
-            ("truck-cab-bw.jpg", "The module sits out of sight below the dash and plugs into the truck's own port"),
+            ("truck-cab-bw.jpg", "The module sits out of sight below the dash and plugs into the vehicle's own port"),
             ("cluster.jpg", "Speed, fuel, faults and hours read from the vehicle, not estimated"),
         ],
         "sections": [
-            ("Any truck", [
+            ("Any vehicle", [
                 "Ignition on and off",
                 "Battery voltage and engine running",
-                "Power for the camera unit, with a last gasp message on power loss",
+                "Power for the camera unit, with a last message on power loss",
             ]),
-            ("Light and medium trucks, 16 pin diagnostic port", [
-                "Engine speed, vehicle speed, coolant temperature",
+            ("Light and medium trucks, diagnostic port", [
+                "Engine speed, vehicle speed and coolant temperature",
                 "Engine load and accelerator pedal",
                 "Fault codes and warning lamps",
-                "Vehicle ID, and fuel level and rate where the truck reports them",
+                "Vehicle ID, and fuel level and rate where the vehicle reports them",
             ]),
-            ("Heavy trucks, 12 pin FMS port", [
+            ("Heavy trucks, fleet management port", [
                 "Total fuel used, live fuel rate and economy",
                 "Odometer, engine hours and distance to next service",
                 "Brake, clutch and cruise control",
-                "Axle weight, AdBlue level, and driver hours where a tachograph is fitted",
+                "Axle weight, AdBlue level and driver hours where a tachograph is fitted",
             ]),
         ],
         "specs": [
-            ("Buses", "Two CAN channels plus a K line"),
-            ("Ports", "16 pin diagnostic and 12 pin FMS harnesses"),
-            ("Power", "Truck battery in, regulated power out to the camera unit"),
-            ("Fallback", "Where the truck gives no speed or distance, GPS does"),
+            ("Ports", "Standard diagnostic and fleet management harnesses"),
+            ("Power", "Vehicle battery in, regulated power out to the camera unit"),
+            ("Fallback", "Where the vehicle gives no speed or distance, GPS does"),
         ],
-        "pairs": ["drivesense"],
+        "pairs": ["fleet-vision-unit"],
     },
     {
         "slug": "field-band",
         "name": "Field Band",
         "line": "sensing",
         "status": "design",
-        "kind": "LoRa wrist band for people in the field",
+        "kind": "Wearable for people in the field",
         "film": "walker-desert",
-        "short": "A slim, sealed band that reports position, heart rate and skin temperature over LoRa, calls for help with one button and lasts days on a charge.",
+        "short": "A slim, sealed band that reports position, heart rate and skin temperature over a long range radio, calls for help with one button and lasts days on a charge.",
         "images": [
             ("watch-1.jpg", "A sealed band on the wrist reports position, heart rate and skin temperature for days"),
             ("watch-3.jpg", "One recessed button calls for help on every path at once"),
@@ -165,30 +160,29 @@ PRODUCTS = [
         ],
         "sections": [
             ("What it reports", [
-                "Position from a low power GPS with a thin patch antenna",
-                "Heart rate and skin temperature, chosen for accuracy on a moving wrist",
-                "Falls and stillness from a motion sensor",
+                "Position",
+                "Heart rate and skin temperature",
+                "Falls and stillness",
                 "Battery level and an off wrist alert",
             ]),
             ("When something goes wrong", [
                 "A recessed SOS button that goes out on every path at once",
-                "Vibration only once help has confirmed the message",
+                "Confirmation back to the wearer once help has the message",
                 "A separation alarm when the wearer loses their group",
-                "A hidden light ring that glows only in an emergency, so rescuers can find the wearer at night",
+                "A light that shows only in an emergency, so rescuers can find the wearer at night",
             ]),
             ("Two builds", [
-                "LoRa only: the slimmest band, about 5 to 7 days per charge (estimate)",
-                "LoRa plus soldered eSIM: calls for help alone wherever there is phone signal, about 2 days per charge (estimate)",
+                "Long range radio only: the slimmest band and the longest charge",
+                "Long range radio plus cellular: calls for help alone wherever there is phone signal",
             ]),
         ],
         "specs": [
-            ("Radio", "Processor with built in LoRa; optional cellular with eSIM"),
-            ("Message", "24 bytes every 5 minutes, instantly for SOS and falls, encrypted per band"),
-            ("Boards", "Main board about 4 by 2.7 cm, sensor board about 2 by 2 cm (current estimates)"),
-            ("Battery", "150 to 250 mAh cell with protection, temperature limited charging and a fuse"),
-            ("Sealing", "IP67, button included; charging contacts are dead off the dock"),
+            ("Radio", "Long range mesh radio; optional cellular"),
+            ("Battery", "Days per charge, not hours"),
+            ("Sealing", "Sealed against rain and dunking, button included"),
+            ("Security", "Every message encrypted; charges only on your own docks"),
         ],
-        "pairs": ["guide-hub", "vehicle-gateway", "solar-relay", "charging-dock"],
+        "pairs": ["guide-hub", "patrol-gateway", "solar-relay", "charging-dock"],
     },
     {
         "slug": "guide-hub",
@@ -200,38 +194,37 @@ PRODUCTS = [
         "short": "Carried at the front and back of a group, it collects every band in range and sends the data on by cellular, or by satellite when there is nothing else.",
         "images": [("radio-1.jpg", "The guide at the back of every group carries the hub and stays in touch"), ("tablet-engineer.jpg", "A phone or tablet app shows the guide every band in the group")],
         "sections": [
-            ("Inside", [
-                "LoRa gateway for the group's bands",
-                "Cellular modem with a satellite messaging modem as backup",
-                "GPS, local storage for queued messages",
-                "Bluetooth to a phone app for the guide",
-                "Antenna on the shoulder strap, rugged sealed case",
+            ("What it does", [
+                "Collects every band in the group",
+                "Sends on by cellular, with satellite messaging as backup",
+                "Queues messages locally and catches up when a link returns",
+                "Shows the group on the guide's phone or tablet",
             ]),
         ],
         "specs": [
-            ("Power", "Swappable pack, about 10 to 20 Wh, charged nightly"),
-            ("Load", "A group of about 50 bands is roughly one message every 6 seconds"),
+            ("Power", "Swappable pack, charged nightly"),
+            ("Build", "Rugged sealed case, antenna on the strap"),
         ],
-        "pairs": ["field-band", "vehicle-gateway"],
+        "pairs": ["field-band", "patrol-gateway"],
     },
     {
-        "slug": "vehicle-gateway",
-        "name": "Vehicle Gateway",
+        "slug": "patrol-gateway",
+        "name": "Patrol Gateway",
         "line": "satcoms",
         "status": "concept",
         "kind": "Roof unit for patrol and safety vehicles",
         "film": "mojave-hwy",
-        "short": "Reaches much further than a backpack. In search mode a missing band reports every few seconds and the screen counts down as the vehicle closes in.",
+        "short": "Reaches much further than a backpack. In search mode a missing band reports every few seconds and the screen reads warmer and colder as the vehicle closes in.",
         "images": [("truck-cab-bw.jpg", "A roof antenna on a magnetic mount and a rugged tablet in the cab"), ("radio-tower.jpg", "Cellular and satellite links reach out where the mesh ends")],
         "sections": [
-            ("Inside", [
-                "Multi channel LoRa gateway with a magnetic roof antenna",
-                "Cellular modem with external antenna and a satellite link",
-                "GPS and a rugged tablet with a live map",
-                "Search mode with a warmer and colder signal meter",
+            ("What it does", [
+                "Long range mesh gateway with a roof antenna",
+                "Cellular and satellite links",
+                "A live map on a rugged tablet",
+                "Search mode for a missing wearer",
             ]),
         ],
-        "specs": [("Power", "Vehicle 12 V supply")],
+        "specs": [("Power", "Vehicle supply")],
         "pairs": ["field-band", "guide-hub"],
     },
     {
@@ -244,17 +237,16 @@ PRODUCTS = [
         "short": "Bolts onto a pole, runs on the sun and passes data pole to pole until it reaches one with a real uplink.",
         "images": [("solar-cam-1.jpg", "A sealed box, a panel and a battery on any pole"), ("weather-station.jpg", "Sensors and relays share the same pole and the same link"), ("radio-tower.jpg", "The last pole carries the uplink")],
         "sections": [
-            ("Inside", [
-                "LoRa gateway for nearby bands and sensors",
-                "Long range LoRa link to the next pole on a directional antenna",
+            ("What it does", [
+                "Gateway for nearby bands and sensors",
+                "Long range link to the next pole",
                 "Health reports: battery, solar and temperature",
-                "White, shaded, sealed box with passive vents",
-                "Uplink build adds cellular on a high gain antenna, or satellite, or microwave",
+                "Uplink build adds cellular, satellite or microwave",
             ]),
         ],
         "specs": [
-            ("Power", "About 80 to 100 W solar and about 300 Wh of heat tolerant LiFePO4"),
-            ("Bandwidth", "300 wearers need under 1 kbit/s; a thin satellite link carries it easily"),
+            ("Power", "Solar panel and a heat tolerant battery, sized for days without sun"),
+            ("Bandwidth", "Hundreds of wearers on less than an old 2G link"),
         ],
         "pairs": ["field-band", "guide-hub"],
     },
@@ -265,14 +257,14 @@ PRODUCTS = [
         "status": "concept",
         "kind": "Camp dock for Field Bands",
         "film": "soldering",
-        "short": "Charges, tests and pairs bands in one tray, and refuses anything that is not ours.",
+        "short": "Charges, tests and pairs bands in one tray, and refuses anything that is not yours.",
         "images": [("radios.jpg", "Every unit charged, tested and paired in one place before it goes out")],
         "sections": [
-            ("Inside", [
-                "10 to 20 slots with sealed 3 pin contacts",
-                "A check that only our bands charge",
-                "Status light per slot; a red light and a dashboard alert if a battery fails",
-                "USB link to a laptop for pairing bands to people, firmware updates and self tests",
+            ("What it does", [
+                "Charges a camp's bands overnight",
+                "Accepts only your own bands",
+                "A light per slot, and an alert if a battery fails",
+                "Pairs bands to people, updates firmware and runs self tests",
             ]),
         ],
         "specs": [("Power", "Mains or generator")],
@@ -282,15 +274,15 @@ PRODUCTS = [
 PBY = {p["slug"]: p for p in PRODUCTS}
 
 INDUSTRIES = [
-    ("Fleets and logistics", "truck-depot", "Driver safety, vehicle data and video for fleets running thousands of heavy trucks.", ["drivesense", "vim"]),
+    ("Fleets and logistics", "truck-depot", "Driver safety, vehicle data and video for fleets of heavy trucks.", ["fleet-vision-unit", "vehicle-interface-module"]),
     ("Crowd and walker safety", "walkers-desert", "Bands, hubs and relays that keep large groups covered on long routes far from the network.", ["field-band", "guide-hub", "solar-relay"]),
-    ("Energy and pipelines", "pumpjacks-desert", "Sensing and control on wells, valves and lines, on links you own.", ["solar-relay", "vim"]),
+    ("Energy and pipelines", "pumpjacks-desert", "Sensing and control on wells, valves and lines, on links you own.", ["solar-relay", "vehicle-interface-module"]),
     ("Utilities and grid", "substation", "Monitoring and control near the equipment, isolated from the public internet.", []),
     ("Agriculture and water", "irrigation", "Low power sensing and pump control across fields and wells.", ["solar-relay"]),
-    ("Defence and government", "military-exercise", "Vehicles, people and sites in the field, on air gapped links, with hardware you can audit part by part.", ["drivesense", "field-band", "vehicle-gateway", "solar-relay"]),
-    ("Remote and closed sites", "desert-aerial", "Border, camp and range sites where nothing may leave the perimeter.", ["vehicle-gateway", "guide-hub"]),
-    ("Telecom and satellite", "cell-tower", "Edge radios, relays and terminals for networks that must keep running.", ["solar-relay", "vehicle-gateway"]),
-    ("Ports and supply chain", "harbor-night", "Tracking and sensing for yards, terminals and the trucks that serve them.", ["drivesense"]),
+    ("Defence and government", "military-exercise", "Vehicles, people and sites in the field, on air gapped links, with hardware you can audit part by part.", ["fleet-vision-unit", "field-band", "patrol-gateway", "solar-relay"]),
+    ("Remote and closed sites", "desert-aerial", "Border, camp and range sites where nothing may leave the perimeter.", ["patrol-gateway", "guide-hub"]),
+    ("Telecom and satellite", "cell-tower", "Edge radios, relays and terminals for networks that must keep running.", ["solar-relay", "patrol-gateway"]),
+    ("Ports and supply chain", "harbor-night", "Tracking and sensing for yards, terminals and the trucks that serve them.", ["fleet-vision-unit"]),
 ]
 
 NOTES = [
@@ -321,51 +313,11 @@ NOTES = [
             ("p", "So before we quote a fleet, we look at the trucks. A fleet of fleet managed heavy trucks gets the whole table; a fleet of light trucks gets the top half, and we say so up front."),
         ],
     },
-    {
-        "slug": "a-person-in-24-bytes",
-        "title": "A person in 24 bytes",
-        "sub": "How a wrist band can report every five minutes for days, over links slower than old 2G.",
-        "date": "10 Nov 2026",
-        "film": "walker-desert",
-        "body": [
-            ("p", "A band on a wrist has a small battery and a long way to reach. So the message has to be tiny. Ours is 24 bytes."),
-            ("table", [
-                ["Field", "Bytes"],
-                ["Band ID", "4"],
-                ["Latitude", "4"],
-                ["Longitude", "4"],
-                ["Timestamp", "4"],
-                ["Sequence number", "2"],
-                ["Skin temperature", "2"],
-                ["Heart rate", "1"],
-                ["Battery level", "1"],
-                ["Alert flags: SOS, fall, still, off wrist, battery fault", "1"],
-                ["Spare", "1"],
-            ]),
-            ("p", "With wrapping and security it is about 100 bytes by the time it reaches a server. One message every five minutes means 300 people need about 0.8 kbit/s and about 9 MB a day: roughly one phone photo an hour."),
-            ("h", "Why it does not collide"),
-            ("p", "GPS gives every band the exact time, so each band speaks in its own slot of the five minute cycle. Before sending it listens for a fraction of a second. The hub answers every few seconds with one short list of the bands it heard; a band that is not on the list tries again within seconds on another channel."),
-            ("p", "Nothing is dropped. A message that cannot get through stays on the band and goes out with the next one, and the sequence number puts everything back in order. SOS and falls skip the queue, go out on every path, and repeat until someone confirms."),
-        ],
-    },
-    {
-        "slug": "small-decisions-on-a-small-board",
-        "title": "Small decisions on a small board",
-        "sub": "Why the top of the band's board is kept clear, and how the other small decisions get made.",
-        "date": "11 Nov 2026",
-        "film": "pcb-macro",
-        "body": [
-            ("p", "Look at the main board of the Field Band and the top is almost bare. That is on purpose. The GPS antenna is a thin patch, and anything switching nearby makes it deaf. So the electronics live underneath and the top is kept clear for the sky."),
-            ("p", "The sensor board sits at the very bottom, against the skin, where the heart rate sensor and the charging contacts need to be. Today it is about 2 by 2 cm and the main board about 4 by 2.7 cm. Those numbers will move as the requirements settle."),
-            ("p", "Colour is a choice too. A black solder mask costs more per board than the standard green and looks better in photographs. Inside a sealed shell nobody sees it, so for a production run green is usually the right answer, and the customer decides."),
-            ("p", "We write these down because the customer owns the design. Every one of these choices is in the files they keep."),
-        ],
-    },
 ]
 
 # ---------------------------------------------------------------- positioning data
 
-# A fixed site camera unit joins the line: same compute as DriveSense, on a pole or a wall.
+# A fixed site camera unit joins the line.
 PRODUCTS.append({
     "slug": "site-camera",
     "name": "Site Camera",
@@ -373,7 +325,7 @@ PRODUCTS.append({
     "status": "concept",
     "kind": "Fixed AI camera for yards, gates and sites",
     "film": "cams-sunset",
-    "short": "The DriveSense compute and camera stack in a fixed housing. Watches a gate, a yard or a line, runs the models on the unit and keeps the video on site.",
+    "short": "The Fleet Vision Unit camera and AI stack in a fixed housing. Watches a gate, a yard or a line, runs the models on the unit and keeps the video on site.",
     "images": [("solar-cam-2.jpg", "A fixed unit on a pole, powered by the sun where there is no mains"), ("pole-cam-2.jpg", "Gates, yards and perimeter lines watched around the clock")],
     "sections": [
         ("What it watches", [
@@ -389,12 +341,12 @@ PRODUCTS.append({
         ]),
     ],
     "specs": [
-        ("Compute", "The DriveSense compute module in a fixed, sealed housing"),
+        ("Where it runs", "On the unit; only events and clips leave the site"),
         ("Operating system", "Linux or Android, your choice, signed with keys you hold"),
         ("Power", "Mains, PoE or the Solar Relay's panel and battery"),
         ("Links", "Your network, cellular, or LoRa for events only"),
     ],
-    "pairs": ["drivesense", "solar-relay"],
+    "pairs": ["fleet-vision-unit", "solar-relay"],
 })
 PBY = {p["slug"]: p for p in PRODUCTS}
 
@@ -404,16 +356,16 @@ CATEGORIES = [
         "slug": "cameras", "name": "Cameras and Vision", "film": "dashcam-desert",
         "tag": "AI cameras for the cab, the road and the site",
         "title": "See the cab, the road and the site, on the device.",
-        "body": "Dual dash cameras that watch the driver and the road, and fixed cameras that watch gates, yards and lines. The models run on the unit, so only events and short clips leave it, and the video stays yours.",
-        "devices": ["drivesense", "site-camera"],
+        "body": "Cab and road cameras that watch the driver and the road, and fixed cameras that watch gates, yards and lines. The models run on the unit, so only events and short clips leave it, and the video stays yours.",
+        "devices": ["fleet-vision-unit", "site-camera"],
         "outcomes": ["safety", "security", "compliance"],
     },
     {
         "slug": "telematics", "name": "Vehicle Telematics", "film": "night-highway",
         "tag": "GPS, vehicle data, fuel and faults from the truck's own port",
         "title": "Every truck's own data, on your terms.",
-        "body": "A small gateway that plugs into the 16 pin diagnostic or 12 pin FMS port, reads speed, fuel, faults, hours and load, adds GPS, and powers the camera unit. Where the truck gives nothing, GPS fills in.",
-        "devices": ["vim"],
+        "body": "A small gateway that plugs into the vehicle's own port, reads speed, fuel, faults, hours and load, adds GPS, and powers the camera unit. Where the truck gives nothing, GPS fills in.",
+        "devices": ["vehicle-interface-module"],
         "outcomes": ["efficiency", "compliance", "security"],
     },
     {
@@ -429,7 +381,7 @@ CATEGORIES = [
         "tag": "Relays, vehicle gateways and uplinks for places with no coverage",
         "title": "Links that hold when the network does not.",
         "body": "LoRa mesh between devices, solar relays pole to pole, vehicle gateways with cellular and satellite, and one uplink where there is finally a connection. Every message queues and catches up; nothing is dropped.",
-        "devices": ["solar-relay", "vehicle-gateway", "guide-hub"],
+        "devices": ["solar-relay", "patrol-gateway", "guide-hub"],
         "outcomes": ["coverage", "security"],
     },
     {
@@ -457,10 +409,10 @@ SOLUTIONS = [
     {
         "slug": "safety", "name": "Safety and Risk", "film": "dashcam-desert",
         "tag": "Fewer accidents on the road and in the field",
-        "title": "Catch the drowsy driver and the fallen walker before it matters.",
+        "title": "Catch the drowsy driver and the fallen worker before it matters.",
         "body": "The driver camera sees eyes closing, phone use and a missing seatbelt and speaks up in the cab. The road camera warns of a collision ahead. The band feels a fall and sends an SOS on every path at once.",
         "points": ["Drowsiness, distraction, phone use and seatbelt alerts spoken in the cab", "Forward collision, tailgating and lane departure warnings", "Harsh braking, cornering and impact events with video", "Falls, stillness and SOS from the wrist, confirmed back to the wearer"],
-        "devices": ["drivesense", "field-band", "guide-hub"],
+        "devices": ["fleet-vision-unit", "field-band", "guide-hub"],
         "industries": ["Fleets and logistics", "Defence and government", "Crowd and walker safety"],
     },
     {
@@ -469,7 +421,7 @@ SOLUTIONS = [
         "title": "Tamper proof devices, on a stack nobody else holds the keys to.",
         "body": "Case opened, unit unmounted, camera covered, power cut, a knock while parked: the unit reports each one, and sends a last message before it goes dark. Underneath, every part is traced, the firmware is yours and the keys never leave you.",
         "points": ["Tamper, unmount and camera blocked alerts", "Parked impact and tow away detection", "A last message on power loss", "Design files, bill of materials and signing keys handed to the customer", "Air gapped operation with no vendor cloud in the loop"],
-        "devices": ["drivesense", "vim", "site-camera"],
+        "devices": ["fleet-vision-unit", "vehicle-interface-module", "site-camera"],
         "industries": ["Defence and government", "Remote and closed sites", "Utilities and grid"],
     },
     {
@@ -478,7 +430,7 @@ SOLUTIONS = [
         "title": "A record of every trip, every event and every part.",
         "body": "Driver hours from the tachograph, odometer and engine hours from the truck, continuous recording on the unit for any time later, and a bill of materials that names the maker of every component.",
         "points": ["Trips with start, end, distance, duration, stops and idling", "Driver hours where a tachograph is fitted, and who was driving", "Continuous recording on the unit, pulled for any time later", "Event clips with position and time", "A traceable bill of materials for the device itself"],
-        "devices": ["vim", "drivesense"],
+        "devices": ["vehicle-interface-module", "fleet-vision-unit"],
         "industries": ["Fleets and logistics", "Ports and supply chain", "Utilities and grid"],
     },
     {
@@ -487,7 +439,7 @@ SOLUTIONS = [
         "title": "Cut fuel and downtime with numbers from the truck itself.",
         "body": "Live fuel rate, total fuel used, idling, engine load and distance to next service, read from the FMS port rather than estimated. Routes and utilisation from GPS on every vehicle and relay.",
         "points": ["Fuel level, live fuel rate and economy", "Idling and harsh driving by driver", "Fault codes, warning lamps and distance to next service", "Odometer, engine hours and axle weight", "Routes and utilisation across the fleet"],
-        "devices": ["vim", "drivesense"],
+        "devices": ["vehicle-interface-module", "fleet-vision-unit"],
         "industries": ["Fleets and logistics", "Agriculture and water", "Energy and pipelines"],
     },
     {
@@ -495,18 +447,18 @@ SOLUTIONS = [
         "tag": "Keep working where there is no signal",
         "title": "The desert, the sea and the closed site, all covered.",
         "body": "Devices store everything with no signal and send it when coverage returns. Bands reach hubs, hubs reach cars, relays pass messages pole to pole, and one uplink reaches the world by cellular, satellite or microwave.",
-        "points": ["Store and forward on every device", "LoRa mesh between bands, hubs, cars and poles", "Solar relays that run for days without sun", "Cellular, satellite or microwave uplink where there is finally a link", "Under 1 kbit/s for 300 wearers"],
-        "devices": ["solar-relay", "vehicle-gateway", "guide-hub", "field-band"],
+        "points": ["Store and forward on every device", "LoRa mesh between bands, hubs, cars and poles", "Solar relays that run for days without sun", "Cellular, satellite or microwave uplink where there is finally a link", "Hundreds of wearers on less than an old 2G link"],
+        "devices": ["solar-relay", "patrol-gateway", "guide-hub", "field-band"],
         "industries": ["Defence and government", "Crowd and walker safety", "Remote and closed sites"],
     },
 ]
 SBY = {s["slug"]: s for s in SOLUTIONS}
 
 PROOF = [
-    ("On the device", "2", "cameras, models run on the unit, only events leave it"),
-    ("Per band message", "24", "bytes, every five minutes, encrypted per band"),
-    ("For 300 wearers", "under 1", "kbit/s, less than an old 2G link"),
-    ("Handed over", "100%", "of the design: files, parts list, firmware and keys"),
+    ("On the device", "Edge first", "The models run on the unit. Only events and clips leave it, and only to where you say."),
+    ("Off the network", "Store and forward", "Every device keeps working with no signal and catches up when a link returns."),
+    ("In your hands", "Owned outright", "Design files, bill of materials, firmware and keys are handed over with the build."),
+    ("Built to order", "Purpose built", "Each unit is adapted to your vehicles, your sites and your rules, from a pilot to a fleet."),
 ]
 
 # ---------------------------------------------------------------- chrome
@@ -516,10 +468,10 @@ FONTS = '<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="p
 MARK = '<svg class="mark" viewBox="0 0 40 40" aria-hidden="true"><circle cx="20" cy="20" r="18.5" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M7 27 Q20 4 33 27" fill="none" stroke="currentColor" stroke-width="1.6"/><circle cx="7" cy="27" r="3" fill="currentColor"/><circle cx="33" cy="27" r="3" fill="currentColor"/></svg>'
 
 FEATURED = [
-    ("Fleet vision", "Cameras and Vision · Gulf fleets", "Two cameras, AI on the device, for heavy truck fleets in the Gulf", "/products/cameras/", "assets/video/dashcam-desert.jpg"),
-    ("Worker safety", "Worker Safety · Field band", "A 24 byte band message that keeps thousands of walkers covered off the network", "/products/workforce/", "assets/video/walkers-desert.jpg"),
+    ("Fleet vision", "Cameras and Vision · Gulf fleets", "Cab and road cameras with the AI on the unit, for heavy truck fleets in the Gulf", "/products/cameras/", "assets/video/dashcam-desert.jpg"),
+    ("Worker safety", "Worker Safety · Field band", "A wearable that keeps thousands of people covered with no network at all", "/products/workforce/", "assets/video/walkers-desert.jpg"),
     ("Own the stack", "Security and Sovereignty", "Design files, bill of materials and keys handed to the customer, not kept by us", "/solutions/security/", "assets/video/chip-macro.jpg"),
-    ("Design Lab", "Design Lab · Notes from the bench", "Why the antenna gets the whole top of a wrist band's board", "/lab/", "assets/img/stock/chips-macro.jpg"),
+    ("Design Lab", "Design Lab · Notes from the bench", "What a truck will tell you: the honest table of vehicle data", "/lab/", "assets/img/stock/chips-macro.jpg"),
     ("Defence", "Defence and government", "Field hardware on air gapped links, auditable part by part", "/industries/#defence-and-government", "assets/video/military-exercise.jpg"),
     ("Two headquarters", "Riyadh and Dallas", "One technology company working from the Gulf and the United States", "/about/", "assets/video/dallas-sunset.jpg"),
 ]
@@ -527,7 +479,7 @@ FEATURED = [
 
 def menu_products():
     cats = "".join(f'<a href="{u("/products/" + c["slug"] + "/")}"><b>{e(c["name"])}</b><span>{e(c["tag"])}</span></a>' for c in CATEGORIES)
-    return f'<div class="ddgrid"><div class="ddcol">{cats}</div><div class="ddside"><p class="mono">Hardware</p><a href="{u("/hardware/")}"><b>All hardware</b><span>Every device, its status and its reference specification</span></a><a href="{u("/products/")}"><b>Products overview</b><span>How the categories fit together</span></a><a href="{u("/build/")}"><b>Request a build</b><span>Made to order, from a pilot to a fleet</span></a></div></div>'
+    return f'<div class="ddgrid"><div class="ddcol">{cats}</div><div class="ddside"><p class="mono">Hardware</p><a href="{u("/hardware/")}"><b>All hardware</b><span>Every device in the stack, at a glance</span></a><a href="{u("/products/")}"><b>Products overview</b><span>How the categories fit together</span></a><a href="{u("/build/")}"><b>Request a build</b><span>Made to order, from a pilot to a fleet</span></a></div></div>'
 
 
 def menu_solutions():
@@ -702,7 +654,7 @@ def pill(href, text, primary=False):
 
 
 def status_badge(p):
-    return f'<span class="badge s-{p["status"]}">{STATUS[p["status"]]}</span>'
+    return ""
 
 
 def dev_url(p):
@@ -750,7 +702,7 @@ def own_strip():
 
 
 def proof_strip():
-    items = "".join(f'<div><span class="mono">{e(k)}</span><strong>{e(n)}</strong><p>{e(t)}</p></div>' for k, n, t in PROOF)
+    items = "".join(f'<div><span class="mono">{e(k)}</span><strong class="word">{e(n)}</strong><p>{e(t)}</p></div>' for k, n, t in PROOF)
     return f'<section class="proof"><div class="wrap">{label("Built for the field")}<h2>Purpose built. Owned outright.</h2><p class="lede">Cameras, gateways, wearables, relays and the platform they report to, designed as one stack and handed over whole.</p><div class="proof4">{items}</div></div></section>'
 
 
@@ -808,8 +760,8 @@ def home():
         pill(u("/supply-chain/"), "How ownership works"),
         side="right",
     )
-    cards = "".join(product_card(p) for p in PRODUCTS if p["status"] != "concept")
-    grid = f'<section class="cards"><div class="wrap"><div class="head">{label("Hardware")}<h2>In design and at fab today.</h2><a class="btn ghost" href="{u("/hardware/")}">All hardware</a></div><div class="grid3">{cards}</div></div></section>'
+    cards = "".join(product_card(PBY[k]) for k in ["fleet-vision-unit", "vehicle-interface-module", "field-band", "site-camera", "solar-relay", "guide-hub"])
+    grid = f'<section class="cards"><div class="wrap"><div class="head">{label("Hardware")}<h2>Purpose built, device by device.</h2><a class="btn ghost" href="{u("/hardware/")}">All hardware</a></div><div class="grid3">{cards}</div></div></section>'
     inds = "".join(
         f'<a class="tile" href="{u("/industries/")}#{slugify(n)}"><div class="cm"><img src="{u("/assets/video/" + f + ".jpg")}" alt="" loading="lazy">{video_tag(f)}</div><h3>{e(n)}</h3></a>'
         for n, f, _, _ in INDUSTRIES
@@ -841,7 +793,7 @@ def category_page(c):
         devsec = f'<section class="cards"><div class="wrap"><div class="head">{label("Devices")}<h2>{e(c["name"])} hardware.</h2></div><div class="grid3">{devs}</div></div></section>'
     else:
         feats = "".join(f'<div class="card flat"><div class="cb"><h3>{e(a)}</h3><p>{e(b)}</p></div></div>' for a, b in c["features"])
-        devsec = f'<section class="cards"><div class="wrap"><div class="head">{label("What Command does")}<h2>Everything the devices send, on one screen you host.</h2></div><div class="grid3">{feats}</div><p class="fine">Command is a reference design today. It is built around the devices\' own protocol and runs wherever you put it: a data centre, a site server, or a laptop in camp.</p></div></section>'
+        devsec = f'<section class="cards"><div class="wrap"><div class="head">{label("What Command does")}<h2>Everything the devices send, on one screen you host.</h2></div><div class="grid3">{feats}</div><p class="fine">Command is built around the devices\' own protocol and runs wherever you put it: a data centre, a site server, or a laptop in camp.</p></div></section>'
     sols = "".join(sol_card(SBY[s]) for s in c["outcomes"])
     solsec = f'<section class="cards grey"><div class="wrap"><div class="head">{label("Solutions")}<h2>What it is for.</h2></div><div class="grid3">{sols}</div></div></section>'
     others = "".join(cat_card(o) for o in CATEGORIES if o["slug"] != c["slug"])
@@ -850,9 +802,8 @@ def category_page(c):
 
 
 def hardware():
-    head = page_head("All hardware", "Every device, its status and its reference specification.", "Nothing here has a list price. Each unit is adapted to where it will live and built for the customer who will own it. Status is updated as boards go to fab and come back.", "smt-line", f'<div class="actions">{pill(u("/build/"), "Request a build", True)}</div>')
-    legend = "".join(f'<span class="badge s-{k}">{v}</span>' for k, v in STATUS.items())
-    leg = f'<section class="legend"><div class="wrap"><span class="mono">Status</span>{legend}<span class="mono">Updated 12 Nov 2026</span></div></section>'
+    head = page_head("All hardware", "Every device in the stack.", "Nothing here has a list price. Each unit is adapted to where it will live and built for the customer who will own it.", "smt-line", f'<div class="actions">{pill(u("/build/"), "Request a build", True)}</div>')
+    leg = ""
     rows = ""
     for c in CATEGORIES:
         for d in c["devices"]:
@@ -861,9 +812,9 @@ def hardware():
                 continue
             if f'data-s="{d}"' in rows:
                 continue
-            spec = "; ".join(f"{a}: {b}" for a, b in p["specs"][:3])
-            rows += f'<tr data-s="{d}"><td><a href="{dev_url(p)}"><b>{e(p["name"])}</b><br><span>{e(p["kind"])}</span></a></td><td>{e(c["name"])}</td><td>{status_badge(p)}</td><td class="specs">{e(spec)}</td></tr>'
-    table = f'<section class="hwtable"><div class="wrap"><div class="tw"><table class="data"><thead><tr><th>Device</th><th>Category</th><th>Status</th><th>Reference specification</th></tr></thead><tbody>{rows}</tbody></table></div></div></section>'
+            spec = "; ".join(f"{a}: {b}" for a, b in p["specs"][:2])
+            rows += f'<tr data-s="{d}"><td><a href="{dev_url(p)}"><b>{e(p["name"])}</b><br><span>{e(p["kind"])}</span></a></td><td>{e(c["name"])}</td><td class="specs">{e(spec)}</td></tr>'
+    table = f'<section class="hwtable"><div class="wrap"><div class="tw"><table class="data"><thead><tr><th>Device</th><th>Category</th><th>At a glance</th></tr></thead><tbody>{rows}</tbody></table></div></div></section>'
     cards = "".join(product_card(p) for p in PRODUCTS)
     grid = f'<section class="cards"><div class="wrap"><div class="grid3">{cards}</div></div></section>'
     page("/hardware/", "All hardware", "Every Arab American Instruments device with its status and reference specification.", head + leg + table + grid + own_strip() + cta(), "/products/")
@@ -877,7 +828,7 @@ def product_page(p):
         figs = "".join(f'<figure class="panel"><img src="{u("/assets/img/stock/" + f)}" alt="{e(cp)}" loading="lazy"><figcaption>{e(cp)}</figcaption></figure>' for f, cp in p["images"])
         gal = f'<section class="gallery"><div class="wrap">{label("From the Design Lab")}<div class="gal">{figs}</div></div></section>'
     else:
-        gal = f'<section class="gallery"><div class="wrap"><p class="pending">Renders for {e(p["name"])} are in progress. This page describes the reference concept as designed today; parts are shortlisted, not final.</p></div></section>'
+        gal = ""
     secs = "".join(f'<div class="feat"><h3>{e(h)}</h3><ul>{"".join("<li>" + e(i) + "</li>" for i in items)}</ul></div>' for h, items in p["sections"])
     specs = "".join(f"<tr><th>{e(a)}</th><td>{e(b)}</td></tr>" for a, b in p["specs"])
     pairs = "".join(product_card(PBY[s]) for s in p.get("pairs", []))
@@ -885,7 +836,7 @@ def product_page(p):
     body = (
         head
         + gal
-        + f'<section class="detail grey"><div class="wrap"><div class="cols"><div>{label("What it does")}<div class="feats">{secs}</div></div><aside>{label("Reference specification")}<table class="spec">{specs}</table><p class="fine">Figures marked estimate are design targets, set conservatively, and will be confirmed in field trials. Every unit is adapted to the customer, so the delivered specification may differ.</p></aside></div></div></section>'
+        + f'<section class="detail grey"><div class="wrap"><div class="cols"><div>{label("What it does")}<div class="feats">{secs}</div></div><aside>{label("At a glance")}<table class="spec">{specs}</table><p class="fine">Every unit is adapted to the customer, so the delivered configuration may differ.</p></aside></div></div></section>'
         + (f'<section class="cards"><div class="wrap"><div class="head">{label("Solutions")}<h2>What it is for.</h2></div><div class="grid3">{sols}</div></div></section>' if sols else "")
         + own_strip()
         + (f'<section class="cards grey"><div class="wrap"><div class="head">{label("Works with")}<h2>Part of one stack.</h2></div><div class="grid3">{pairs}</div></div></section>' if pairs else "")
@@ -1028,7 +979,7 @@ def build_page():
 <div class="two"><label>Name<input name="Name" required autocomplete="name"></label><label>Organisation<input name="Organisation" required autocomplete="organization"></label></div>
 <div class="two"><label>Work email<input type="email" name="Email" required autocomplete="email"></label><label>Country<input name="Country" placeholder="Saudi Arabia, United States, ..."></label></div>
 <label>Closest device<select name="Platform"><option value="Not sure yet">Not sure yet, recommend one</option>{opts}<option value="Command platform">Command platform</option><option value="Custom controller">Custom controller</option></select></label>
-<label>What must it sense, send or control?<textarea name="Requirement" rows="4" required placeholder="For example: driver and road cameras for 800 heavy trucks, vehicle data from the FMS port, events over LTE."></textarea></label>
+<label>What must it sense, send or control?<textarea name="Requirement" rows="4" required placeholder="For example: cab and road cameras for a heavy truck fleet, vehicle data from the fleet port, events over cellular."></textarea></label>
 <fieldset><legend>Where will the data go?</legend>{eopts}</fieldset>
 <fieldset><legend>How many units to start?</legend>{qopts}</fieldset>
 <label>Timeline<input name="Timeline" placeholder="For example: pilot in Q1 2027"></label>
@@ -1059,8 +1010,12 @@ def extras():
     open(os.path.join(OUT, ".nojekyll"), "w").close()
     # Old URLs from the first release.
     redirect("/platforms/", "/products/")
+    OLD = {"drivesense": "fleet-vision-unit", "vim": "vehicle-interface-module", "vehicle-gateway": "patrol-gateway"}
     for p in PRODUCTS:
         redirect(f"/platforms/{p['slug']}/", f"/hardware/{p['slug']}/")
+    for o, n in OLD.items():
+        redirect(f"/platforms/{o}/", f"/hardware/{n}/")
+        redirect(f"/hardware/{o}/", f"/hardware/{n}/")
 
 
 def main():
