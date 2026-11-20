@@ -4,7 +4,9 @@
   "page": "/",
   "defect": "hero headline hard to read over bright sky in some banner frames",
   "fix": "add a scrim or pick a darker frame",
-  "state": "open"
+  "state": "fixed",
+  "day": "2026-11-20",
+  "note": "scrim middle stop .2 to .5, commit 22a562d, after shots prove it"
  },
  {
   "id": "hero-coords",
@@ -25,7 +27,9 @@
   "page": "*",
   "defect": "floating header at phone width unverified",
   "fix": "screenshot at 375px; pill must not cover the H1",
-  "state": "open"
+  "state": "fixed",
+  "day": "2026-11-20",
+  "note": "verified at 375: pill sits above the H1, menu button visible (before-home-375.png, before-field-band-375.png)"
  },
  {
   "id": "pillars-phone",

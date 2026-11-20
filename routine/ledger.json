@@ -1,6 +1,87 @@
 {
- "episodes": [],
- "feedback": [],
+ "episodes": [
+  {
+   "episode": 1,
+   "day": "2026-11-20",
+   "run_id": "aai-site-daily-2026-11-20",
+   "kind": "routine",
+   "backlog_done": [
+    "gsc-bing",
+    "structured-data (partial)"
+   ],
+   "channels": {
+    "google": {
+     "sovereign AI hardware": null,
+     "edge AI devices": null,
+     "air gapped AI": null,
+     "edge AI camera": null,
+     "sovereign edge AI": null
+    },
+    "gsc": {
+     "clicks": null,
+     "impressions": null,
+     "position": null,
+     "window": "28d"
+    },
+    "links": "gsc null, bing null, github 0",
+    "design": "home hero scrim darkened, 22a562d",
+    "ai_citations": null,
+    "inbound": "unmeasured"
+   },
+   "defects": [
+    "hero-scrim fixed",
+    "header-phone fixed",
+    "brand query returns music results; site: returns 0"
+   ],
+   "decisions": [
+    {
+     "what": "no sameAs on Organization; parentOrganization plus founder Persons",
+     "why": "sameAs claims the same entity",
+     "revert": "add sameAs to ld_org()"
+    },
+    {
+     "what": "About: build them to order -> deploy them inside the perimeter",
+     "why": "brand rule",
+     "revert": "restore phrase (6eab8a9)"
+    },
+    {
+     "what": "home indexing requested",
+     "why": "indexed copy predates structured data",
+     "revert": "none"
+    }
+   ],
+   "feedback_applied": [],
+   "lessons_added": [
+    "headless Chrome phone shots need a 375px iframe wrapper"
+   ],
+   "gap_records": [],
+   "reward": 4,
+   "summary": "GSC and Bing verified, sitemaps submitted, JSON-LD on 31 pages, hero scrim fixed; all five candidate terms absent from Google US top 30.",
+   "engram_id": "639f814e-4b57-477e-89a8-f9a2a325a724"
+  }
+ ],
+ "feedback": [
+  {
+   "episode": 1,
+   "day": "2026-11-20",
+   "verdict": "pending",
+   "went_well": [
+    "one deploy verified both consoles",
+    "JSON-LD through one page() argument",
+    "design change with before, after and revert"
+   ],
+   "not_good": [
+    "Enhancements, Links, Performance still processing. Next run: read Enhancements and close structured-data.",
+    "site: returns 0 and brand query returns music results. Next run: recheck, request indexing of /about/ and /platform/.",
+    "preview_start declined unattended. Next run: routine/shot.sh from the start.",
+    "pillars-phone unverified. Next run: capture pillars at 375.",
+    "hero-coords still illegible. Next run: design pick.",
+    "volume not read. Next run: Bing Keyword Research."
+   ],
+   "status": "open",
+   "engram_id": "0e95734c-c739-4620-940c-953856cb2055"
+  }
+ ],
  "seen": {
   "/about/": "2026-11-20",
   "/build/": "2026-11-20",

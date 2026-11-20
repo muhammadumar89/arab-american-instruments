@@ -1,0 +1,16 @@
+{
+ "changes": [
+  {
+   "day": "2026-11-20",
+   "page": "/",
+   "width": "1440 and 375",
+   "what": "home hero scrim darkened: top .5 to .6, middle .2 to .5, bottom .8 to .82",
+   "why": "defect hero-scrim: white headline sat on bright sky with almost no darkening behind it",
+   "before": "raw/shots/2026-11-20/before-home-1440.png, before-home-375.png",
+   "after": "raw/shots/2026-11-20/after-home-1440.png, after-home-375.png",
+   "commit": "22a562d",
+   "revert": "git revert 22a562d",
+   "episode": 1
+  }
+ ]
+}
