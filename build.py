@@ -524,7 +524,7 @@ def menu_solutions():
 
 
 def menu_company():
-    items = [("/about/", "About", "A technology company for sovereign hardware"), ("/supply-chain/", "Supply chain", "How you end up owning the stack"), ("/lab/", "Design Lab", "Notes from the bench"), ("/credits/", "Credits", "Footage and image credits")]
+    items = [("/supply-chain/", "Supply chain", "How you end up owning the stack"), ("/lab/", "Design Lab", "Notes from the bench"), ("/credits/", "Credits", "Footage and image credits")]
     return '<div class="ddgrid one"><div class="ddcol">' + "".join(f'<a href="{u(h)}"><b>{t}</b><span>{d}</span></a>' for h, t, d in items) + "</div></div>"
 
 
@@ -532,7 +532,7 @@ def header(active=""):
     def grp(name, href, menu):
         on = " on" if active.startswith(href) else ""
         return f'<div class="grp"><a class="tab{on}" href="{u(href)}">{name}<svg viewBox="0 0 10 6" aria-hidden="true"><path d="M1 1l4 4 4-4" fill="none" stroke="currentColor" stroke-width="1.2"/></svg></a><div class="dd">{menu}</div></div>'
-    nav = grp("Products", "/products/", menu_products()) + grp("Solutions", "/solutions/", menu_solutions()) + f'<a class="tab{" on" if active == "/platform/" else ""}" href="{u("/platform/")}">Platform</a>' + f'<a class="tab{" on" if active == "/lab/" else ""}" href="{u("/lab/")}">Design Lab</a>' + grp("Company", "/about/", menu_company())
+    nav = grp("Products", "/products/", menu_products()) + grp("Solutions", "/solutions/", menu_solutions()) + f'<a class="tab{" on" if active == "/platform/" else ""}" href="{u("/platform/")}">Platform</a>' + f'<a class="tab{" on" if active == "/lab/" else ""}" href="{u("/lab/")}">Design Lab</a>' + f'<a class="tab{" on" if active == "/about/" else ""}" href="{u("/about/")}">About</a>' + grp("Company", "/supply-chain/", menu_company())
     mobile = ""
     for title, items in [("Products", [(c["name"], "/products/" + c["slug"] + "/") for c in CATEGORIES] + [("All hardware", "/hardware/"), ("AI platform", "/platform/")]), ("Solutions", [(s["name"], "/solutions/" + s["slug"] + "/") for s in SOLUTIONS] + [("Industries", "/industries/")]), ("Company", [("Design Lab", "/lab/"), ("About", "/about/"), ("Supply chain", "/supply-chain/")])]:
         mobile += f'<span class="mono">{title}</span>' + "".join(f'<a href="{u(h)}">{e(n)}</a>' for n, h in items)
@@ -548,7 +548,7 @@ def header(active=""):
 def footer():
     prods = "".join(f'<a href="{u("/products/" + c["slug"] + "/")}">{e(c["name"])}</a>' for c in CATEGORIES) + f'<a href="{u("/hardware/")}">All hardware</a><a href="{u("/platform/")}">AI platform</a>'
     sols = "".join(f'<a href="{u("/solutions/" + s["slug"] + "/")}">{e(s["name"])}</a>' for s in SOLUTIONS) + f'<a href="{u("/industries/")}">Industries</a>'
-    comp = "".join(f'<a href="{u(h)}">{n}</a>' for n, h in [("About", "/about/"), ("Supply chain", "/supply-chain/"), ("Design Lab", "/lab/"), ("Request a deployment", "/build/"), ("Credits", "/credits/")])
+    comp = "".join(f'<a href="{u(h)}">{n}</a>' for n, h in [("Supply chain", "/supply-chain/"), ("Design Lab", "/lab/"), ("Request a deployment", "/build/"), ("Credits", "/credits/")])
     return f'''<footer class="foot"><div class="wrap">
 <div class="ftop"><p class="tag">{e(TAGLINE)}</p><a class="btn ghost" href="{u("/build/")}">Request a deployment</a></div>
 <div class="fgrid">
@@ -1003,7 +1003,7 @@ def supply():
         + split("Traceable by default", "Every part with its maker and its origin.", "Each bill of materials we hand over names the maker of every part and where it was made, so your security team can audit the device the way it audits code.", panel_video("chip-macro"), side="right")
         + cta()
     )
-    page("/supply-chain/", "Supply chain", "How Arab American Instruments hands customers their design files, parts list, firmware and keys so they own their hardware supply chain.", body, "/about/")
+    page("/supply-chain/", "Supply chain", "How Arab American Instruments hands customers their design files, parts list, firmware and keys so they own their hardware supply chain.", body, "/supply-chain/")
 
 
 LEADERS = [
