@@ -194,8 +194,8 @@ def pages():
         rel = "/" + f.relative_to(SITE).parent.as_posix().strip(".")
         rel = "/" if rel in ("/", "/.") else rel.rstrip("/") + "/"
         html = f.read_text(encoding="utf-8")
-        if 'http-equiv="refresh"' in html or rel == "/credits/":
-            continue  # redirects carry no copy; /credits/ quotes Pexels titles and file names verbatim
+        if 'http-equiv="refresh"' in html:
+            continue  # redirects carry no copy
         r = Reader()
         r.feed(html)
         out.append((rel, f, r, html))
