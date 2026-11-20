@@ -1020,7 +1020,7 @@ def build_page():
 <div class="col"><form id="buildform">
 <div class="two"><label>Name<input name="Name" required autocomplete="name"></label><label>Organisation<input name="Organisation" required autocomplete="organization"></label></div>
 <div class="two"><label>Work email<input type="email" name="Email" required autocomplete="email"></label><label>Country<input name="Country" placeholder="Saudi Arabia, United States, ..."></label></div>
-<label>Closest device<select name="Platform"><option value="Not sure yet">Not sure yet, recommend one</option>{opts}<option value="Command platform">Command platform</option><option value="Custom controller">Custom controller</option></select></label>
+<label>Closest device<select name="Platform"><option value="Not sure yet">Not sure yet, recommend one</option>{opts}<option value="Command platform">Command platform</option><option value="Other controller">Other controller</option></select></label>
 <label>What must it sense, send or control?<textarea name="Requirement" rows="4" required placeholder="For example: cab and road cameras for a heavy truck fleet, vehicle data from the fleet port, events over cellular."></textarea></label>
 <fieldset><legend>Where will the data go?</legend>{eopts}</fieldset>
 <fieldset><legend>How many units to start?</legend>{qopts}</fieldset>

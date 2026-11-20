@@ -1,0 +1,11 @@
+{
+  "note": "Umar locks a head term by saying so in chat; the routine never locks a term itself. Each locked term gets ONE owning page titled for it, built by build.py. Candidates are proposed by the routine with Google US page 1 and a volume read.",
+  "locked": [],
+  "candidates": [
+    {"term": "sovereign AI hardware", "proposed_day": "2026-11-20", "volume": null, "page1": [], "note": "from Umar's brief; measure before proposing"},
+    {"term": "edge AI devices", "proposed_day": "2026-11-20", "volume": null, "page1": [], "note": "from Umar's brief; incumbents expected"},
+    {"term": "air gapped AI", "proposed_day": "2026-11-20", "volume": null, "page1": [], "note": "from Umar's brief; shared with codeatoms.ai vocabulary"},
+    {"term": "edge AI camera", "proposed_day": "2026-11-20", "volume": null, "page1": [], "note": "from Umar's brief; owning page would be /products/vision-at-the-edge/ or the fleet vision unit"},
+    {"term": "sovereign edge AI", "proposed_day": "2026-11-20", "volume": null, "page1": [], "note": "from Umar's brief"}
+  ]
+}

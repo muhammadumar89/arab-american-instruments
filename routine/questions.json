@@ -1,0 +1,26 @@
+{
+  "note": "Saturday AI citation check for arabamerican.ai. Never reword a question that has results; append new ids. Ask verbatim, signed out, never solve a CAPTCHA or accept terms. One aai_ai_citations row per question and engine: day, week (ISO), engine, question_id, question, status, cited_home, cited_parent, mentioned, position, our_urls, top_urls, competitor_named, note. Any engine answering a brand question (b*) with another company is a defect.",
+  "questions": [
+    {"id": "b1", "kind": "brand", "q": "What is Arab American Instruments?"},
+    {"id": "b2", "kind": "brand", "q": "Who makes Arab American Instruments edge devices?"},
+    {"id": "b3", "kind": "brand", "q": "Arab American Instruments Riyadh Dallas edge AI"},
+    {"id": "c1", "kind": "category", "q": "Which companies make edge AI cameras that run vision models on the device with no cloud?"},
+    {"id": "c2", "kind": "category", "q": "Who sells sovereign AI hardware for air gapped sites?"},
+    {"id": "c3", "kind": "category", "q": "Edge devices that run language models on the device in an air gapped environment"},
+    {"id": "c4", "kind": "category", "q": "Low power edge devices for sensing, satellite communications and real time control"},
+    {"id": "c5", "kind": "category", "q": "Wearable band for pilgrims or crowds that works with no network"},
+    {"id": "c6", "kind": "category", "q": "Vehicle telematics device that runs AI on the device and keeps data on premise"},
+    {"id": "c7", "kind": "category", "q": "Hardware for sovereign AI deployments in Saudi Arabia"},
+    {"id": "c8", "kind": "category", "q": "Edge AI devices built for the Gulf and the United States"},
+    {"id": "c9", "kind": "category", "q": "Who builds edge hardware that runs open weight models inside the customer's perimeter?"}
+  ],
+  "ours": ["arabamerican.ai", "muhammadumar89.github.io/arab-american-instruments"],
+  "parent": ["codeatoms.ai", "codeninjaconsulting.com"],
+  "engines": [
+    {"id": "google_ai_mode", "how": "Chrome session tab: https://www.google.com/search?udm=50&q=<urlencoded question>; wait about 20 s; collect every a[href^=http] not on google or gstatic (the source cards on the right)"},
+    {"id": "perplexity", "how": "Chrome session tab: https://www.perplexity.ai/search?q=<urlencoded question>; works signed out; decline optional cookies; wait about 20 s, open the Links tab, collect every a[href^=http] not on perplexity.ai"},
+    {"id": "chatgpt_search", "how": "Chrome session tab: https://chatgpt.com/?temporary-chat=true&hints=search&q=<urlencoded question>; the question is prefilled, click send (Enter does not send); wait about 40 s until no stop button; citations are not plain anchors, use find('source citation links inside the assistant answer')"},
+    {"id": "bing_web", "how": "Chrome session tab: https://www.bing.com/search?q=<urlencoded question>; collect the organic result URLs (stand in for Copilot; never proceed to a Microsoft sign in)"},
+    {"id": "claude_websearch", "how": "the routine's own WebSearch tool, mode standard, question verbatim; collect the result URLs"}
+  ]
+}

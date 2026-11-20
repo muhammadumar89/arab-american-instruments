@@ -1,0 +1,33 @@
+{
+ "agent_name": "aai-site",
+ "agentId": "1343a1f9-df4c-4929-bc47-4ffab26b08d3",
+ "registered_day": "2026-11-20",
+ "collections": {
+  "aai_episodes": {
+   "created": true,
+   "fields": "episode int, day text, run_id text, kind text, backlog_done json, channels json, defects json, decisions json, feedback_applied json, lessons_added json, gap_records json, reward int, summary text, chat_session json"
+  },
+  "aai_episode_feedback": {
+   "created": true,
+   "fields": "episode int, day text, verdict text, went_well json, not_good json, status text, applied_in_episode int, resolution text"
+  },
+  "aai_keywords": {
+   "created": true,
+   "fields": "kind text (owned|locked|candidate|target|query|page|position), term text, page text, day text, google_position int, top10 json, clicks int, impressions int, position real, window_days int, volume text, first_seen text, last_seen text, last_fix json, status text, note text"
+  },
+  "aai_links": {
+   "created": true,
+   "fields": "day text, gsc json, bing json, github_mentions int, github_repos json, earned json, note text"
+  },
+  "aai_design_changes": {
+   "created": true,
+   "fields": "day text, page text, width text, what text, why text, before text, after text, commit text, revert text, episode int"
+  },
+  "aai_ai_citations": {
+   "created": true,
+   "fields": "day text, week text, engine text, question_id text, question text, status text, cited_home bool, cited_parent bool, mentioned bool, position int, our_urls json, top_urls json, competitor_named text, note text"
+  }
+ },
+ "note": "Registered and approved 20 Nov 2026 from the build session. engram_login(agentId) first in every run, no secret; pass agentId on every write (the connector login is shared across sessions).",
+ "role": "schema-architect"
+}

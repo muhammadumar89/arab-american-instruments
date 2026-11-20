@@ -1,0 +1,44 @@
+[
+ {
+  "id": "hero-scrim",
+  "page": "/",
+  "defect": "hero headline hard to read over bright sky in some banner frames",
+  "fix": "add a scrim or pick a darker frame",
+  "state": "open"
+ },
+ {
+  "id": "hero-coords",
+  "page": "/",
+  "defect": "the coordinates line under the hero buttons is illegible",
+  "fix": "larger, higher contrast, or remove",
+  "state": "open"
+ },
+ {
+  "id": "body-15px",
+  "page": "*",
+  "defect": "body text is 15px",
+  "fix": "16px at phone width at least; check line length",
+  "state": "open"
+ },
+ {
+  "id": "header-phone",
+  "page": "*",
+  "defect": "floating header at phone width unverified",
+  "fix": "screenshot at 375px; pill must not cover the H1",
+  "state": "open"
+ },
+ {
+  "id": "pillars-phone",
+  "page": "/",
+  "defect": "pillar grid at phone width unverified",
+  "fix": "single column, no clipped text",
+  "state": "open"
+ },
+ {
+  "id": "video-mobile",
+  "page": "/",
+  "defect": "22 videos on the home page; weight on mobile data",
+  "fix": "lazy load below the fold, posters, re-encode the largest",
+  "state": "open"
+ }
+]
