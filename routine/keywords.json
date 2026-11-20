@@ -1,0 +1,96 @@
+{
+ "rows": [],
+ "positions": [
+  {
+   "day": "2026-11-20",
+   "term": "sovereign AI hardware",
+   "google_position": null,
+   "top10": [
+    "amd.com",
+    "cisco.com",
+    "redhat.com",
+    "dell.com",
+    "mistral.ai",
+    "mckinsey.com",
+    "premai.io",
+    "oracle.com"
+   ],
+   "page": null,
+   "gsc_impressions": null,
+   "gsc_position": null
+  },
+  {
+   "day": "2026-11-20",
+   "term": "edge AI devices",
+   "google_position": null,
+   "top10": [
+    "redhat.com",
+    "ibm.com",
+    "reddit.com",
+    "nvidia.com",
+    "docs.edgeimpulse.com",
+    "arm.com",
+    "ti.com",
+    "aimultiple.com",
+    "intel.com"
+   ],
+   "page": null,
+   "gsc_impressions": null,
+   "gsc_position": null
+  },
+  {
+   "day": "2026-11-20",
+   "term": "air gapped AI",
+   "google_position": null,
+   "top10": [
+    "iternal.ai",
+    "domino.ai",
+    "ibl.ai",
+    "go.ai",
+    "dspace.mit.edu",
+    "hpe.com",
+    "optimagpt.com"
+   ],
+   "page": null,
+   "gsc_impressions": null,
+   "gsc_position": null
+  },
+  {
+   "day": "2026-11-20",
+   "term": "edge AI camera",
+   "google_position": null,
+   "top10": [
+    "advantech.com",
+    "surveillancesecure.com",
+    "everfocus.com",
+    "hailo.ai",
+    "i-pro.com",
+    "camthink.ai",
+    "ieeexplore.ieee.org",
+    "securityinfowatch.com"
+   ],
+   "page": null,
+   "gsc_impressions": null,
+   "gsc_position": null
+  },
+  {
+   "day": "2026-11-20",
+   "term": "sovereign edge AI",
+   "google_position": null,
+   "top10": [
+    "nutanix.com",
+    "redhat.com",
+    "azure.microsoft.com",
+    "sovaihub.com",
+    "scalecomputing.com",
+    "soff.se",
+    "cisco.com",
+    "stormagic.com",
+    "cloud.google.com"
+   ],
+   "page": null,
+   "gsc_impressions": null,
+   "gsc_position": null
+  }
+ ]
+}

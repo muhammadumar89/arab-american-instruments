@@ -89,7 +89,7 @@ nav a:hover,nav .tab:hover,nav a.on,nav .tab.on{color:#fff}
 .banner .inner{width:100%;max-width:var(--max);margin:0 auto;padding:140px var(--gut) clamp(40px,6vh,72px)}
 .banner.hero{min-height:100vh;min-height:100svh}
 .banner.hero{align-items:center;text-align:center}
-.banner.hero .scrim{background:linear-gradient(180deg,rgba(1,1,1,.5) 0%,rgba(1,1,1,.2) 40%,rgba(1,1,1,.8) 100%)}
+.banner.hero .scrim{background:linear-gradient(180deg,rgba(1,1,1,.6) 0%,rgba(1,1,1,.5) 40%,rgba(1,1,1,.82) 100%)}
 .banner.hero .inner{display:flex;flex-direction:column;align-items:center;padding-top:120px;padding-bottom:clamp(56px,10vh,110px)}
 .banner.hero h1{max-width:860px;margin:0 0 22px;font-size:clamp(30px,3.6vw,52px);letter-spacing:-.025em;line-height:1.08;font-weight:400}
 .banner.hero .lede{margin:0;font-size:15px;color:var(--text2);max-width:600px;text-align:center}
