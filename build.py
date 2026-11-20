@@ -179,8 +179,8 @@ PRODUCTS = [
         ],
         "specs": [
             ("Radio", "Long range mesh radio; optional cellular"),
-            ("Battery", "Days per charge, not hours"),
-            ("Sealing", "Sealed against rain and dunking, button included"),
+            ("Battery", "Several days per charge"),
+            ("Sealing", "Sealed against rain and immersion, including the button"),
             ("Security", "Every message encrypted; charges only on your own docks"),
         ],
         "pairs": ["guide-hub", "patrol-gateway", "solar-relay", "charging-dock"],
@@ -215,7 +215,7 @@ PRODUCTS = [
         "status": "concept",
         "kind": "Roof unit for patrol and safety vehicles",
         "film": "mojave-hwy",
-        "short": "Reaches much further than a backpack. In search mode a missing band reports every few seconds and the screen reads warmer and colder as the vehicle closes in.",
+        "short": "Reaches much further than a backpack. In search mode a missing band reports every few seconds and the display shows the signal strengthening as the vehicle closes in.",
         "images": [("truck-cab-bw.jpg", "A roof antenna on a magnetic mount and a rugged tablet in the cab"), ("radio-tower.jpg", "Cellular and satellite links reach out where the mesh ends")],
         "sections": [
             ("What it does", [
@@ -247,7 +247,7 @@ PRODUCTS = [
         ],
         "specs": [
             ("Power", "Solar panel and a heat tolerant battery, sized for days without sun"),
-            ("Bandwidth", "Hundreds of wearers on less than an old 2G link"),
+            ("Bandwidth", "Hundreds of wearers on a narrowband link"),
         ],
         "pairs": ["field-band", "guide-hub"],
     },
@@ -290,7 +290,7 @@ NOTES = [
     {
         "slug": "what-a-truck-will-tell-you",
         "title": "What a truck will tell you",
-        "sub": "The data you get depends on the port the truck has. Here is the honest table.",
+        "sub": "The data you get depends on the port the truck has. The table below sets out what each port provides.",
         "date": "11 Nov 2026",
         "film": "night-highway",
         "body": [
@@ -396,7 +396,7 @@ CATEGORIES = [
             ("Live map", "Every vehicle, person and relay, with trips, stops and routes."),
             ("Events and clips", "Drowsiness, collision warnings, SOS and falls, each with its video and position."),
             ("Ask it in words", "A language model, hosted with the platform, answers questions over the fleet's own data."),
-            ("Search mode", "A missing band reports every few seconds; the screen reads warmer and colder."),
+            ("Search mode", "A missing band reports every few seconds and the display shows the signal strengthening as the searcher closes in."),
             ("Device health", "Online, signal, storage, temperature, tamper and power loss for every unit."),
             ("Your hosting", "Air gapped by default. Your servers, your keys, your retention rules."),
         ],
@@ -407,14 +407,14 @@ CAT_OF = {d: c["slug"] for c in CATEGORIES for d in c["devices"]}
 
 # One short line per device, in the Anduril manner.
 TAGLINES = {
-    "fleet-vision-unit": "Sees without sending.",
-    "vehicle-interface-module": "Reads the vehicle itself.",
-    "field-band": "Reaches without a network.",
-    "guide-hub": "Carries the group's signal.",
-    "patrol-gateway": "Finds the one who is missing.",
-    "solar-relay": "Runs on sun, speaks pole to pole.",
-    "charging-dock": "Trusts only your own.",
-    "site-camera": "Watches the gate. Keeps the tape.",
+    "fleet-vision-unit": "Vision models on the unit. Only events leave the vehicle.",
+    "vehicle-interface-module": "Vehicle data and power from the vehicle's own port.",
+    "field-band": "Position and vital signs with no network.",
+    "guide-hub": "Portable gateway for every band in a group.",
+    "patrol-gateway": "Mesh gateway and search mode for patrol vehicles.",
+    "solar-relay": "Solar powered mesh relay for poles and remote sites.",
+    "charging-dock": "Charges, tests and pairs bands. Accepts only your own.",
+    "site-camera": "Fixed AI camera. Recording kept on site.",
 }
 
 SOLUTIONS = [
@@ -439,8 +439,8 @@ SOLUTIONS = [
     {
         "slug": "safety", "name": "Safety and Risk", "film": "dashcam-desert",
         "tag": "Fewer accidents on the road and in the field",
-        "title": "Catch the drowsy driver and the fallen worker before it matters.",
-        "body": "The cab camera sees eyes closing, phone use and a missing seatbelt and speaks up in the cab. The road camera warns of a collision ahead. The band feels a fall and sends an SOS on every path at once.",
+        "title": "Detect the drowsy driver and the fallen worker in time.",
+        "body": "The cab camera sees eyes closing, phone use and a missing seatbelt and alerts the driver in the cab. The road camera warns of a collision ahead. The band detects a fall and sends an SOS on every path at once.",
         "points": ["Drowsiness, distraction, phone use and seatbelt alerts spoken in the cab", "Forward collision, tailgating and lane departure warnings", "Harsh braking, cornering and impact events with video", "Falls, stillness and SOS from the wrist, confirmed back to the wearer"],
         "devices": ["fleet-vision-unit", "field-band", "guide-hub"],
         "industries": ["Fleets and logistics", "Crowd and walker safety", "Energy and pipelines"],
@@ -477,7 +477,7 @@ SOLUTIONS = [
         "tag": "Keep working where there is no signal",
         "title": "The desert, the sea and the closed site, all covered.",
         "body": "Devices store everything with no signal and send it when a link returns. Bands reach hubs, hubs reach vehicles, relays pass messages pole to pole, and one uplink reaches out by cellular, satellite or microwave.",
-        "points": ["Store and forward on every device", "Mesh between bands, hubs, vehicles and poles", "Solar relays that run for days without sun", "Cellular, satellite or microwave uplink where there is finally a link", "Hundreds of wearers on less than an old 2G link"],
+        "points": ["Store and forward on every device", "Mesh between bands, hubs, vehicles and poles", "Solar relays that run for days without sun", "Cellular, satellite or microwave uplink where there is finally a link", "Hundreds of wearers on a narrowband link"],
         "devices": ["solar-relay", "patrol-gateway", "guide-hub", "field-band"],
         "industries": ["Crowd and walker safety", "Remote and closed sites", "Telecom and satellite"],
     },
@@ -489,7 +489,7 @@ PILLARS = [
     ("sovereignty", "Sovereign by design", "You own the design, the parts, the firmware and the keys. We hand it all over with the build.", "chip-macro", "/solutions/sovereignty/"),
     ("airgap", "Air gapped by default", "Models on the device, mesh between devices, Command on your servers. Nothing leaves that you did not choose.", "solar-desert", "/solutions/airgap/"),
     ("edge", "AI at the edge", "Vision and language models run on the hardware itself, on our own AI platform, with no cloud in the loop.", "engineer-scope", "/platform/"),
-    ("field", "Built for the field", "Low power, sealed, store and forward, built inside your perimeter for your vehicles, your sites and your heat.", "truck-desert", "/hardware/"),
+    ("field", "Built for the field", "Low power, sealed, store and forward, built inside your perimeter for your vehicles, your sites and your climate.", "truck-desert", "/hardware/"),
 ]
 
 # Our AI platform. The parent stack, named.
@@ -502,7 +502,7 @@ PLATFORM = [
 MODELS = [
     ("Vision models", "Driver state, road events, people and vehicles in zones, plates, helmets and vests, running on the unit at full frame rate."),
     ("Language models", "Hosted with Command on your servers. Ask the fleet a question in words and get an answer from its own data."),
-    ("Open weights, your hosting", "Every model we ship runs from weights you hold, on hardware you own, with no call home."),
+    ("Open weights, your hosting", "Every model we ship runs from weights you hold, on hardware you own, with no outbound connection."),
 ]
 
 # ---------------------------------------------------------------- chrome
@@ -550,7 +550,7 @@ def footer():
 <div><h4>Products</h4>{prods}</div>
 <div><h4>Solutions</h4>{sols}</div>
 <div><h4>Company</h4>{comp}</div>
-<div><h4>Headquarters</h4><p>Riyadh, Saudi Arabia<br><span class="mono">24.71 N, 46.68 E</span></p><p>Dallas, Texas, United States<br><span class="mono">32.78 N, 96.80 W</span></p></div>
+<div><h4>Headquarters</h4><p>Riyadh, Saudi Arabia</p><p>Dallas, Texas, United States</p></div>
 </div>
 <div class="legal"><span>Arab American Instruments is a fully owned subsidiary of CodeNinja</span><span>&copy; 2026 Arab American Instruments</span></div>
 </div></footer>'''
@@ -810,7 +810,7 @@ def note_card(n):
 def home():
     hero = banner(
         "home-montage",
-        f'<h1>{e(TAGLINE)}</h1><p class="lede">Hardware that runs vision and language models on the device, on a stack the customer owns outright. Commercial operations and national ones, from the Gulf, Pakistan and the United States.</p><div class="actions">{pill(u("/build/"), "Request a deployment", True)}{pill(u("/hardware/"), "All hardware")}</div><span class="coords">Riyadh 24.71 N 46.68 E &nbsp;&middot;&nbsp; Dallas 32.78 N 96.80 W</span>',
+        f'<h1>{e(TAGLINE)}</h1><p class="lede">Hardware that runs vision and language models on the device, on a stack the customer owns outright. Commercial operations and national ones, from the Gulf, Pakistan and the United States.</p><div class="actions">{pill(u("/build/"), "Request a deployment", True)}{pill(u("/hardware/"), "All hardware")}</div>',
         "hero",
         hero=True,
     )
@@ -838,11 +838,11 @@ def platform_page():
     body = (
         head
         + platform_block(full=True)
-        + split("On the device", "Vision models at full frame rate, on the unit.", "Driver state, road events, people and vehicles in zones, plates, helmets and vests. The models run on the hardware we design, tuned to the camera and the heat it lives in. Only the event and a short clip leave the unit, and only to where you say.", panel_video("dashcam-desert"), side="right")
+        + split("On the device", "Vision models at full frame rate, on the unit.", "Driver state, road events, people and vehicles in zones, plates, helmets and vests. The models run on the hardware we design, tuned to the camera and the climate it operates in. Only the event and a short clip leave the unit, and only to where you say.", panel_video("dashcam-desert"), side="right")
         + split("On your servers", "A language model that knows your fleet.", "Command hosts a language model next to the fleet's own data. Ask which drivers were drowsy this week, which relay has been running on battery, where the missing band last reported. The answer comes from your perimeter and never leaves it.", panel_video("engineer-scope"), side="left")
         + split("Open weights, your hosting", "Models you hold, on hardware you own.", "Every model we ship runs from weights you hold, on devices and servers you own, signed with keys you keep. Updates arrive on your schedule, by your approval, or not at all.", panel_video("chip-macro"), side="right")
         + own_strip()
-        + cta("Tell us what the devices should see, say and decide.")
+        + cta("Tell us what the devices should sense, report and decide.")
     )
     page("/platform/", "AI platform", "The AI platform behind Arab American Instruments hardware: vision models on the device, language models on your servers, built on CodeNinja's stack.", body, "/platform/")
 
@@ -945,7 +945,7 @@ def solution_page(s):
 
 
 def industries():
-    head = film_head("desert-drone", "Industries", "Where nothing may phone home.", "Commercial operations and national ones, on the same stack.", "We build for work that runs far from the network or must stay off it: fleets, crowds, energy, water, grids, ports and closed sites across the Gulf, Pakistan and the United States.")
+    head = film_head("desert-drone", "Industries", "Where nothing may leave the perimeter.", "Commercial operations and national ones, on the same stack.", "We build for work that runs far from the network or must stay off it: fleets, crowds, energy, water, grids, ports and closed sites across the Gulf, Pakistan and the United States.")
     rows = ""
     for i, (n, f, d, ps) in enumerate(INDUSTRIES):
         links = "".join(f'<a href="{dev_url(PBY[s])}">{e(PBY[s]["name"])} <i>&rarr;</i></a>' for s in ps) or f'<a href="{u("/build/")}">Commission a design <i>&rarr;</i></a>'
@@ -954,7 +954,7 @@ def industries():
 
 
 def lab():
-    head = film_head("smt-line", "Design Lab", "We publish what we learn.", "Notes from the bench.", "The decisions behind our boards, the numbers behind our links, and the tradeoffs we weighed. Our customers own their designs; the method we share with everyone.")
+    head = film_head("smt-line", "Design Lab", "We publish what we learn.", "Engineering notes from Arab American Instruments.", "The decisions behind our boards, the numbers behind our links, and the tradeoffs we weighed. Our customers own their designs; the method we share with everyone.")
     notes = "".join(note_card(n) for n in NOTES)
     page("/lab/", "Design Lab", "Notes from the Arab American Instruments Design Lab on edge hardware, mesh links, vehicle data and board design.", head + f'<section class="cards"><div class="wrap"><div class="grid3">{notes}</div></div></section>' + cta(), "/lab/")
     for n in NOTES:
@@ -983,7 +983,7 @@ def supply():
     steps = [
         ("Requirement", "What must be sensed, sent or controlled, where, for how long, and what may never leave the site."),
         ("Reference design", "We start from the closest platform and show you the tradeoffs: battery, range, size, cost."),
-        ("Your board", "We adapt the schematic, layout and shell to your vehicles, your heat and your rules."),
+        ("Your board", "We adapt the schematic, layout and shell to your vehicles, your climate and your rules."),
         ("Pilot run", "A small batch built and tested with you, with every part traced to its maker."),
         ("Field trial", "Units in the field, measured against the targets we set together."),
         ("Handover", "Design files, bill of materials, firmware source and keys. Build the rest wherever you trust."),
@@ -1064,13 +1064,13 @@ def build_page():
     env = [("Air gapped: nothing may leave the site (recommended default)", True), ("Private network or private cloud", False), ("Public cellular or satellite is acceptable", False), ("Not known yet", False)]
     eopts = "".join(f'<label class="opt"><input type="radio" name="Connectivity" value="{e(q)}"{" checked" if c else ""}><span>{e(q)}</span></label>' for q, c in env)
     form = f'''<section class="formwrap paper"><div class="wrap grid2">
-<div class="col text">{label("Request a deployment")}<h2>Tell us the job. We scope the deployment.</h2>
+<div class="col text">{label("Request a deployment")}<h2>Describe the requirement. We scope the deployment.</h2>
 <p class="lede">No prices on this site, because every deployment is scoped to the site it will run on. Send the outline and an engineer replies with questions, a reference design and a plan for a pilot.</p>
 {panel_video("print-timelapse")}</div>
 <div class="col"><form id="buildform">
 <div class="two"><label>Name<input name="Name" required autocomplete="name"></label><label>Organisation<input name="Organisation" required autocomplete="organization"></label></div>
 <div class="two"><label>Work email<input type="email" name="Email" required autocomplete="email"></label><label>Country<input name="Country" placeholder="Saudi Arabia, United States, ..."></label></div>
-<label>Closest device<select name="Platform"><option value="Not sure yet">Not sure yet, recommend one</option>{opts}<option value="Command platform">Command platform</option><option value="Other controller">Other controller</option></select></label>
+<label>Closest device<select name="Platform"><option value="Not yet decided">Not yet decided, recommend one</option>{opts}<option value="Command platform">Command platform</option><option value="Other controller">Other controller</option></select></label>
 <label>What must it sense, send or control?<textarea name="Requirement" rows="4" required placeholder="For example: cab and road cameras for a heavy truck fleet, vehicle data from the fleet port, events over cellular."></textarea></label>
 <fieldset><legend>Where will the data go?</legend>{eopts}</fieldset>
 <fieldset><legend>How many units to start?</legend>{qopts}</fieldset>
