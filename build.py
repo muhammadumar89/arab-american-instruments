@@ -589,7 +589,52 @@ SCRIPT = '''<script>
 </script>''' % CONTACT
 
 
-def page(path, title, desc, body, active=""):
+# Search engine ownership proofs (Search Console URL prefix property, Bing Webmaster Tools). Keep them: removal unverifies.
+GOOGLE_VERIFY_FILE = "google5c8034f5c559d4ab.html"
+BING_VERIFY = "C0BA30668F739D132B60D2147D569A8E"
+
+ORG_ID = SITE_URL + "/#organization"
+CRUMBS = {"/": "Home", "/products/": "Products", "/hardware/": "Hardware", "/solutions/": "Solutions", "/lab/": "Design Lab"}
+MONTHS = {m: i + 1 for i, m in enumerate("Jan Feb Mar Apr May Jun Jul Aug Sep Oct Nov Dec".split())}
+
+
+def iso_date(d):
+    day, mon, year = d.split()
+    return f"{int(year):04d}-{MONTHS[mon]:02d}-{int(day):02d}"
+
+
+def ld_org():
+    """Organization: who we are, where, and whose subsidiary. Founders carry their own profiles; no sameAs to another company."""
+    return {
+        "@context": "https://schema.org", "@type": "Organization", "@id": ORG_ID,
+        "name": "Arab American Instruments", "alternateName": "AAI", "url": SITE_URL + "/",
+        "logo": SITE_URL + "/assets/img/mark.svg", "image": SITE_URL + "/assets/video/home-montage.jpg",
+        "description": TAGLINE,
+        "address": [
+            {"@type": "PostalAddress", "addressLocality": "Riyadh", "addressCountry": "SA"},
+            {"@type": "PostalAddress", "addressLocality": "Dallas", "addressRegion": "TX", "addressCountry": "US"},
+        ],
+        "parentOrganization": {"@type": "Organization", "name": "CodeNinja", "url": "https://codeatoms.ai/"},
+        "founder": [{"@type": "Person", "name": L["name"], "jobTitle": L["title"], "sameAs": L["link"]} for L in LEADERS],
+    }
+
+
+def ld_crumbs(path, title):
+    parts = [x for x in path.strip("/").split("/") if x]
+    items, acc = [("Home", "/")], "/"
+    for i, seg in enumerate(parts):
+        acc += seg + "/"
+        items.append((title if i == len(parts) - 1 else CRUMBS.get(acc, seg.replace("-", " ").title()), acc))
+    return {"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [
+        {"@type": "ListItem", "position": i + 1, "name": n, "item": SITE_URL + p} for i, (n, p) in enumerate(items)]}
+
+
+def ld_tags(path, title, ld):
+    blocks = list(ld or []) + ([ld_crumbs(path, title)] if path != "/" else [])
+    return "".join('<script type="application/ld+json">' + json.dumps(b, ensure_ascii=False).replace("</", "<\\/") + "</script>\n" for b in blocks)
+
+
+def page(path, title, desc, body, active="", ld=None):
     full = title if title == "Arab American Instruments" else f"{title} | Arab American Instruments"
     canon = SITE_URL + path
     doc = f'''<!doctype html>
@@ -601,7 +646,7 @@ def page(path, title, desc, body, active=""):
 <meta property="og:title" content="{e(full)}"><meta property="og:description" content="{e(desc)}">
 <meta property="og:image" content="{SITE_URL}/assets/video/home-montage.jpg"><meta name="twitter:card" content="summary_large_image">
 <meta name="theme-color" content="#010101">
-<link rel="icon" href="{u("/assets/img/mark.svg")}" type="image/svg+xml">
+{f'<meta name="msvalidate.01" content="{BING_VERIFY}">' + chr(10) if path == "/" else ""}{ld_tags(path, title, ld)}<link rel="icon" href="{u("/assets/img/mark.svg")}" type="image/svg+xml">
 {FONTS}
 <link rel="stylesheet" href="{u("/assets/site.css")}">
 </head><body>
@@ -790,7 +835,7 @@ def home():
     lab = f'<section class="cards"><div class="wrap"><div class="head">{label("Design Lab")}<h2>We publish what we learn.</h2><a class="btn ghost" href="{u("/lab/")}">All notes</a></div><div class="grid3">{notes}</div></div></section>'
     hq = f'<section class="hq"><div class="wrap">{label("Headquarters")}<div class="grid2 even">{panel_video("riyadh-day", "Riyadh, Saudi Arabia. Design, customer engineering and field trials for the Gulf.")}{panel_video("dallas-sunset", "Dallas, Texas. Design, partners and supply for the United States.")}</div></div></section>'
     body = hero + pillars() + mosaic() + platform_block() + why + own_strip() + solsec + ind + lab + hq + cta()
-    page("/", "Arab American Instruments", "Arab American Instruments designs low power edge devices that run vision and language models on the device, for sovereign and air gapped operations. Riyadh and Dallas. You own the design and the supply chain.", body)
+    page("/", "Arab American Instruments", "Arab American Instruments designs low power edge devices that run vision and language models on the device, for sovereign and air gapped operations. Riyadh and Dallas. You own the design and the supply chain.", body, "", [ld_org(), {"@context": "https://schema.org", "@type": "WebSite", "name": "Arab American Instruments", "url": SITE_URL + "/", "publisher": {"@id": ORG_ID}}])
 
 
 def platform_page():
@@ -871,7 +916,12 @@ def product_page(p):
         + (f'<section class="cards"><div class="wrap"><div class="head">{label("Works with")}<h2>Part of one stack.</h2></div><div class="grid3">{pairs}</div></div></section>' if pairs else "")
         + cta(f"Deploy {p['name']} inside your perimeter.")
     )
-    page(f"/hardware/{p['slug']}/", p["name"], f"{p['name']}: {p['short']}", body, "/products/")
+    url = f"{SITE_URL}/hardware/{p['slug']}/"
+    img = SITE_URL + ("/assets/img/stock/" + p["images"][0][0] if p["images"] else f"/assets/video/{p['film']}.jpg")
+    ld = [{"@context": "https://schema.org", "@type": "Product", "@id": url + "#product", "name": p["name"], "description": p["short"],
+           "category": c["name"], "image": img, "url": url,
+           "brand": {"@type": "Brand", "name": "Arab American Instruments"}, "manufacturer": {"@id": ORG_ID}}]
+    page(f"/hardware/{p['slug']}/", p["name"], f"{p['name']}: {p['short']}", body, "/products/", ld)
 
 
 def solutions():
@@ -925,7 +975,12 @@ def lab():
                 out += f'<div class="tw"><table class="data"><thead><tr>{hd}</tr></thead><tbody>{rows}</tbody></table></div>'
         head = film_head(n["film"], f"Design Lab · {n['date']}", e(n["title"]), "", e(n["sub"]))
         art = f'<article class="article paper"><div class="wrap narrow">{out}<p class="byline mono">Design Lab, Arab American Instruments</p></div></article>'
-        page(f"/lab/{n['slug']}/", n["title"], n["sub"], head + art + cta(), "/lab/")
+        url = f"{SITE_URL}/lab/{n['slug']}/"
+        ld = [{"@context": "https://schema.org", "@type": "Article", "headline": n["title"], "description": n["sub"],
+               "datePublished": iso_date(n["date"]), "dateModified": iso_date(n["date"]), "image": f"{SITE_URL}/assets/video/{n['film']}.jpg",
+               "mainEntityOfPage": url, "author": {"@type": "Organization", "@id": ORG_ID, "name": "Arab American Instruments", "url": SITE_URL + "/"},
+               "publisher": {"@id": ORG_ID}}]
+        page(f"/lab/{n['slug']}/", n["title"], n["sub"], head + art + cta(), "/lab/", ld)
 
 
 def supply():
@@ -997,14 +1052,14 @@ def about():
     body = (
         head
         + mission
-        + split("What we do", "Purpose built hardware that runs AI, owned by the customer.", "We design edge devices for sensing, satellite and mesh links, and real time control, run vision and language models on them, and build them to order so that the customer owns the design and the supply chain, not us and not anyone else. We keep reference designs, publish what we learn, and build for each customer from a single pilot to a national fleet.", panel_img("/assets/img/stock/technician-solder.jpg", "Schematic, layout, firmware, models and shell under one roof."), side="right")
+        + split("What we do", "Purpose built hardware that runs AI, owned by the customer.", "We design edge devices for sensing, satellite and mesh links, and real time control, run vision and language models on them, and deploy them inside the perimeter so that the customer owns the design and the supply chain, not us and not anyone else. We keep reference designs, publish what we learn, and build for each customer from a single pilot to a national fleet.", panel_img("/assets/img/stock/technician-solder.jpg", "Schematic, layout, firmware, models and shell under one roof."), side="right")
         + team
         + board
         + f'<section class="hq"><div class="wrap">{label("Headquarters")}<div class="grid2 even">{panel_video("riyadh-day", "Riyadh, Saudi Arabia")}{panel_video("dallas-sunset", "Dallas, Texas, United States")}</div></div></section>'
         + split("Ownership", "A fully owned subsidiary of CodeNinja.", "Arab American Instruments brings hardware into the CodeNinja group, alongside its work on sovereign AI systems for governments and enterprises. The AI platform that runs on our devices is CodeNinja\'s.", panel_video("engineer-scope"), side="right")
         + cta()
     )
-    page("/about/", "About", "Arab American Instruments is a technology company headquartered in Riyadh and Dallas, a fully owned subsidiary of CodeNinja, led by its founders and backed by sAi Venture Capital.", body, "/about/")
+    page("/about/", "About", "Arab American Instruments is a technology company headquartered in Riyadh and Dallas, a fully owned subsidiary of CodeNinja, led by its founders and backed by sAi Venture Capital.", body, "/about/", [ld_org()])
 
 
 def build_page():
@@ -1050,6 +1105,10 @@ def extras():
     with open(os.path.join(OUT, "robots.txt"), "w") as fh:
         fh.write(f"User-agent: *\nAllow: /\nSitemap: {SITE_URL}/sitemap.xml\n")
     open(os.path.join(OUT, ".nojekyll"), "w").close()
+    with open(os.path.join(OUT, GOOGLE_VERIFY_FILE), "w") as fh:
+        fh.write(f"google-site-verification: {GOOGLE_VERIFY_FILE}")
+    with open(os.path.join(OUT, "BingSiteAuth.xml"), "w") as fh:
+        fh.write(f'<?xml version="1.0"?>\n<users>\n\t<user>{BING_VERIFY}</user>\n</users>\n')
     with open(os.path.join(OUT, "CNAME"), "w") as fh:
         fh.write(DOMAIN + "\n")
     redirect("/platforms/", "/products/")
