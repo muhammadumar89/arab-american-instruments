@@ -1037,7 +1037,7 @@ def about():
         fig = f'<figure><img src="{u("/assets/img/team/" + L["slug"] + ".jpg")}" alt="{e(L["name"])}" loading="lazy" width="900" height="750"></figure>'
         pan = f'<div class="lpanel"><h3>{e(L["name"])}</h3><p class="role">{e(L["title"])}</p><p class="bio">{e(L["bio"])}</p><a class="in" href="{L["link"]}" rel="noopener" target="_blank">LinkedIn</a></div>'
         rows += f'<div class="leader{" flip" if i % 2 else ""}">{fig}{pan}</div>'
-    team = f'<section class="team"><div class="wrap"><div class="head">{label("Founding team")}<h2>Led by the founders of CodeNinja.</h2></div>{rows}</div></section>'
+    team = f'<section class="team"><div class="wrap"><div class="head">{label("Founding team")}</div>{rows}</div></section>'
     brows = ""
     for L in BOARD:
         fig = f'<figure><img src="{u("/assets/img/team/" + L["slug"] + ".jpg")}" alt="{e(L["name"])}" loading="lazy" width="900" height="750"></figure>'
