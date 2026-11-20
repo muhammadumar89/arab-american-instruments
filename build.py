@@ -1007,17 +1007,17 @@ def supply():
 
 
 LEADERS = [
+    {"slug": "muhammad-umar-bilal", "name": "Muhammad Umar", "title": "Founder",
+     "bio": "Muhammad Umar is a founder of Arab American Instruments and one of the co-founders of CodeNinja, the parent company of Arab American Instruments. He works on Hyper Ontologies, the memory and interpretability layer underneath CodeNinja's enterprise AI deployments, and is the author of the Own the Loop research series.",
+     "link": "https://www.linkedin.com/in/muhammadumargiki/"},
     {"slug": "mukhtar-ahmad-baig", "name": "Mukhtar Ahmad Baig", "title": "Co-Founder and Chief Executive Officer",
-     "bio": "Mr. Baig is one of the co-founders of CodeNinja and serves as its Chief Executive Officer. CodeNinja began as an engineering firm in Lahore in 2014 and now builds systems for enterprises, governments and critical operations across the United States and the Gulf.",
+     "bio": "Mr. Baig is the Chief Executive Officer of Arab American Instruments and one of the co-founders of CodeNinja, its parent company, where he holds the same office. He leads the company's direction, its relationships with governments and enterprises in the Gulf and the United States, and the growth of the group's hardware business.",
      "link": "https://www.linkedin.com/in/mukhtarahmadbaig/"},
     {"slug": "adil-khalil", "name": "Adil Khalil", "title": "Co-Founder and Chief Technology Officer",
-     "bio": "Mr. Khalil is one of the co-founders of CodeNinja and serves as its Chief Technology Officer, responsible for the engineering behind CodeNinja's sovereign systems.",
+     "bio": "Mr. Khalil is the Chief Technology Officer of Arab American Instruments and one of the co-founders of CodeNinja, its parent company, where he holds the same office. He leads the engineering behind the devices, from schematic and firmware to the models that run on them, and their deployment inside the customer's perimeter.",
      "link": "https://www.linkedin.com/in/adilkhalil/"},
-    {"slug": "muhammad-umar-bilal", "name": "Muhammad Umar", "title": "Co-Founder and Chief Operating Officer",
-     "bio": "Mr. Umar is one of the co-founders of CodeNinja and serves as its Chief Operating Officer. He works on Hyper Anthologies, the memory and interpretability layer underneath CodeNinja's enterprise AI deployments, and is the author of the Own the Loop research series.",
-     "link": "https://www.linkedin.com/in/muhammadumargiki/"},
     {"slug": "ibrar-hussain", "name": "Ibrar Hussain", "title": "Co-Founder and Chief Product Officer",
-     "bio": "Mr. Hussain is one of the co-founders of CodeNinja and serves as its Chief Product Officer. Mr. Hussain holds a B.S. in Computer Science from the University of the Punjab.",
+     "bio": "Mr. Hussain is the Chief Product Officer of Arab American Instruments and one of the co-founders of CodeNinja, its parent company, where he holds the same office. He leads the product line and the roadmap of the devices, from a single pilot to a national fleet, and the experience of the teams who operate them.",
      "link": "https://pk.linkedin.com/in/helloibrar"},
 ]
 
