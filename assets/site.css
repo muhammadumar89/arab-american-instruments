@@ -132,9 +132,9 @@ nav a:hover,nav .tab:hover,nav a.on,nav .tab.on{color:#fff}
 .tile.tall{grid-row:span 2}
 .tile img,.tile video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0;transition:transform .9s ease}
 .tile:hover img,.tile:hover video{transform:scale(1.03)}
-.tile::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(1,1,1,0) 45%,rgba(1,1,1,.8) 100%);z-index:1}
+.tile::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(1,1,1,0) 30%,rgba(1,1,1,.55) 62%,rgba(1,1,1,.9) 100%);z-index:1}
 .tile .tt{position:relative;z-index:2;padding:22px;display:flex;flex-direction:column;gap:4px}
-.tile .cat{font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--mute);margin-bottom:6px}
+.tile .cat{font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--text2);margin-bottom:6px}
 .tile .name{font:500 15px var(--sans);letter-spacing:.02em}
 .tile .tag{font-family:var(--sans);font-size:clamp(18px,1.6vw,26px);letter-spacing:-.02em;color:#fff}
 @media(max-width:1000px){.mosaic{grid-template-columns:1fr 1fr;grid-auto-rows:minmax(240px,45vw)}.tile,.tile.wide,.tile.tall{grid-column:span 1;grid-row:span 1}}
