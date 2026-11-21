@@ -13,7 +13,9 @@
   "page": "/",
   "defect": "the coordinates line under the hero buttons is illegible",
   "fix": "larger, higher contrast, or remove",
-  "state": "open"
+  "state": "fixed",
+  "day": "2026-11-21",
+  "note": "Umar removed the coordinates line from the hero in a99df03 (20 Nov); nothing left to read"
  },
  {
   "id": "body-15px",
@@ -36,7 +38,9 @@
   "page": "/",
   "defect": "pillar grid at phone width unverified",
   "fix": "single column, no clipped text",
-  "state": "open"
+  "state": "fixed",
+  "day": "2026-11-21",
+  "note": "verified at 375: single column, no clipped text (raw/shots/2026-11-21/home-375-pillars.png)"
  },
  {
   "id": "video-mobile",
@@ -44,5 +48,14 @@
   "defect": "22 videos on the home page; weight on mobile data",
   "fix": "lazy load below the fold, posters, re-encode the largest",
   "state": "open"
+ },
+ {
+  "id": "tiles-bright",
+  "page": "",
+  "defect": "hardware tile labels over bright footage at 375 low contrast; road markings cut through the tagline",
+  "fix": "",
+  "state": "fixed",
+  "day": "2026-11-21",
+  "note": "tile scrim deepened 30/62/100 and category label to text2, c13d1d3; after-tiles-375.png"
  }
 ]

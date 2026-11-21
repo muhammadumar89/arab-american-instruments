@@ -86,7 +86,9 @@
   "/about/": "2026-11-20",
   "/build/": "2026-11-20",
   "/hardware/charging-dock/": "2026-11-20",
-  "/hardware/field-band/": "2026-11-20"
+  "/hardware/field-band/": "2026-11-20",
+  "/hardware/fleet-vision-unit/": "2026-11-21",
+  "/hardware/guide-hub/": "2026-11-21"
  },
  "backlog": {
   "gsc-bing": {

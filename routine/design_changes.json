@@ -11,6 +11,18 @@
    "commit": "22a562d",
    "revert": "git revert 22a562d",
    "episode": 1
+  },
+  {
+   "day": "2026-11-21",
+   "page": "/",
+   "width": 375,
+   "what": "hardware tile scrim deepened (0 at 30%, .55 at 62%, .9 at 100%) and the category label raised from mute to text2",
+   "why": "labels and taglines on the hardware mosaic were hard to read over bright desert and sky footage at phone width",
+   "before": "raw/shots/2026-11-21/before-tiles-375.png",
+   "after": "raw/shots/2026-11-21/after-tiles-375.png",
+   "commit": "c13d1d3",
+   "revert": "git revert c13d1d3",
+   "episode": 2
   }
  ]
 }

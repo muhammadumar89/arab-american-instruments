@@ -91,6 +91,122 @@
    "page": null,
    "gsc_impressions": null,
    "gsc_position": null
+  },
+  {
+   "day": "2026-11-21",
+   "term": "sovereign AI hardware",
+   "google_position": null,
+   "top10": [
+    "amd.com",
+    "cisco.com",
+    "dell.com",
+    "redhat.com",
+    "mistral.ai",
+    "premai.io",
+    "palantir.com",
+    "oracle.com",
+    "hpe.com"
+   ],
+   "page": null,
+   "gsc_impressions": null,
+   "gsc_position": null
+  },
+  {
+   "day": "2026-11-21",
+   "term": "edge AI devices",
+   "google_position": null,
+   "top10": [
+    "redhat.com",
+    "ibm.com",
+    "reddit.com",
+    "nvidia.com",
+    "docs.edgeimpulse.com",
+    "arm.com",
+    "ti.com",
+    "aimultiple.com",
+    "splunk.com",
+    "f5.com"
+   ],
+   "page": null,
+   "gsc_impressions": null,
+   "gsc_position": null
+  },
+  {
+   "day": "2026-11-21",
+   "term": "air gapped AI",
+   "google_position": null,
+   "top10": [
+    "domino.ai",
+    "iternal.ai",
+    "ibl.ai",
+    "go.ai",
+    "dspace.mit.edu",
+    "hpe.com",
+    "reddit.com",
+    "optimagpt.com",
+    "seekr.com"
+   ],
+   "page": null,
+   "gsc_impressions": null,
+   "gsc_position": null
+  },
+  {
+   "day": "2026-11-21",
+   "term": "edge AI camera",
+   "google_position": null,
+   "top10": [
+    "advantech.com",
+    "everfocus.com",
+    "surveillancesecure.com",
+    "i-pro.com",
+    "hailo.ai",
+    "newsroom.axis.com",
+    "ieeexplore.ieee.org",
+    "camthink.ai",
+    "reddit.com",
+    "vvdntech.com"
+   ],
+   "page": null,
+   "gsc_impressions": null,
+   "gsc_position": null
+  },
+  {
+   "day": "2026-11-21",
+   "term": "sovereign edge AI",
+   "google_position": null,
+   "top10": [
+    "nutanix.com",
+    "redhat.com",
+    "azure.microsoft.com",
+    "sovaihub.com",
+    "scalecomputing.com",
+    "soff.se",
+    "cisco.com",
+    "cloud.google.com",
+    "stormagic.com",
+    "mayfield.com"
+   ],
+   "page": null,
+   "gsc_impressions": null,
+   "gsc_position": null
+  },
+  {
+   "day": "2026-11-21",
+   "term": "Arab American Instruments",
+   "google_position": 1,
+   "top10": [
+    "arabamerican.ai",
+    "en.wikipedia.org",
+    "scalar.usc.edu",
+    "cyso.org",
+    "arabamerica.com",
+    "arabinstruments.com",
+    "melodymakers.ae",
+    "facebook.com"
+   ],
+   "page": "/",
+   "gsc_impressions": null,
+   "gsc_position": null
   }
  ]
 }
