@@ -58,6 +58,39 @@
    "reward": 4,
    "summary": "GSC and Bing verified, sitemaps submitted, JSON-LD on 31 pages, hero scrim fixed; all five candidate terms absent from Google US top 30.",
    "engram_id": "639f814e-4b57-477e-89a8-f9a2a325a724"
+  },
+  {
+   "episode": 2,
+   "day": "2026-11-21",
+   "run_id": "aai-site-daily-2026-11-21",
+   "kind": "routine",
+   "backlog_done": [
+    "structured-data",
+    "llms-markdown"
+   ],
+   "channels": {
+    "google": {
+     "sovereign AI hardware": null,
+     "edge AI devices": null,
+     "air gapped AI": null,
+     "edge AI camera": null,
+     "sovereign edge AI": null,
+     "Arab American Instruments (brand)": 1
+    },
+    "gsc": {
+     "clicks": null,
+     "impressions": null,
+     "position": null,
+     "window": "28d"
+    },
+    "links": "gsc null, bing no data, github 0",
+    "design": "hardware tile scrim, c13d1d3",
+    "ai_citations": "Bing #1 on b1-b3; AI Mode cites home b2 b3, b1 music; Perplexity b1 music then walled; ChatGPT names us via NovumSignals; 0 category citations",
+    "inbound": "unmeasured"
+   },
+   "engram_id": "a97c79e9-4fa9-4022-bb89-189b43f63bac",
+   "reward": 7,
+   "summary": "see Engram aai_episodes episode 2"
   }
  ],
  "feedback": [
@@ -80,6 +113,27 @@
    ],
    "status": "open",
    "engram_id": "0e95734c-c739-4620-940c-953856cb2055"
+  },
+  {
+   "episode": 2,
+   "day": "2026-11-21",
+   "verdict": "pending",
+   "status": "open",
+   "engram_id": "c928aec3-e57a-4ee3-ae29-143f0eb498f1",
+   "went_well": [
+    "brand query Google #1",
+    "llms and markdown shipped live",
+    "detached in page loop for search reads",
+    "design before and after with revert"
+   ],
+   "not_good": [
+    "AI Mode and Perplexity answer b1 with music. Next run: What is AAI heading + FAQPage JSON-LD on /about/.",
+    "ChatGPT cannot open the site. Next run: Bing URL Inspection on /about/ and llms.txt.",
+    "Category questions not run on AI engines. Next run: all 12 on AI Mode on 28 Nov.",
+    "/platform/ crawled not indexed. Next run: re-inspect, add internal links.",
+    "GSC Performance and Links processing. Next run: read both.",
+    "titles not started. Next run: titles for 30 non frozen pages, trim 8 long descriptions."
+   ]
   }
  ],
  "seen": {
@@ -97,9 +151,14 @@
    "note": "Search Console URL prefix verified by HTML file and Bing verified by meta tag 20 Nov; sitemap.xml submitted to both; live on domain"
   },
   "structured-data": {
-   "status": "partial",
-   "day": "2026-11-20",
-   "note": "JSON-LD live on all 31 pages (commit 6eab8a9); Search Console Enhancements still processing, read next run"
+   "status": "done",
+   "day": "2026-11-21",
+   "note": "Rich Results Test 21 Nov: Breadcrumbs valid; Product parsed but snippet ineligible by design (no offers or price under the brand rule); live on 31 pages"
+  },
+  "llms-markdown": {
+   "status": "done",
+   "day": "2026-11-21",
+   "note": "llms.txt, llms-full.txt, 31 index.md copies, sitemap lastmod live 21 Nov (b29adc3)"
   }
  }
 }
