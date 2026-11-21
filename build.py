@@ -11,6 +11,8 @@ import html
 import json
 import os
 import shutil
+import subprocess
+from html.parser import HTMLParser
 
 ROOT = os.path.dirname(os.path.abspath(__file__))
 OUT = os.path.join(ROOT, "site")
@@ -629,6 +631,69 @@ def ld_tags(path, title, ld):
     return "".join('<script type="application/ld+json">' + json.dumps(b, ensure_ascii=False).replace("</", "<\\/") + "</script>\n" for b in blocks)
 
 
+class _MD(HTMLParser):
+    """Minimal HTML to Markdown for the page's <main>: headings, paragraphs, lists, links. Media and scripts dropped."""
+    BLOCK = {"p", "div", "section", "article", "li", "h1", "h2", "h3", "h4", "figcaption", "tr", "br", "span"}
+
+    def __init__(self):
+        super().__init__(convert_charrefs=True)
+        self.out, self.skip, self.href, self.link = [], 0, None, []
+
+    def handle_starttag(self, tag, attrs):
+        a = dict(attrs)
+        if tag in ("script", "style", "video", "svg", "select", "noscript"):
+            self.skip += 1
+        elif tag in ("h1", "h2", "h3", "h4"):
+            self.out.append("\n\n" + "#" * int(tag[1]) + " ")
+        elif tag == "li":
+            self.out.append("\n- ")
+        elif tag in self.BLOCK:
+            self.out.append("\n\n" if tag != "span" else " ")
+        elif tag == "a" and a.get("href", "").startswith(("/", "http", "mailto:")):
+            h = a["href"]
+            if BASE and h.startswith(BASE):
+                h = h[len(BASE):]
+            self.href = SITE_URL + h if h.startswith("/") else h
+            self.link = []
+
+    def handle_endtag(self, tag):
+        if tag in ("script", "style", "video", "svg", "select", "noscript"):
+            self.skip = max(0, self.skip - 1)
+        elif tag == "a" and self.href is not None:
+            t = " ".join("".join(self.link).split())
+            self.out.append(f"[{t}]({self.href})" if t else "")
+            self.href = None
+        elif tag in self.BLOCK and tag != "span":
+            self.out.append("\n")
+
+    def handle_data(self, d):
+        if self.skip:
+            return
+        (self.link if self.href is not None else self.out).append(d)
+
+    def text(self):
+        lines = [" ".join(l.split()) for l in "".join(self.out).split("\n")]
+        md, blank = [], False
+        for l in lines:
+            if not l or l in ("-", "#", "##", "###"):
+                if md and not blank:
+                    md.append("")
+                blank = True
+                continue
+            md.append(l)
+            blank = False
+        return "\n".join(md).strip() + "\n"
+
+
+def to_md(path, full, desc, body):
+    m = _MD()
+    m.feed(body)
+    return f"# {full}\n\n> {desc}\n\nSource: {SITE_URL}{path}\n\n" + m.text()
+
+
+MD = []  # (path, full title, desc, markdown) for llms.txt, llms-full.txt and index.md copies
+
+
 def page(path, title, desc, body, active="", ld=None):
     full = title if title == "Arab American Instruments" else f"{title} | Arab American Instruments"
     canon = SITE_URL + path
@@ -655,6 +720,10 @@ def page(path, title, desc, body, active="", ld=None):
     os.makedirs(os.path.dirname(dest), exist_ok=True)
     with open(dest, "w") as fh:
         fh.write(doc)
+    md = to_md(path, full, desc, body)
+    with open(os.path.join(os.path.dirname(dest), "index.md"), "w") as fh:
+        fh.write(md)
+    MD.append((path, full, desc, md))
     PAGES.append(path)
 
 
@@ -1084,15 +1153,62 @@ def build_page():
     page("/build/", "Request a deployment", "Request a deployment of Arab American Instruments edge devices.", head + form, "")
 
 
+
+INDEXNOW_KEY = "5e2f8c1a9b4d47e3a6c0d8f1b2e9a7c4"
+
+
+def last_change():
+    """Date of the last commit that touched build.py (the site's data), never today. None outside git."""
+    try:
+        d = subprocess.run(["git", "log", "-1", "--format=%cs", "--", "build.py"], cwd=ROOT, capture_output=True, text=True, timeout=10).stdout.strip()
+        return d or None
+    except Exception:
+        return None
+
+
+def llms():
+    """llms.txt (an index for AI readers) and llms-full.txt (every page as Markdown) at the root."""
+    head = (f"# Arab American Instruments\n\n> {TAGLINE} A technology company headquartered in Riyadh and Dallas, "
+            "working from the Gulf, Pakistan and the United States, and a fully owned subsidiary of CodeNinja. "
+            "The devices run open weight vision and language models inside the customer's perimeter.\n\n")
+    groups = [("Company", lambda p: p in ("/", "/about/", "/platform/", "/supply-chain/", "/build/")),
+              ("Hardware", lambda p: p.startswith("/hardware/")),
+              ("Products", lambda p: p.startswith("/products/")),
+              ("Solutions", lambda p: p.startswith("/solutions/") or p.startswith("/industries/")),
+              ("Design Lab", lambda p: p.startswith("/lab/"))]
+    out, seen = [head], set()
+    for name, f in groups:
+        rows = [(p, t, d) for p, t, d, _ in MD if f(p) and p not in seen]
+        if not rows:
+            continue
+        out.append(f"## {name}\n\n")
+        for p, t, d in rows:
+            seen.add(p)
+            out.append(f"- [{t}]({SITE_URL}{p}index.md): {d}\n")
+        out.append("\n")
+    rest = [(p, t, d) for p, t, d, _ in MD if p not in seen]
+    if rest:
+        out.append("## Other\n\n" + "".join(f"- [{t}]({SITE_URL}{p}index.md): {d}\n" for p, t, d in rest))
+    with open(os.path.join(OUT, "llms.txt"), "w") as fh:
+        fh.write("".join(out))
+    with open(os.path.join(OUT, "llms-full.txt"), "w") as fh:
+        fh.write(head + "\n\n---\n\n".join(m for _, _, _, m in MD))
+
+
 def extras():
     with open(os.path.join(OUT, "sitemap.xml"), "w") as fh:
         fh.write('<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n')
+        lastmod = last_change()
         for p in PAGES:
-            fh.write(f"<url><loc>{SITE_URL}{p}</loc></url>\n")
+            lm = f"<lastmod>{lastmod}</lastmod>" if lastmod else ""
+            fh.write(f"<url><loc>{SITE_URL}{p}</loc>{lm}</url>\n")
         fh.write("</urlset>\n")
     with open(os.path.join(OUT, "robots.txt"), "w") as fh:
         fh.write(f"User-agent: *\nAllow: /\nSitemap: {SITE_URL}/sitemap.xml\n")
     open(os.path.join(OUT, ".nojekyll"), "w").close()
+    with open(os.path.join(OUT, f"{INDEXNOW_KEY}.txt"), "w") as fh:
+        fh.write(INDEXNOW_KEY)
+    llms()
     with open(os.path.join(OUT, GOOGLE_VERIFY_FILE), "w") as fh:
         fh.write(f"google-site-verification: {GOOGLE_VERIFY_FILE}")
     with open(os.path.join(OUT, "BingSiteAuth.xml"), "w") as fh:
