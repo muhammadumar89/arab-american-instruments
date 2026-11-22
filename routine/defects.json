@@ -22,7 +22,9 @@
   "page": "*",
   "defect": "body text is 15px",
   "fix": "16px at phone width at least; check line length",
-  "state": "open"
+  "state": "fixed",
+  "day": "2026-11-22",
+  "note": "hero lede, hardware aside and team bios 15 to 16px, 7cf610f; raw/shots/2026-11-22/bio-compare.png"
  },
  {
   "id": "header-phone",
@@ -57,5 +59,14 @@
   "state": "fixed",
   "day": "2026-11-21",
   "note": "tile scrim deepened 30/62/100 and category label to text2, c13d1d3; after-tiles-375.png"
+ },
+ {
+  "id": "hardware-table-phone",
+  "page": "",
+  "defect": "/hardware/ device table runs off the right edge at 375; the At a glance column is cut",
+  "fix": "",
+  "state": "open",
+  "day": "2026-11-22",
+  "note": "/hardware/ device table runs off the right edge at 375; the At a glance column is cut"
  }
 ]

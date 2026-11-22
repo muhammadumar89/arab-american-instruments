@@ -1,5 +1,83 @@
 {
- "rows": [],
+ "rows": [
+  {
+   "first_seen": "2026-11-22",
+   "last_seen": "2026-11-22",
+   "status": "open",
+   "kind": "query",
+   "term": "(all)",
+   "page": "/",
+   "clicks": 0,
+   "impressions": 0,
+   "position": null,
+   "window_days": 28
+  },
+  {
+   "kind": "target",
+   "term": "sovereign AI hardware",
+   "first_seen": "2026-11-22",
+   "last_seen": "2026-11-22",
+   "last_fix": {
+    "commit": "9ac173f",
+    "what": "title now leads with the exact term",
+    "clicks_at_fix": 0,
+    "day": "2026-11-22"
+   },
+   "status": "open"
+  },
+  {
+   "kind": "target",
+   "term": "edge AI devices",
+   "first_seen": "2026-11-22",
+   "last_seen": "2026-11-22",
+   "last_fix": {
+    "commit": "9ac173f",
+    "what": "title Edge AI Devices for Air Gapped Sites",
+    "clicks_at_fix": 0,
+    "day": "2026-11-22"
+   },
+   "status": "open"
+  },
+  {
+   "kind": "target",
+   "term": "air gapped AI",
+   "first_seen": "2026-11-22",
+   "last_seen": "2026-11-22",
+   "last_fix": {
+    "commit": "9ac173f",
+    "what": "title Air Gapped AI for Operations Off the Network",
+    "clicks_at_fix": 0,
+    "day": "2026-11-22"
+   },
+   "status": "open"
+  },
+  {
+   "kind": "target",
+   "term": "edge AI camera",
+   "first_seen": "2026-11-22",
+   "last_seen": "2026-11-22",
+   "last_fix": {
+    "commit": "9ac173f",
+    "what": "title Edge AI Camera for Fleets, Gates and Sites",
+    "clicks_at_fix": 0,
+    "day": "2026-11-22"
+   },
+   "status": "open"
+  },
+  {
+   "kind": "target",
+   "term": "sovereign edge AI",
+   "first_seen": "2026-11-22",
+   "last_seen": "2026-11-22",
+   "last_fix": {
+    "commit": "9ac173f",
+    "what": "title Sovereign Edge AI Inside Your Perimeter",
+    "clicks_at_fix": 0,
+    "day": "2026-11-22"
+   },
+   "status": "open"
+  }
+ ],
  "positions": [
   {
    "day": "2026-11-20",
@@ -203,6 +281,126 @@
     "arabinstruments.com",
     "melodymakers.ae",
     "facebook.com"
+   ],
+   "page": "/",
+   "gsc_impressions": null,
+   "gsc_position": null
+  },
+  {
+   "day": "2026-11-22",
+   "term": "sovereign AI hardware",
+   "google_position": null,
+   "top10": [
+    "amd.com",
+    "cisco.com",
+    "dell.com",
+    "redhat.com",
+    "oracle.com",
+    "mistral.ai",
+    "mckinsey.com",
+    "nvidia.com",
+    "cset.georgetown.edu",
+    "reddit.com"
+   ],
+   "page": "/hardware/",
+   "gsc_impressions": null,
+   "gsc_position": null
+  },
+  {
+   "day": "2026-11-22",
+   "term": "edge AI devices",
+   "google_position": null,
+   "top10": [
+    "redhat.com",
+    "ibm.com",
+    "reddit.com",
+    "arm.com",
+    "nvidia.com",
+    "docs.edgeimpulse.com",
+    "aws.amazon.com",
+    "ti.com",
+    "aimultiple.com",
+    "advantech.com"
+   ],
+   "page": "/products/",
+   "gsc_impressions": null,
+   "gsc_position": null
+  },
+  {
+   "day": "2026-11-22",
+   "term": "air gapped AI",
+   "google_position": null,
+   "top10": [
+    "domino.ai",
+    "iternal.ai",
+    "ibl.ai",
+    "go.ai",
+    "dspace.mit.edu",
+    "hpe.com",
+    "seekr.com",
+    "reddit.com",
+    "min.io",
+    "f5.com"
+   ],
+   "page": "/solutions/airgap/",
+   "gsc_impressions": null,
+   "gsc_position": null
+  },
+  {
+   "day": "2026-11-22",
+   "term": "edge AI camera",
+   "google_position": null,
+   "top10": [
+    "advantech.com",
+    "everfocus.com",
+    "surveillancesecure.com",
+    "i-pro.com",
+    "hailo.ai",
+    "ieeexplore.ieee.org",
+    "newsroom.axis.com",
+    "roboflow.com",
+    "reddit.com",
+    "vvdntech.com"
+   ],
+   "page": "/products/cameras/",
+   "gsc_impressions": null,
+   "gsc_position": null
+  },
+  {
+   "day": "2026-11-22",
+   "term": "sovereign edge AI",
+   "google_position": null,
+   "top10": [
+    "nutanix.com",
+    "redhat.com",
+    "cgi.com",
+    "azure.microsoft.com",
+    "scalecomputing.com",
+    "sovaihub.com",
+    "soff.se",
+    "cisco.com",
+    "cloud.google.com",
+    "mayfield.com"
+   ],
+   "page": "/solutions/sovereignty/",
+   "gsc_impressions": null,
+   "gsc_position": null
+  },
+  {
+   "day": "2026-11-22",
+   "term": "Arab American Instruments",
+   "google_position": 1,
+   "top10": [
+    "arabamerican.ai",
+    "en.wikipedia.org",
+    "scalar.usc.edu",
+    "cyso.org",
+    "arabamerica.com",
+    "arabinstruments.com",
+    "melodymakers.ae",
+    "facebook.com",
+    "kennedy-center.org",
+    "wnycstudios.org"
    ],
    "page": "/",
    "gsc_impressions": null,

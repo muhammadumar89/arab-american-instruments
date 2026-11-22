@@ -23,6 +23,18 @@
    "commit": "c13d1d3",
    "revert": "git revert c13d1d3",
    "episode": 2
+  },
+  {
+   "day": "2026-11-22",
+   "page": "/about/",
+   "width": 375,
+   "what": "body copy 15px to 16px: hero lede, hardware detail aside, team bios",
+   "why": "defect body-15px; bios read small at phone width",
+   "before": "raw/shots/2026-11-22/before-bio-375.png",
+   "after": "raw/shots/2026-11-22/after-bio-375.png",
+   "commit": "7cf610f",
+   "revert": "git revert 7cf610f",
+   "episode": 3
   }
  ]
 }

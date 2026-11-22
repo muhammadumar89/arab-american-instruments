@@ -91,6 +91,83 @@
    "engram_id": "a97c79e9-4fa9-4022-bb89-189b43f63bac",
    "reward": 7,
    "summary": "see Engram aai_episodes episode 2"
+  },
+  {
+   "episode": 3,
+   "day": "2026-11-22",
+   "run_id": "aai-site-daily-2026-11-22",
+   "kind": "routine",
+   "backlog_done": [
+    "titles (done, live 9ac173f)"
+   ],
+   "channels": {
+    "google": {
+     "sovereign AI hardware": null,
+     "edge AI devices": null,
+     "air gapped AI": null,
+     "edge AI camera": null,
+     "sovereign edge AI": null,
+     "Arab American Instruments (brand)": 1
+    },
+    "gsc": {
+     "clicks": 0,
+     "impressions": 0,
+     "position": null,
+     "window": "28d",
+     "note": "first readable Performance: data through 19 Nov only, zero rows; Page indexing still processing; /platform/ now indexed"
+    },
+    "links": "gsc external 0 (first read), bing null (Saturdays), github mentions 0, earned 0",
+    "design": "body copy 15px to 16px (hero lede, hardware aside, team bios), 7cf610f; About FAQ block added",
+    "ai_citations": null,
+    "inbound": "unmeasured"
+   },
+   "defects": [
+    "b1 brand answers still unverified until Saturday 28 Nov",
+    "hardware-table-phone open: /hardware/ table runs off the right edge at 375",
+    "video-mobile open",
+    "home description 208 characters (home frozen, left alone)"
+   ],
+   "decisions": [
+    {
+     "what": "Searcher first titles on 30 pages; each locked term leads the title of its owning page; H1 and breadcrumbs unchanged",
+     "why": "titles backlog plus Umar's rule that every locked term is worked on its owning page; the title is the single biggest missing signal (no page used the term)",
+     "revert": "git revert 9ac173f, or delete entries from SEO_TITLES in build.py"
+    },
+    {
+     "what": "Home title, H1 and description left untouched",
+     "why": "brand query at Google position 1 freezes the home page",
+     "revert": "add '/' to SEO_TITLES"
+    },
+    {
+     "what": "About gets an In brief block: four questions and one sentence answers with FAQPage JSON-LD",
+     "why": "ep2 feedback: AI Mode and Perplexity answer b1 with Arab music; a literal answer to the question on the entity page",
+     "revert": "git revert 9ac173f (ABOUT_FAQ and faq section in about())"
+    },
+    {
+     "what": "No Google indexing requests; all 31 URLs resubmitted to IndexNow (200)",
+     "why": "/about/ and /platform/ were requested 21 Nov (7 day rule); every title changed today",
+     "revert": "none needed"
+    },
+    {
+     "what": "Pushed mid run before the records push",
+     "why": "Search Console, Bing and IndexNow read the live domain",
+     "revert": "git revert 7cf610f 9ac173f"
+    },
+    {
+     "what": "Guide Hub and Field Band descriptions cut at the last comma under 160",
+     "why": "one long sentence each; Guide Hub loses 'or by satellite'",
+     "revert": "remove the rfind fallback in product_page()"
+    }
+   ],
+   "feedback_applied": [
+    "c928aec3-e57a-4ee3-ae29-143f0eb498f1"
+   ],
+   "lessons_added": [
+    "[ep3 2026-11-22] Search Console URL Inspection cannot be opened by an inspect?id= deep link (404): type the URL into the top inspect box instead"
+   ],
+   "gap_records": [],
+   "reward": 5,
+   "summary": "Episode 3 (Sunday). Google US: brand 'Arab American Instruments' holds position 1; the five locked terms are still absent from the top 30 (no Google block). Search Console Performance readable for the first time: 0 clicks, 0 impressions, data only through 19 Nov; Links 0 external. /platform/ now indexed (was crawled not indexed). Bing has /about/ indexed; it flagged the long description, fixed today. Shipped titles backlog: 30 non frozen pages now lead with what a searcher types, each locked term first on its owning page (/hardware/ Sovereign AI Hardware, /products/ Edge AI Devices, /solutions/airgap/ Air Gapped AI, /products/cameras/ Edge AI Camera, /solutions/sovereignty/ Sovereign Edge AI); all descriptions under 160 except the frozen home. About page gained an In brief block answering 'What is Arab American Instruments?' with FAQPage JSON-LD. 31 URLs to IndexNow (200). Design: body copy 15 to 16px, before and after at 375, 7cf610f; body-15px closed; new defect hardware-table-phone. Reward 5."
   }
  ],
  "feedback": [
@@ -134,6 +211,23 @@
     "GSC Performance and Links processing. Next run: read both.",
     "titles not started. Next run: titles for 30 non frozen pages, trim 8 long descriptions."
    ]
+  },
+  {
+   "episode": 3,
+   "day": "2026-11-22",
+   "verdict": "pending",
+   "went_well": [
+    "Titles backlog shipped live in one run with every locked term leading its owning page",
+    "/platform/ went from crawled not indexed to indexed",
+    "Body copy fix has before and after at 375 and a named revert"
+   ],
+   "not_good": [
+    "The five locked terms are still absent from the Google top 30. Next run: one first screen change per owning page (an answer sentence in the term's own words under the H1), since titles alone were today's improvement.",
+    "/hardware/ device table runs off the right edge at 375. Next run: fix hardware-table-phone (stack rows as cards under 600px) with before and after.",
+    "Search Console data stops at 19 Nov. Next run: read Performance again and record real 28 day numbers.",
+    "Category questions still not asked on AI Mode, Perplexity, ChatGPT. Next run (Saturday 28 Nov): all 12 questions on every engine, AI Mode first; re-ask b1 to test the About FAQ."
+   ],
+   "status": "open"
   }
  ],
  "seen": {
@@ -142,7 +236,9 @@
   "/hardware/charging-dock/": "2026-11-20",
   "/hardware/field-band/": "2026-11-20",
   "/hardware/fleet-vision-unit/": "2026-11-21",
-  "/hardware/guide-hub/": "2026-11-21"
+  "/hardware/guide-hub/": "2026-11-21",
+  "/hardware/": "2026-11-22",
+  "/hardware/patrol-gateway/": "2026-11-22"
  },
  "backlog": {
   "gsc-bing": {
@@ -159,6 +255,11 @@
    "status": "done",
    "day": "2026-11-21",
    "note": "llms.txt, llms-full.txt, 31 index.md copies, sitemap lastmod live 21 Nov (b29adc3)"
+  },
+  "titles": {
+   "status": "done",
+   "day": "2026-11-22",
+   "note": "30 non frozen pages titled searcher first, locked terms lead on owning pages; descriptions all under 160 except frozen home; live 22 Nov (9ac173f)"
   }
  }
 }
