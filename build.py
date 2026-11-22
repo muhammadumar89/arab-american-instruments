@@ -592,6 +592,33 @@ BING_VERIFY = "C0BA30668F739D132B60D2147D569A8E"
 
 ORG_ID = SITE_URL + "/#organization"
 CRUMBS = {"/": "Home", "/products/": "Products", "/hardware/": "Hardware", "/solutions/": "Solutions", "/lab/": "Design Lab"}
+
+# Search titles: what a searcher types comes first; locked terms lead on their owning page (routine/locked.json).
+# The home page is frozen (brand query at Google position 1) and is not listed here. H1 and breadcrumbs keep the short title.
+SEO_TITLES = {
+    "/hardware/": "Sovereign AI Hardware",
+    "/products/": "Edge AI Devices for Air Gapped Sites",
+    "/solutions/airgap/": "Air Gapped AI for Operations Off the Network",
+    "/products/cameras/": "Edge AI Camera for Fleets, Gates and Sites",
+    "/solutions/sovereignty/": "Sovereign Edge AI Inside Your Perimeter",
+    "/platform/": "Edge AI Platform: Models On the Device",
+    "/about/": "About Arab American Instruments, Riyadh and Dallas",
+    "/build/": "Request an Edge AI Deployment",
+    "/solutions/": "Sovereign AI Solutions for Edge Operations",
+    "/industries/": "Edge AI by Industry: Fleets, Energy, Ports",
+    "/lab/": "Design Lab: Notes on Edge AI Hardware",
+    "/supply-chain/": "Own Your Hardware Supply Chain",
+    "/products/command/": "Self Hosted Command Platform for Edge Devices",
+    "/products/telematics/": "Vehicle Telematics on Your Own Servers",
+    "/products/network/": "Air Gapped Satellite and Mesh Links",
+    "/products/workforce/": "Wearables for People in the Field",
+    "/solutions/compliance/": "Compliance and Records Kept On Site",
+    "/solutions/coverage/": "Edge AI Coverage Off the Network",
+    "/solutions/efficiency/": "Fleet Efficiency and Cost with Edge AI",
+    "/solutions/safety/": "Safety and Risk with Edge AI",
+    "/solutions/security/": "Site Security with Edge AI Cameras",
+    "/lab/what-a-truck-will-tell-you/": "What a Truck Will Tell You: Fleet Vehicle Data",
+}
 MONTHS = {m: i + 1 for i, m in enumerate("Jan Feb Mar Apr May Jun Jul Aug Sep Oct Nov Dec".split())}
 
 
@@ -695,7 +722,8 @@ MD = []  # (path, full title, desc, markdown) for llms.txt, llms-full.txt and in
 
 
 def page(path, title, desc, body, active="", ld=None):
-    full = title if title == "Arab American Instruments" else f"{title} | Arab American Instruments"
+    t = SEO_TITLES.get(path, title)
+    full = t if t == "Arab American Instruments" or "Arab American Instruments" in t else f"{t} | Arab American Instruments"
     canon = SITE_URL + path
     doc = f'''<!doctype html>
 <html lang="en"><head>
@@ -985,7 +1013,13 @@ def product_page(p):
     ld = [{"@context": "https://schema.org", "@type": "Product", "@id": url + "#product", "name": p["name"], "description": p["short"],
            "category": c["name"], "image": img, "url": url,
            "brand": {"@type": "Brand", "name": "Arab American Instruments"}, "manufacturer": {"@id": ORG_ID}}]
-    page(f"/hardware/{p['slug']}/", p["name"], f"{p['name']}: {p['short']}", body, "/products/", ld)
+    hd = f"{p['name']}: {p['short']}"
+    if len(hd) > 160:
+        hd = f"{p['name']}: {p['short'].split('. ')[0].rstrip('.')}."
+    if len(hd) > 160:
+        hd = hd[:hd.rfind(",", 0, 158)] + "."
+    SEO_TITLES.setdefault(f"/hardware/{p['slug']}/", f"{p['name']}: {p['kind']}")
+    page(f"/hardware/{p['slug']}/", p["name"], hd, body, "/products/", ld)
 
 
 def solutions():
@@ -1019,7 +1053,7 @@ def industries():
     for i, (n, f, d, ps) in enumerate(INDUSTRIES):
         links = "".join(f'<a href="{dev_url(PBY[s])}">{e(PBY[s]["name"])} <i>&rarr;</i></a>' for s in ps) or f'<a href="{u("/build/")}">Commission a design <i>&rarr;</i></a>'
         rows += f'<div id="{slugify(n)}">' + split(f"0{i + 1}", e(n), e(d), panel_video(f), links, side="right" if i % 2 == 0 else "left", cls="line") + "</div>"
-    page("/industries/", "Industries", "Industries served by Arab American Instruments: fleets, crowd safety, energy, utilities, agriculture, government and critical sites, remote sites, telecom and ports.", head + rows + cta(), "/solutions/")
+    page("/industries/", "Industries", "Edge AI devices by industry: fleets, crowd safety, energy, utilities, agriculture, government and critical sites, remote sites, telecom and ports.", head + rows + cta(), "/solutions/")
 
 
 def lab():
@@ -1091,6 +1125,13 @@ BOARD = [
      "link": "https://saiventurecap.com/our-team/"},
 ]
 
+ABOUT_FAQ = [
+    ("What is Arab American Instruments?", "Arab American Instruments is a technology company headquartered in Riyadh and Dallas. It builds low power edge devices for sensing, satellite links and real time control that run vision and language models inside the customer's perimeter."),
+    ("Who owns Arab American Instruments?", "Arab American Instruments is a fully owned subsidiary of CodeNinja. The AI platform on its devices is CodeNinja's: Praxis, Hyper Ontology, Hyper Pragma and Hyper Engram."),
+    ("Where does Arab American Instruments work?", "From Riyadh and Dallas, with teams across the Gulf, Pakistan and the United States, for commercial and national buyers."),
+    ("What does Arab American Instruments offer?", "Edge AI devices for fleets, people and sites: the Fleet Vision Unit, Vehicle Interface Module, Field Band, Guide Hub, Patrol Gateway, Solar Relay, Charging Dock and Site Camera, deployed inside your perimeter and owned outright."),
+]
+
 MISSION = [
     "The most important assets of nation states, governments and enterprises, our national institutions, our energy grids, our border controls, our oil and gas facilities, all exist in the physical world. Every one of them is now watched, connected and controlled by hardware: cameras, gateways, radios and controllers, and the models that run on them.",
     "While we are passionate about instrumenting all this physical infrastructure, we cannot simply outsource the devices it runs on to one or two extremely centralised hardware vendors, with sealed firmware and supply chains nobody in the room can see. The only way to defend these institutions and this critical infrastructure is to own the hardware stack: the design, the parts, the firmware, the models and the keys.",
@@ -1113,8 +1154,13 @@ def about():
         pan = f'<div class="lpanel"><h3>{e(L["name"])}</h3><p class="role">{e(L["title"])}</p><p class="bio">{e(L["bio"])}</p><a class="in" href="{L["link"]}" rel="noopener" target="_blank">sAi Venture Capital</a></div>'
         brows += f'<div class="leader">{fig}{pan}</div>'
     board = f'<section class="team"><div class="wrap"><div class="head">{label("Board")}<h2>Backed by sAi Venture Capital.</h2><p class="lede">sAi Venture Capital led CodeNinja\'s investment round in December 2023 and holds a seat on the board.</p></div>{brows}</div></section>'
+    faq_html = "".join(f'<div class="qa"><h2>{e(q)}</h2><p class="lede">{e(a)}</p></div>' for q, a in ABOUT_FAQ)
+    faq = f'<section class="faq"><div class="wrap">{label("In brief")}{faq_html}</div></section>'
+    ld_faq = {"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [
+        {"@type": "Question", "name": q, "acceptedAnswer": {"@type": "Answer", "text": a}} for q, a in ABOUT_FAQ]}
     body = (
         head
+        + faq
         + mission
         + split("What we do", "Purpose built hardware that runs AI, owned by the customer.", "We design edge devices for sensing, satellite and mesh links, and real time control, run vision and language models on them, and deploy them inside the perimeter so that the customer owns the design and the supply chain, not us and not anyone else. We keep reference designs, publish what we learn, and build for each customer from a single pilot to a national fleet.", panel_img("/assets/img/stock/technician-solder.jpg", "Schematic, layout, firmware, models and shell under one roof."), side="right")
         + team
@@ -1123,7 +1169,7 @@ def about():
         + split("Ownership", "A fully owned subsidiary of CodeNinja.", "Arab American Instruments brings hardware into the CodeNinja group, alongside its work on sovereign AI systems for governments and enterprises. The AI platform that runs on our devices is CodeNinja\'s.", panel_video("engineer-scope"), side="right")
         + cta()
     )
-    page("/about/", "About", "Arab American Instruments is a technology company headquartered in Riyadh and Dallas, a fully owned subsidiary of CodeNinja, led by its founders and backed by sAi Venture Capital.", body, "/about/", [ld_org()])
+    page("/about/", "About", "Arab American Instruments is a technology company in Riyadh and Dallas that builds sovereign edge AI devices. A fully owned subsidiary of CodeNinja.", body, "/about/", [ld_org(), ld_faq])
 
 
 def build_page():

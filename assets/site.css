@@ -346,3 +346,7 @@ form .fine{color:var(--pmute)!important}
 @media(max-width:480px){.fgrid{grid-template-columns:1fr}}
 
 @media(prefers-reduced-motion:reduce){video{display:none}}
+.faq{padding:clamp(48px,6vw,88px) 0 0}
+.faq .qa{max-width:760px;padding:22px 0;border-top:1px solid var(--line,rgba(255,255,255,.12))}
+.faq .qa h2{font-size:clamp(20px,2.2vw,26px);margin:0 0 8px}
+.faq .qa .lede{margin:0}
