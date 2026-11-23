@@ -26,6 +26,15 @@
    "github_mentions": 0,
    "github_repos": [],
    "note": "Search Console Links readable for the first time: 0 external links; Bing backlinks read Saturdays"
+  },
+  {
+   "day": "2026-11-23",
+   "gsc": {
+    "external_links": 0,
+    "sites": []
+   },
+   "bing": null,
+   "github_mentions": 0
   }
  ]
 }

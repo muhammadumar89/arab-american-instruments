@@ -65,8 +65,17 @@
   "page": "",
   "defect": "/hardware/ device table runs off the right edge at 375; the At a glance column is cut",
   "fix": "",
+  "state": "fixed",
+  "day": "2026-11-23",
+  "note": "stacked cards under 600px, d2a69f4; raw/shots/2026-11-23/after-hardware-375.png"
+ },
+ {
+  "id": "phero-tagline-bright",
+  "page": "",
+  "defect": "/solutions/airgap/ at 375: grey tagline over bright solar panels reads under 4.5:1; deepen the phero scrim or raise the tagline to white",
+  "fix": "",
   "state": "open",
-  "day": "2026-11-22",
-  "note": "/hardware/ device table runs off the right edge at 375; the At a glance column is cut"
+  "day": "2026-11-23",
+  "note": "/solutions/airgap/ at 375: grey tagline over bright solar panels reads under 4.5:1; deepen the phero scrim or raise the tagline to white"
  }
 ]

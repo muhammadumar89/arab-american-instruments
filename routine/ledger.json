@@ -168,6 +168,83 @@
    "gap_records": [],
    "reward": 5,
    "summary": "Episode 3 (Sunday). Google US: brand 'Arab American Instruments' holds position 1; the five locked terms are still absent from the top 30 (no Google block). Search Console Performance readable for the first time: 0 clicks, 0 impressions, data only through 19 Nov; Links 0 external. /platform/ now indexed (was crawled not indexed). Bing has /about/ indexed; it flagged the long description, fixed today. Shipped titles backlog: 30 non frozen pages now lead with what a searcher types, each locked term first on its owning page (/hardware/ Sovereign AI Hardware, /products/ Edge AI Devices, /solutions/airgap/ Air Gapped AI, /products/cameras/ Edge AI Camera, /solutions/sovereignty/ Sovereign Edge AI); all descriptions under 160 except the frozen home. About page gained an In brief block answering 'What is Arab American Instruments?' with FAQPage JSON-LD. 31 URLs to IndexNow (200). Design: body copy 15 to 16px, before and after at 375, 7cf610f; body-15px closed; new defect hardware-table-phone. Reward 5."
+  },
+  {
+   "episode": 4,
+   "day": "2026-11-23",
+   "run_id": "aai-site-daily-2026-11-23",
+   "kind": "routine",
+   "backlog_done": [
+    "home-weight (partial: posters on all, lazy load seen on live desktop, two clips re-encoded 8.6 to 3.8 MB; phone proof and home-montage open)"
+   ],
+   "channels": {
+    "google": {
+     "sovereign AI hardware": null,
+     "edge AI devices": null,
+     "air gapped AI": null,
+     "edge AI camera": null,
+     "sovereign edge AI": null,
+     "Arab American Instruments (brand)": 1
+    },
+    "gsc": {
+     "clicks": 0,
+     "impressions": 4,
+     "position": 1.8,
+     "window": "28d",
+     "note": "data 19 to 21 Nov; Queries empty (anonymised); Page indexing still processing"
+    },
+    "links": "gsc external 0, bing null (Saturdays), github mentions 0, earned 0",
+    "design": "/hardware/ device table stacks as cards under 600px, d2a69f4",
+    "ai_citations": null,
+    "inbound": "unmeasured"
+   },
+   "defects": [
+    "phero-tagline-bright open: /solutions/airgap/ tagline over bright solar panels at 375",
+    "video-mobile open: phone width proof and 4.1 MB hero montage",
+    "home description 208 characters (home frozen)",
+    "b1 brand answers unverified until Saturday 28 Nov"
+   ],
+   "decisions": [
+    {
+     "what": "One answer sentence in the term's own words under the H1 on the five owning pages (ANSWERS in build.py)",
+     "why": "ep3 feedback: titles alone were not enough; none of the pages ranks so nothing is frozen",
+     "revert": "git revert d2a69f4, or empty ANSWERS in build.py"
+    },
+    {
+     "what": "/products/ lede changed from 'a reference design we build to order' to 'built inside your perimeter'",
+     "why": "brand rule: deployment, never made to order; the gate did not catch 'build to order'",
+     "revert": "restore the sentence in products() (d2a69f4)"
+    },
+    {
+     "what": "substation and truck-depot re-encoded from raw with a 1500k rate cap; posters regenerated; home-montage left alone",
+     "why": "home-weight backlog; the montage has no single raw source and a second generation encode would soften the hero",
+     "revert": "copy raw/pre-ep4/*.mp4 and *.jpg back to assets/video/"
+    },
+    {
+     "what": "Screenshots by routine/shot.sh on a file build",
+     "why": "preview pane declined in the unattended session",
+     "revert": "none"
+    },
+    {
+     "what": "No Google indexing requests",
+     "why": "only entity pages qualify and both were requested 21 Nov (7 day rule)",
+     "revert": "none"
+    },
+    {
+     "what": "Pushed mid run before the records push",
+     "why": "Search Console and the live checks read the domain",
+     "revert": "git revert d2a69f4"
+    }
+   ],
+   "feedback_applied": [
+    "68521222-bc57-4dd2-a0de-f2f97bc01d70"
+   ],
+   "lessons_added": [
+    "[ep4 2026-11-23] shot.sh sizes vh heroes to the capture height: shoot first screens at 812 and tall captures only for content below the hero"
+   ],
+   "gap_records": [],
+   "reward": 3,
+   "summary": "Episode 4 (Monday). Google US: brand holds position 1; the five locked terms still absent from the top 30. Search Console 28 days: 0 clicks, 4 impressions, position 1.8 (first impressions; data to 21 Nov); Links 0 external. Shipped an answer sentence in each term's own words under the H1 of the five owning pages, live d2a69f4. Design: /hardware/ device table stacks as cards under 600px, before and after at 375. home-weight partial: two heaviest clips re-encoded 8.6 to 3.8 MB, video folder 50 to 46 MB, lazy loading seen live (5 of 26 clips before scroll). /products/ lede lost 'build to order'. New defect phero-tagline-bright. Reward 3."
   }
  ],
  "feedback": [
@@ -228,6 +305,24 @@
     "Category questions still not asked on AI Mode, Perplexity, ChatGPT. Next run (Saturday 28 Nov): all 12 questions on every engine, AI Mode first; re-ask b1 to test the About FAQ."
    ],
    "status": "open"
+  },
+  {
+   "episode": 4,
+   "day": "2026-11-23",
+   "verdict": "pending",
+   "status": "open",
+   "went_well": [
+    "Answer sentence live on all five owning pages in one run, verified on the domain",
+    "hardware-table-phone closed with before and after at 375 and a named revert",
+    "Two heaviest clips cut from 8.6 to 3.8 MB with posters regenerated and gated"
+   ],
+   "not_good": [
+    "The five locked terms are still absent from the Google top 30. Next run: one internal link per owning page in the term words from the home or platform body (below the frozen first screen), and the Tuesday lab note titled for an air gapped AI query linking to /solutions/airgap/.",
+    "home-weight is only partial: lazy loading was read at desktop width and the 4.1 MB hero montage is untouched. Next run: read network requests at 375 and give the phone a lighter hero source.",
+    "Search Console Pages tab was not read, only totals. Next run: read Queries and Pages and upsert each row.",
+    "The gate missed build to order on /products/. Next run: add the phrase to the gate list and scan build.py for reference design in visitor copy.",
+    "phero-tagline-bright is open on /solutions/airgap/ at 375. Next run: fix it with before and after."
+   ]
   }
  ],
  "seen": {
@@ -262,6 +357,11 @@
    "status": "done",
    "day": "2026-11-22",
    "note": "30 non frozen pages titled searcher first, locked terms lead on owning pages; descriptions all under 160 except frozen home; live 22 Nov (9ac173f)"
+  },
+  "home-weight": {
+   "status": "partial",
+   "day": "2026-11-23",
+   "note": "23 Nov: every video has a poster; live home loads 5 of 26 clips before scroll (hero plus 4 near the fold) at desktop width; substation and truck-depot re-encoded 8.6 to 3.8 MB (d2a69f4); phone width proof and home-montage (4.1 MB hero) still open"
   }
  }
 }

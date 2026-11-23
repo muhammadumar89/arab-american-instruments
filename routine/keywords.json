@@ -18,10 +18,10 @@
    "first_seen": "2026-11-22",
    "last_seen": "2026-11-22",
    "last_fix": {
-    "commit": "9ac173f",
-    "what": "title now leads with the exact term",
+    "commit": "d2a69f4",
+    "what": "answer sentence in the term's own words under the H1 of the owning page",
     "clicks_at_fix": 0,
-    "day": "2026-11-22"
+    "day": "2026-11-23"
    },
    "status": "open"
   },
@@ -31,10 +31,10 @@
    "first_seen": "2026-11-22",
    "last_seen": "2026-11-22",
    "last_fix": {
-    "commit": "9ac173f",
-    "what": "title Edge AI Devices for Air Gapped Sites",
+    "commit": "d2a69f4",
+    "what": "answer sentence in the term's own words under the H1 of the owning page",
     "clicks_at_fix": 0,
-    "day": "2026-11-22"
+    "day": "2026-11-23"
    },
    "status": "open"
   },
@@ -44,10 +44,10 @@
    "first_seen": "2026-11-22",
    "last_seen": "2026-11-22",
    "last_fix": {
-    "commit": "9ac173f",
-    "what": "title Air Gapped AI for Operations Off the Network",
+    "commit": "d2a69f4",
+    "what": "answer sentence in the term's own words under the H1 of the owning page",
     "clicks_at_fix": 0,
-    "day": "2026-11-22"
+    "day": "2026-11-23"
    },
    "status": "open"
   },
@@ -57,10 +57,10 @@
    "first_seen": "2026-11-22",
    "last_seen": "2026-11-22",
    "last_fix": {
-    "commit": "9ac173f",
-    "what": "title Edge AI Camera for Fleets, Gates and Sites",
+    "commit": "d2a69f4",
+    "what": "answer sentence in the term's own words under the H1 of the owning page",
     "clicks_at_fix": 0,
-    "day": "2026-11-22"
+    "day": "2026-11-23"
    },
    "status": "open"
   },
@@ -70,12 +70,24 @@
    "first_seen": "2026-11-22",
    "last_seen": "2026-11-22",
    "last_fix": {
-    "commit": "9ac173f",
-    "what": "title Sovereign Edge AI Inside Your Perimeter",
+    "commit": "d2a69f4",
+    "what": "answer sentence in the term's own words under the H1 of the owning page",
     "clicks_at_fix": 0,
-    "day": "2026-11-22"
+    "day": "2026-11-23"
    },
    "status": "open"
+  },
+  {
+   "first_seen": "2026-11-23",
+   "last_seen": "2026-11-23",
+   "status": "open",
+   "kind": "page",
+   "term": "site total",
+   "page": "/",
+   "clicks": 0,
+   "impressions": 4,
+   "position": 1.8,
+   "window_days": 28
   }
  ],
  "positions": [
@@ -397,6 +409,126 @@
     "cyso.org",
     "arabamerica.com",
     "arabinstruments.com",
+    "melodymakers.ae",
+    "facebook.com",
+    "kennedy-center.org",
+    "wnycstudios.org"
+   ],
+   "page": "/",
+   "gsc_impressions": null,
+   "gsc_position": null
+  },
+  {
+   "day": "2026-11-23",
+   "term": "sovereign AI hardware",
+   "google_position": null,
+   "top10": [
+    "amd.com",
+    "cisco.com",
+    "dell.com",
+    "redhat.com",
+    "oracle.com",
+    "premai.io",
+    "mistral.ai",
+    "nvidia.com",
+    "tenstorrent.com",
+    "cset.georgetown.edu"
+   ],
+   "page": "/hardware/",
+   "gsc_impressions": null,
+   "gsc_position": null
+  },
+  {
+   "day": "2026-11-23",
+   "term": "edge AI devices",
+   "google_position": null,
+   "top10": [
+    "redhat.com",
+    "ibm.com",
+    "reddit.com",
+    "nvidia.com",
+    "docs.edgeimpulse.com",
+    "arm.com",
+    "aws.amazon.com",
+    "aimultiple.com",
+    "ti.com",
+    "intel.com"
+   ],
+   "page": "/products/",
+   "gsc_impressions": null,
+   "gsc_position": null
+  },
+  {
+   "day": "2026-11-23",
+   "term": "air gapped AI",
+   "google_position": null,
+   "top10": [
+    "h2o.ai",
+    "iternal.ai",
+    "domino.ai",
+    "f5.com",
+    "dspace.mit.edu",
+    "hpe.com",
+    "ibl.ai",
+    "oxmaint.com",
+    "seekr.com",
+    "community.openai.com"
+   ],
+   "page": "/solutions/airgap/",
+   "gsc_impressions": null,
+   "gsc_position": null
+  },
+  {
+   "day": "2026-11-23",
+   "term": "edge AI camera",
+   "google_position": null,
+   "top10": [
+    "advantech.com",
+    "surveillancesecure.com",
+    "everfocus.com",
+    "i-pro.com",
+    "hailo.ai",
+    "newsroom.axis.com",
+    "ieeexplore.ieee.org",
+    "camthink.ai",
+    "reddit.com",
+    "vvdntech.com"
+   ],
+   "page": "/products/cameras/",
+   "gsc_impressions": null,
+   "gsc_position": null
+  },
+  {
+   "day": "2026-11-23",
+   "term": "sovereign edge AI",
+   "google_position": null,
+   "top10": [
+    "nutanix.com",
+    "scalecomputing.com",
+    "redhat.com",
+    "azure.microsoft.com",
+    "sovaihub.com",
+    "soff.se",
+    "cisco.com",
+    "stormagic.com",
+    "cgi.com",
+    "mayfield.com"
+   ],
+   "page": "/solutions/sovereignty/",
+   "gsc_impressions": null,
+   "gsc_position": null
+  },
+  {
+   "day": "2026-11-23",
+   "term": "Arab American Instruments",
+   "google_position": 1,
+   "top10": [
+    "arabamerican.ai",
+    "en.wikipedia.org",
+    "scalar.usc.edu",
+    "cyso.org",
+    "arabinstruments.com",
+    "arabamerica.com",
     "melodymakers.ae",
     "facebook.com",
     "kennedy-center.org",

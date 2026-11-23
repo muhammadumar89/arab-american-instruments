@@ -35,6 +35,18 @@
    "commit": "7cf610f",
    "revert": "git revert 7cf610f",
    "episode": 3
+  },
+  {
+   "page": "/hardware/",
+   "width": "375",
+   "what": "device table stacks as one card per device under 600px, with Category and At a glance labels",
+   "why": "defect hardware-table-phone: the At a glance column ran off the right edge",
+   "before": "raw/shots/2026-11-23/before-hardware-375.png",
+   "after": "raw/shots/2026-11-23/after-hardware-375.png",
+   "commit": "d2a69f4",
+   "revert": "git revert d2a69f4, or delete the max-width:600px .hwtable block at the end of assets/site.css",
+   "episode": 4,
+   "day": "2026-11-23"
   }
  ]
 }
