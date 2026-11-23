@@ -350,3 +350,12 @@ form .fine{color:var(--pmute)!important}
 .faq .qa{max-width:760px;padding:22px 0;border-top:1px solid var(--line,rgba(255,255,255,.12))}
 .faq .qa h2{font-size:clamp(20px,2.2vw,26px);margin:0 0 8px}
 .faq .qa .lede{margin:0}
+.banner.phero .lede.answer{color:#fff;margin-bottom:.6em}
+@media (max-width:600px){
+.hwtable .data{min-width:0;border:0;background:none}
+.hwtable .data thead{display:none}
+.hwtable .data tr{display:block;background:var(--bg2);border:1px solid var(--rule);margin:0 0 12px;padding:6px 0}
+.hwtable .data td{display:block;border:0;padding:8px 14px}
+.hwtable .data td[data-l]::before{content:attr(data-l);display:block;font:500 10px var(--mono);letter-spacing:.06em;text-transform:uppercase;color:var(--mute);margin-bottom:3px}
+.hwtable .data td.specs{max-width:none}
+}

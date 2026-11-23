@@ -619,6 +619,14 @@ SEO_TITLES = {
     "/solutions/security/": "Site Security with Edge AI Cameras",
     "/lab/what-a-truck-will-tell-you/": "What a Truck Will Tell You: Fleet Vehicle Data",
 }
+# One sentence under the H1 of each locked term's owning page that answers the term in its own words (routine/locked.json).
+ANSWERS = {
+    "/hardware/": "Sovereign AI hardware is a device that runs its vision and language models on the unit, with open weights you host and keys you hold.",
+    "/products/": "Edge AI devices run vision and language models on the unit itself, so decisions are made where the data is captured.",
+    "/solutions/airgap/": "Air gapped AI runs open weight vision and language models on devices and servers that never touch a public network.",
+    "/products/cameras/": "An edge AI camera runs its vision model on the unit and sends only events and short clips, so the video stays on your site.",
+    "/solutions/sovereignty/": "Sovereign edge AI keeps the models, the devices and the keys inside your perimeter: open weights, self hosted, owned outright.",
+}
 MONTHS = {m: i + 1 for i, m in enumerate("Jan Feb Mar Apr May Jun Jul Aug Sep Oct Nov Dec".split())}
 
 
@@ -805,9 +813,10 @@ def page_head(kicker, title, text, slug=None, actions=""):
     return f'<section class="phead"><div class="wrap">{label(kicker)}<h1>{title}</h1><p class="lede">{text}</p>{actions}</div>{media}</section>'
 
 
-def film_head(slug, kicker, title, tagline, text, actions=""):
+def film_head(slug, kicker, title, tagline, text, actions="", path=""):
     """Anduril style page opener: name and tagline over footage."""
-    return banner(slug, f'{label(kicker)}<h1>{title}</h1><p class="tagline">{e(tagline)}</p><p class="lede">{text}</p>{actions}', "phero")
+    ans = f'<p class="lede answer">{e(ANSWERS[path])}</p>' if path in ANSWERS else ""
+    return banner(slug, f'{label(kicker)}<h1>{title}</h1><p class="tagline">{e(tagline)}</p>{ans}<p class="lede">{text}</p>{actions}', "phero")
 
 
 def pill(href, text, primary=False):
@@ -945,7 +954,7 @@ def platform_page():
 
 
 def products():
-    head = film_head("oasis-road", "Products", "One stack, inside your perimeter.", "Cameras, telematics, wearables, air gapped links and the platform they report to.", "Every device is a reference design we build to order and hand over whole. The models run on the hardware, the data stays on your site, and the design stays with you.", f'<div class="actions">{pill(u("/build/"), "Request a deployment", True)}{pill(u("/hardware/"), "See all hardware")}</div>')
+    head = film_head("oasis-road", "Products", "One stack, inside your perimeter.", "Cameras, telematics, wearables, air gapped links and the platform they report to.", "Every device is built inside your perimeter and handed over whole. The models run on the hardware, the data stays on your site, and the design stays with you.", f'<div class="actions">{pill(u("/build/"), "Request a deployment", True)}{pill(u("/hardware/"), "See all hardware")}</div>', path="/products/")
     jump = '<section class="jump"><div class="wrap"><span class="mono">Explore the products</span><div class="jumps">' + "".join(f'<a href="#{c["slug"]}">{e(c["name"])} <i>&darr;</i></a>' for c in CATEGORIES) + f'<a href="{u("/hardware/")}">All hardware <i>&rarr;</i></a><a href="{u("/platform/")}">AI platform <i>&rarr;</i></a></div></div></section>'
     secs = ""
     for i, c in enumerate(CATEGORIES):
@@ -957,7 +966,7 @@ def products():
 
 
 def category_page(c):
-    head = film_head(c["film"], f"Products · {c['name']}", e(c["name"]), c["title"], e(c["body"]), f'<div class="actions">{pill(u("/build/"), "Request a deployment", True)}{pill(u("/hardware/"), "All hardware")}</div>')
+    head = film_head(c["film"], f"Products · {c['name']}", e(c["name"]), c["title"], e(c["body"]), f'<div class="actions">{pill(u("/build/"), "Request a deployment", True)}{pill(u("/hardware/"), "All hardware")}</div>', path=f"/products/{c['slug']}/")
     if c["devices"]:
         devs = "".join(product_card(PBY[d]) for d in c["devices"])
         devsec = f'<section class="cards"><div class="wrap"><div class="head">{label("Devices")}<h2>{e(c["name"])} hardware.</h2></div><div class="grid3">{devs}</div></div></section>'
@@ -972,7 +981,7 @@ def category_page(c):
 
 
 def hardware():
-    head = film_head("smt-line", "All hardware", "Every device in the stack.", "Built inside your perimeter. Owned outright.", "Nothing here has a list price. Each deployment is scoped to where it will live and built for the customer who will own it.", f'<div class="actions">{pill(u("/build/"), "Request a deployment", True)}</div>')
+    head = film_head("smt-line", "All hardware", "Every device in the stack.", "Built inside your perimeter. Owned outright.", "Nothing here has a list price. Each deployment is scoped to where it will live and built for the customer who will own it.", f'<div class="actions">{pill(u("/build/"), "Request a deployment", True)}</div>', path="/hardware/")
     rows = ""
     for c in CATEGORIES:
         for d in c["devices"]:
@@ -980,7 +989,7 @@ def hardware():
                 continue
             p = PBY[d]
             spec = "; ".join(f"{a}: {b}" for a, b in p["specs"][:2])
-            rows += f'<tr data-s="{d}"><td><a href="{dev_url(p)}"><b>{e(p["name"])}</b><br><span>{e(TAGLINES.get(d, p["kind"]))}</span></a></td><td>{e(c["name"])}</td><td class="specs">{e(spec)}</td></tr>'
+            rows += f'<tr data-s="{d}"><td><a href="{dev_url(p)}"><b>{e(p["name"])}</b><br><span>{e(TAGLINES.get(d, p["kind"]))}</span></a></td><td data-l="Category">{e(c["name"])}</td><td class="specs" data-l="At a glance">{e(spec)}</td></tr>'
     table = f'<section class="hwtable"><div class="wrap"><div class="tw"><table class="data"><thead><tr><th>Device</th><th>Category</th><th>At a glance</th></tr></thead><tbody>{rows}</tbody></table></div></div></section>'
     cards = "".join(product_card(p) for p in PRODUCTS)
     grid = f'<section class="cards"><div class="wrap"><div class="grid3">{cards}</div></div></section>'
@@ -1032,7 +1041,7 @@ def solutions():
 
 
 def solution_page(s):
-    head = film_head(s["film"], f"Solutions · {s['name']}", e(s["name"]), s["title"], e(s["body"]), f'<div class="actions">{pill(u("/build/"), "Request a deployment", True)}</div>')
+    head = film_head(s["film"], f"Solutions · {s['name']}", e(s["name"]), s["title"], e(s["body"]), f'<div class="actions">{pill(u("/build/"), "Request a deployment", True)}</div>', path=f"/solutions/{s['slug']}/")
     pts = "".join(f"<li>{e(x)}</li>" for x in s["points"])
     devs = "".join(product_card(PBY[d]) for d in s["devices"])
     ibys = {n: f for n, f, _, _ in INDUSTRIES}
