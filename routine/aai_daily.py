@@ -238,7 +238,7 @@ def audit():
 
 BANNED = [
     # Umar's standing rules for AAI copy, 14 and 15 Nov 2026
-    r"made to order", r"\bcustom\b", r"\bbespoke\b", r"\btailored\b", r"made for its owner",
+    r"made to order", r"buil[dt] to order", r"commission a design", r"\bcustom\b", r"\bbespoke\b", r"\btailored\b", r"made for its owner",
     r"design house", r"hardware design company", r"world'?s first",
     r"\bdefen[cs]e\b", r"\bmilitary\b",
     r"\bnot a \w+ company", r"\bnot just\b", r"\bwe are not\b", r"\bnot an? \w+ (house|shop|vendor)",

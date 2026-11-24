@@ -359,3 +359,9 @@ form .fine{color:var(--pmute)!important}
 .hwtable .data td[data-l]::before{content:attr(data-l);display:block;font:500 10px var(--mono);letter-spacing:.06em;text-transform:uppercase;color:var(--mute);margin-bottom:3px}
 .hwtable .data td.specs{max-width:none}
 }
+@media (max-width:600px){
+.banner.phero .scrim{background:linear-gradient(180deg,rgba(1,1,1,.55) 0%,rgba(1,1,1,.5) 38%,rgba(1,1,1,.86) 100%)}
+.banner.phero .tagline{color:#fff}
+}
+.article .plinks{margin-top:1.6em}
+.article .plinks a{color:var(--ink);font-size:16px;border-bottom:1px solid currentColor}

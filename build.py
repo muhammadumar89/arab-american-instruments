@@ -290,6 +290,33 @@ INDUSTRIES = [
 
 NOTES = [
     {
+        "slug": "what-is-air-gapped-ai",
+        "title": "What is air gapped AI?",
+        "sub": "Air gapped AI runs its models on devices and servers that never touch a public network. Here is what that takes in the field.",
+        "date": "24 Nov 2026",
+        "film": "radio-site",
+        "body": [
+            ("p", "Air gapped AI is AI that runs with no path to a public network. The models, the data they see and the answers they give all stay inside one perimeter."),
+            ("p", "The idea is old in computing. What changed is that vision and language models now fit on a device at the edge, so the gap no longer costs you the intelligence."),
+            ("h", "Connected AI and air gapped AI, side by side"),
+            ("table", [
+                ["Question", "Connected AI", "Air gapped AI"],
+                ["Where the model runs", "A provider's cloud", "On the device and on your servers"],
+                ["Where the data goes", "Out to the provider", "Nowhere outside the perimeter"],
+                ["Who holds the weights", "The provider", "You, as open weights you host"],
+                ["How updates arrive", "Pushed by the provider", "Carried in and approved by you"],
+                ["What happens with no signal", "The service stops", "Work continues; devices store and forward"],
+            ]),
+            ("h", "Where air gapped AI runs"),
+            ("p", "A truck cab far from coverage. A gate at a closed site. A line of poles across open desert. A walking route crowded with people and short on bandwidth."),
+            ("p", "In each case the model sits where the event happens. The device decides, records and alerts on its own, then passes the event along a link the operator owns."),
+            ("h", "What to ask a supplier"),
+            ("p", "Ask where the weights live and who can change them. Ask what the device does when every link is down. Ask whether any part of the system calls home, even for a licence check."),
+            ("p", "When the answers are open weights you hold, full operation offline and no outbound connection, the system is air gapped."),
+            ("links", [("Air gapped AI operations", "/solutions/airgap/"), ("Sovereign edge AI", "/solutions/sovereignty/"), ("Edge AI devices", "/products/")]),
+        ],
+    },
+    {
         "slug": "what-a-truck-will-tell-you",
         "title": "What a truck will tell you",
         "sub": "The data you get depends on the port the truck has. The table below sets out what each port provides.",
@@ -618,6 +645,7 @@ SEO_TITLES = {
     "/solutions/safety/": "Safety and Risk with Edge AI",
     "/solutions/security/": "Site Security with Edge AI Cameras",
     "/lab/what-a-truck-will-tell-you/": "What a Truck Will Tell You: Fleet Vehicle Data",
+    "/lab/what-is-air-gapped-ai/": "What Is Air Gapped AI? Models That Never Touch a Public Network",
 }
 # One sentence under the H1 of each locked term's owning page that answers the term in its own words (routine/locked.json).
 ANSWERS = {
@@ -782,7 +810,8 @@ def label(text):
 def video_tag(slug, hero=False):
     v = f"/assets/video/{slug}"
     if hero:
-        return f'<video autoplay muted loop playsinline preload="auto" poster="{u(v + ".jpg")}" aria-hidden="true"><source src="{u(v + ".mp4")}" type="video/mp4"></video>'
+        sm = f'<source src="{u(v + "-sm.mp4")}" type="video/mp4" media="(max-width:700px)">' if os.path.exists(os.path.join(ROOT, "assets", "video", slug + "-sm.mp4")) else ""
+        return f'<video autoplay muted loop playsinline preload="auto" poster="{u(v + ".jpg")}" aria-hidden="true">{sm}<source src="{u(v + ".mp4")}" type="video/mp4"></video>'
     return f'<video muted loop playsinline preload="none" poster="{u(v + ".jpg")}" data-src="{u(v + ".mp4")}" aria-hidden="true"></video>'
 
 
@@ -898,6 +927,14 @@ def platform_block(full=False):
     return f'<section class="platform"><div class="wrap">{head}<div class="stack4">{stack}</div><div class="models">{models}</div></div></section>'
 
 
+TERM_LINKS = [("Sovereign AI hardware", "/hardware/"), ("Edge AI devices", "/products/"), ("Air gapped AI", "/solutions/airgap/"), ("Edge AI camera", "/products/cameras/"), ("Sovereign edge AI", "/solutions/sovereignty/")]
+
+
+def term_links():
+    """Internal links in the locked terms' own words (routine/locked.json), below the first screen of home and platform."""
+    return '<section class="jump"><div class="wrap"><span class="mono">Explore</span><div class="jumps">' + "".join(f'<a href="{u(h)}">{e(t)} <i>&rarr;</i></a>' for t, h in TERM_LINKS) + "</div></div></section>"
+
+
 def cta(title="Tell us what you need to sense, send or control.", film_slug="print-timelapse"):
     return banner(film_slug, f'{label("Deployments")}<h2>{e(title)}</h2><p class="lede">No catalogue prices. We start from your site, your vehicles and your rules, and scope the deployment.</p><div class="actions">{pill(u("/build/"), "Request a deployment", True)}{pill(u("/hardware/"), "See all hardware")}</div>', "cta")
 
@@ -935,7 +972,7 @@ def home():
     notes = "".join(note_card(n) for n in NOTES)
     lab = f'<section class="cards"><div class="wrap"><div class="head">{label("Design Lab")}<h2>We publish what we learn.</h2><a class="btn ghost" href="{u("/lab/")}">All notes</a></div><div class="grid3">{notes}</div></div></section>'
     hq = f'<section class="hq"><div class="wrap">{label("Headquarters")}<div class="grid2 even">{panel_video("riyadh-day", "Riyadh, Saudi Arabia. Design, customer engineering and field trials for the Gulf.")}{panel_video("dallas-sunset", "Dallas, Texas. Design, partners and supply for the United States.")}</div></div></section>'
-    body = hero + pillars() + mosaic() + platform_block() + why + own_strip() + solsec + ind + lab + hq + cta()
+    body = hero + pillars() + mosaic() + platform_block() + term_links() + why + own_strip() + solsec + ind + lab + hq + cta()
     page("/", "Arab American Instruments", "Arab American Instruments designs low power edge devices that run vision and language models on the device, for sovereign and air gapped operations. Riyadh and Dallas. You own the design and the supply chain.", body, "", [ld_org(), {"@context": "https://schema.org", "@type": "WebSite", "name": "Arab American Instruments", "url": SITE_URL + "/", "publisher": {"@id": ORG_ID}}])
 
 
@@ -944,6 +981,7 @@ def platform_page():
     body = (
         head
         + platform_block(full=True)
+        + term_links()
         + split("On the device", "Vision models at full frame rate, on the unit.", "Driver state, road events, people and vehicles in zones, plates, helmets and vests. The models run on the hardware we design, tuned to the camera and the climate it operates in. Only the event and a short clip leave the unit, and only to where you say.", panel_video("dashcam-desert"), side="right")
         + split("On your servers", "A language model that knows your fleet.", "Command hosts a language model next to the fleet's own data. Ask which drivers were drowsy this week, which relay has been running on battery, where the missing band last reported. The answer comes from your perimeter and never leaves it.", panel_video("engineer-scope"), side="left")
         + split("Open weights, your hosting", "Models you hold, on hardware you own.", "Every model we ship runs from weights you hold, on devices and servers you own, signed with keys you keep. Updates arrive on your schedule, by your approval, or not at all.", panel_video("chip-macro"), side="right")
@@ -1048,7 +1086,7 @@ def solution_page(s):
     inds = "".join(ind_tile(n, ibys[n]) for n in s["industries"])
     body = (
         head
-        + f'<section class="detail"><div class="wrap"><div class="cols"><div>{label("What you get")}<ul class="points">{pts}</ul></div><aside>{label("How it stays yours")}<p>The models run on the device. Events and clips go only where you send them. Command runs on your servers. The design files, the bill of materials and the keys are handed over at the end of the build.</p>{pill(u("/supply-chain/"), "How ownership works")}</aside></div></div></section>'
+        + f'<section class="detail"><div class="wrap"><div class="cols"><div>{label("What you get")}<ul class="points">{pts}</ul></div><aside>{label("How it stays yours")}<p>The models run on the device. Events and clips go only where you send them. Command runs on your servers. The design files, the bill of materials and the keys are handed over at the end of the build.</p>{pill(u("/supply-chain/"), "How ownership works")}{pill(u("/lab/what-is-air-gapped-ai/"), "What is air gapped AI?") if s["slug"] == "airgap" else ""}</aside></div></div></section>'
         + f'<section class="cards"><div class="wrap"><div class="head">{label("Hardware")}<h2>The devices behind it.</h2><a class="btn ghost" href="{u("/hardware/")}">All hardware</a></div><div class="grid3">{devs}</div></div></section>'
         + f'<section class="cards"><div class="wrap"><div class="head">{label("Industries")}<h2>Where it runs.</h2></div><div class="grid3">{inds}</div></div></section>'
         + cta()
@@ -1060,15 +1098,15 @@ def industries():
     head = film_head("desert-drone", "Industries", "Where nothing may leave the perimeter.", "Commercial operations and national ones, on the same stack.", "We build for work that runs far from the network or must stay off it: fleets, crowds, energy, water, grids, ports and closed sites across the Gulf, Pakistan and the United States.")
     rows = ""
     for i, (n, f, d, ps) in enumerate(INDUSTRIES):
-        links = "".join(f'<a href="{dev_url(PBY[s])}">{e(PBY[s]["name"])} <i>&rarr;</i></a>' for s in ps) or f'<a href="{u("/build/")}">Commission a design <i>&rarr;</i></a>'
+        links = "".join(f'<a href="{dev_url(PBY[s])}">{e(PBY[s]["name"])} <i>&rarr;</i></a>' for s in ps) or f'<a href="{u("/build/")}">Request a deployment <i>&rarr;</i></a>'
         rows += f'<div id="{slugify(n)}">' + split(f"0{i + 1}", e(n), e(d), panel_video(f), links, side="right" if i % 2 == 0 else "left", cls="line") + "</div>"
     page("/industries/", "Industries", "Edge AI devices by industry: fleets, crowd safety, energy, utilities, agriculture, government and critical sites, remote sites, telecom and ports.", head + rows + cta(), "/solutions/")
 
 
 def lab():
-    head = film_head("smt-line", "Design Lab", "We publish what we learn.", "Engineering notes from Arab American Instruments.", "The decisions behind our boards, the numbers behind our links, and the tradeoffs we weighed. Our customers own their designs; the method we share with everyone.")
+    head = film_head("smt-line", "Design Lab", "We publish what we learn.", "Engineering notes from Arab American Instruments.", "The decisions behind our devices, the numbers behind our links, and the tradeoffs we weighed. Our customers own their designs; the method we share with everyone.")
     notes = "".join(note_card(n) for n in NOTES)
-    page("/lab/", "Design Lab", "Notes from the Arab American Instruments Design Lab on edge hardware, mesh links, vehicle data and board design.", head + f'<section class="cards"><div class="wrap"><div class="grid3">{notes}</div></div></section>' + cta(), "/lab/")
+    page("/lab/", "Design Lab", "Notes from the Arab American Instruments Design Lab on edge hardware, mesh links, vehicle data and air gapped AI.", head + f'<section class="cards"><div class="wrap"><div class="grid3">{notes}</div></div></section>' + cta(), "/lab/")
     for n in NOTES:
         out = ""
         for kind, val in n["body"]:
@@ -1076,6 +1114,8 @@ def lab():
                 out += f"<p>{e(val)}</p>"
             elif kind == "h":
                 out += f"<h2>{e(val)}</h2>"
+            elif kind == "links":
+                out += '<p class="plinks">' + "".join(f'<a href="{u(h)}">{e(t)} <i>&rarr;</i></a>' for t, h in val) + "</p>"
             elif kind == "table":
                 hd = "".join(f"<th>{e(c)}</th>" for c in val[0])
                 rows = "".join("<tr>" + "".join(f"<td>{e(c)}</td>" for c in r) + "</tr>" for r in val[1:])
@@ -1189,7 +1229,7 @@ def build_page():
     eopts = "".join(f'<label class="opt"><input type="radio" name="Connectivity" value="{e(q)}"{" checked" if c else ""}><span>{e(q)}</span></label>' for q, c in env)
     form = f'''<section class="formwrap paper"><div class="wrap grid2">
 <div class="col text">{label("Request a deployment")}<h2>Describe the requirement. We scope the deployment.</h2>
-<p class="lede">No prices on this site, because every deployment is scoped to the site it will run on. Send the outline and an engineer replies with questions, a reference design and a plan for a pilot.</p>
+<p class="lede">No prices on this site, because every deployment is scoped to the site it will run on. Send the outline and an engineer replies with questions, a deployment outline and a plan for a pilot.</p>
 {panel_video("print-timelapse")}</div>
 <div class="col"><form id="buildform">
 <div class="two"><label>Name<input name="Name" required autocomplete="name"></label><label>Organisation<input name="Organisation" required autocomplete="organization"></label></div>

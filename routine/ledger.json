@@ -335,7 +335,9 @@
   "/hardware/": "2026-11-22",
   "/hardware/patrol-gateway/": "2026-11-22",
   "/hardware/site-camera/": "2026-11-23",
-  "/hardware/solar-relay/": "2026-11-23"
+  "/hardware/solar-relay/": "2026-11-23",
+  "/hardware/vehicle-interface-module/": "2026-11-24",
+  "/industries/": "2026-11-24"
  },
  "backlog": {
   "gsc-bing": {
