@@ -47,6 +47,18 @@
    "revert": "git revert d2a69f4, or delete the max-width:600px .hwtable block at the end of assets/site.css",
    "episode": 4,
    "day": "2026-11-23"
+  },
+  {
+   "day": "2026-11-24",
+   "page": "/solutions/airgap/ (all film headers)",
+   "width": "375",
+   "what": "under 600px the film header scrim deepens (.55, .5 at 38%, .86) and the tagline goes from grey to white",
+   "why": "defect phero-tagline-bright: grey tagline over bright solar panels read under 4.5:1",
+   "before": "raw/shots/2026-11-24/before-airgap-375.png",
+   "after": "raw/shots/2026-11-24/after-airgap-375.png",
+   "commit": "f1ff87d",
+   "revert": "delete the max-width:600px .banner.phero block at the end of assets/site.css",
+   "episode": 5
   }
  ]
 }

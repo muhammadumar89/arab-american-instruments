@@ -49,7 +49,9 @@
   "page": "/",
   "defect": "22 videos on the home page; weight on mobile data",
   "fix": "lazy load below the fold, posters, re-encode the largest",
-  "state": "open"
+  "state": "fixed",
+  "day": "2026-11-24",
+  "note": "live at 375: 1 of 26 clips fetched before scroll, the hero, served as home-montage-sm.mp4 1.0 MB (was 4.1 MB), f1ff87d"
  },
  {
   "id": "tiles-bright",
@@ -74,8 +76,26 @@
   "page": "",
   "defect": "/solutions/airgap/ at 375: grey tagline over bright solar panels reads under 4.5:1; deepen the phero scrim or raise the tagline to white",
   "fix": "",
+  "state": "fixed",
+  "day": "2026-11-24",
+  "note": "scrim deepened and tagline white under 600px, f1ff87d; raw/shots/2026-11-24/after-airgap-375.png"
+ },
+ {
+  "id": "platform-hero-lanyard",
+  "page": "",
+  "defect": "/platform/ hero frame at phone width shows a lanyard with partly readable letters; check at 812 and pick another frame or crop if a name reads",
+  "fix": "",
   "state": "open",
-  "day": "2026-11-23",
-  "note": "/solutions/airgap/ at 375: grey tagline over bright solar panels reads under 4.5:1; deepen the phero scrim or raise the tagline to white"
+  "day": "2026-11-24",
+  "note": "/platform/ hero frame at phone width shows a lanyard with partly readable letters; check at 812 and pick another frame or crop if a name reads"
+ },
+ {
+  "id": "note-table-phone",
+  "page": "",
+  "defect": "lab note tables are wider than 375 and scroll sideways; third column is cut on first view; stack or shrink like the hardware table",
+  "fix": "",
+  "state": "open",
+  "day": "2026-11-24",
+  "note": "lab note tables are wider than 375 and scroll sideways; third column is cut on first view; stack or shrink like the hardware table"
  }
 ]

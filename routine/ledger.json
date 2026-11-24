@@ -245,6 +245,98 @@
    "gap_records": [],
    "reward": 3,
    "summary": "Episode 4 (Monday). Google US: brand holds position 1; the five locked terms still absent from the top 30. Search Console 28 days: 0 clicks, 4 impressions, position 1.8 (first impressions; data to 21 Nov); Links 0 external. Shipped an answer sentence in each term's own words under the H1 of the five owning pages, live d2a69f4. Design: /hardware/ device table stacks as cards under 600px, before and after at 375. home-weight partial: two heaviest clips re-encoded 8.6 to 3.8 MB, video folder 50 to 46 MB, lazy loading seen live (5 of 26 clips before scroll). /products/ lede lost 'build to order'. New defect phero-tagline-bright. Reward 3."
+  },
+  {
+   "episode": 5,
+   "day": "2026-11-24",
+   "run_id": "aai-site-daily-2026-11-24",
+   "kind": "routine",
+   "backlog_done": [
+    "home-weight (done: live at 375 only the hero clip loads before scroll, 1 of 26, and phones get a 1.0 MB hero source instead of 4.1 MB)"
+   ],
+   "channels": {
+    "google": {
+     "sovereign AI hardware": null,
+     "edge AI devices": null,
+     "air gapped AI": null,
+     "edge AI camera": null,
+     "sovereign edge AI": null,
+     "Arab American Instruments (brand)": 1
+    },
+    "gsc": {
+     "clicks": 0,
+     "impressions": 4,
+     "position": 1.8,
+     "window": "28d",
+     "note": "unchanged; data still 19 to 21 Nov; Queries empty; Pages read for the first time: 10 rows, home 4 impressions, nine sitelink pages 1 each"
+    },
+    "links": "gsc external 0, bing null (Saturdays), github mentions 0, earned 0",
+    "design": "film header scrim deepened and tagline white under 600px, f1ff87d",
+    "ai_citations": null,
+    "inbound": "unmeasured"
+   },
+   "defects": [
+    "platform-hero-lanyard open: /platform/ hero frame shows a lanyard with partly readable letters at phone width",
+    "note-table-phone open: lab note tables scroll sideways at 375",
+    "home description 208 characters (home frozen)",
+    "b1 brand answers unverified until Saturday 28 Nov"
+   ],
+   "decisions": [
+    {
+     "what": "Tuesday lab note 'What is air gapped AI?' published with the existing radio-site frame as cover",
+     "why": "that clip is already gated and credited; no new download in an unattended run",
+     "revert": "delete the first NOTES entry in build.py"
+    },
+    {
+     "what": "Explore strip with the five locked terms as link text on home (below the platform block) and /platform/",
+     "why": "ep4 feedback: one internal link per owning page in the term's words; home first screen untouched",
+     "revert": "remove term_links() from home() and platform_page()"
+    },
+    {
+     "what": "Phones get home-montage-sm.mp4 (854 wide, 1.0 MB) through a media source; desktop keeps the 4.1 MB original",
+     "why": "home-weight backlog; a softer second generation encode is acceptable on a phone under the hero scrim",
+     "revert": "delete assets/video/home-montage-sm.mp4"
+    },
+    {
+     "what": "Copy: 'Commission a design' to 'Request a deployment' on /industries/; 'a reference design' to 'a deployment outline' on /build/; Design Lab lede 'our boards' to 'our devices'; gate now catches build to order and commission a design",
+     "why": "brand rules: deployment wording, offerings over designs; ep4 feedback on the gate",
+     "revert": "git revert f1ff87d (copy lines in industries(), build_page(), lab())"
+    },
+    {
+     "what": "'We keep and improve our reference designs' on /supply-chain/ left as is",
+     "why": "it states what the company owns and carries no device detail",
+     "revert": "edit supply() if Umar wants it gone"
+    },
+    {
+     "what": "Reran the failed GitHub Pages deploy job",
+     "why": "deploy-pages returned 'Deployment failed, try again later'; the rerun went green and the domain serves f1ff87d",
+     "revert": "none"
+    },
+    {
+     "what": "nightly_push.sh co author line updated to Claude Fable 5.2",
+     "why": "the session's attribution line changed",
+     "revert": "edit the line in routine/nightly_push.sh"
+    },
+    {
+     "what": "No Google indexing requests; 7 changed URLs sent to IndexNow (200)",
+     "why": "entity pages were requested 21 Nov (7 day rule)",
+     "revert": "none"
+    },
+    {
+     "what": "Screenshots by routine/shot.sh; phone network proof by a 375px same origin iframe in Chrome",
+     "why": "preview pane declined in the unattended session",
+     "revert": "none"
+    }
+   ],
+   "feedback_applied": [
+    "c55afef6-23cc-45b3-92ff-72b157264fbe"
+   ],
+   "lessons_added": [
+    "[ep5 2026-11-24] A Pages deploy can fail with 'try again later' and leave the old site live: check gh run list after every push and rerun the failed job before any live check"
+   ],
+   "gap_records": [],
+   "reward": 5,
+   "summary": "Episode 5 (Tuesday). Google US: brand holds position 1; the five locked terms still absent from the top 30. Search Console 28 days unchanged: 0 clicks, 4 impressions, position 1.8; Pages read for the first time (10 rows, all brand sitelinks); Links 0 external. Shipped f1ff87d: lab note 'What is air gapped AI?' linking to /solutions/airgap/ and back; an Explore strip with the five locked terms as link text on home and /platform/; phones get a 1.0 MB hero clip instead of 4.1 MB and only that clip loads before scroll at 375 (1 of 26), closing home-weight and video-mobile; film header scrim deepened and tagline white under 600px, closing phero-tagline-bright; three copy lines moved to deployment wording and the gate widened. First deploy failed at GitHub and was rerun green. New defects: platform-hero-lanyard, note-table-phone. Reward 5."
   }
  ],
  "feedback": [
@@ -323,6 +415,25 @@
     "The gate missed build to order on /products/. Next run: add the phrase to the gate list and scan build.py for reference design in visitor copy.",
     "phero-tagline-bright is open on /solutions/airgap/ at 375. Next run: fix it with before and after."
    ]
+  },
+  {
+   "episode": 5,
+   "day": "2026-11-24",
+   "verdict": "pending",
+   "status": "open",
+   "went_well": [
+    "All five ep4 fix lines closed in one run and verified on the domain",
+    "home-weight closed with a live phone width proof: 1 of 26 clips before scroll, hero 4.1 MB to 1.0 MB",
+    "First Tuesday lab note shipped, titled for a real query and linked both ways with its owning page",
+    "Caught a failed Pages deploy before the live checks and reran it"
+   ],
+   "not_good": [
+    "The five locked terms are still absent from the Google top 30 and Search Console shows only brand impressions. Next run: request indexing of the new lab note if the 7 day rule allows, and add one table or question heading in the term's words on /products/cameras/ and /hardware/.",
+    "The /platform/ hero frame may show readable lanyard letters at phone width. Next run: shoot it at 812, and if a name reads, change the frame or the object position.",
+    "Lab note tables scroll sideways at 375 and hide the third column. Next run: stack them like the hardware table, with before and after.",
+    "The task file still lists a /credits/ page that the build never made. Next run: propose the one line diff in the report, or build the page from CREDITS.md.",
+    "request-form and analytics are still open backlog. Next run: keep the two For you lines until Umar answers."
+   ]
   }
  ],
  "seen": {
@@ -361,9 +472,9 @@
    "note": "30 non frozen pages titled searcher first, locked terms lead on owning pages; descriptions all under 160 except frozen home; live 22 Nov (9ac173f)"
   },
   "home-weight": {
-   "status": "partial",
-   "day": "2026-11-23",
-   "note": "23 Nov: every video has a poster; live home loads 5 of 26 clips before scroll (hero plus 4 near the fold) at desktop width; substation and truck-depot re-encoded 8.6 to 3.8 MB (d2a69f4); phone width proof and home-montage (4.1 MB hero) still open"
+   "status": "done",
+   "day": "2026-11-24",
+   "note": "24 Nov: live at 375 only the hero clip loads before scroll (1 of 26) and phones get home-montage-sm.mp4 1.0 MB instead of 4.1 MB (f1ff87d); posters on all; substation and truck-depot re-encoded 23 Nov"
   }
  }
 }
