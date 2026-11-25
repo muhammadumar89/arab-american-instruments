@@ -85,17 +85,17 @@
   "page": "",
   "defect": "/platform/ hero frame at phone width shows a lanyard with partly readable letters; check at 812 and pick another frame or crop if a name reads",
   "fix": "",
-  "state": "open",
-  "day": "2026-11-24",
-  "note": "/platform/ hero frame at phone width shows a lanyard with partly readable letters; check at 812 and pick another frame or crop if a name reads"
+  "state": "fixed",
+  "day": "2026-11-25",
+  "note": "control-room clip and poster regated: desk signs, shirt print and lanyard blurred, 84991cb; raw/shots/2026-11-25/cr-after-compare.png; original in raw/pre-ep6"
  },
  {
   "id": "note-table-phone",
   "page": "",
   "defect": "lab note tables are wider than 375 and scroll sideways; third column is cut on first view; stack or shrink like the hardware table",
   "fix": "",
-  "state": "open",
-  "day": "2026-11-24",
-  "note": "lab note tables are wider than 375 and scroll sideways; third column is cut on first view; stack or shrink like the hardware table"
+  "state": "fixed",
+  "day": "2026-11-25",
+  "note": "stacked as cards under 600px, 84991cb; raw/shots/2026-11-25/note-table-before-after.png"
  }
 ]

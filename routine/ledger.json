@@ -337,6 +337,70 @@
    "gap_records": [],
    "reward": 5,
    "summary": "Episode 5 (Tuesday). Google US: brand holds position 1; the five locked terms still absent from the top 30. Search Console 28 days unchanged: 0 clicks, 4 impressions, position 1.8; Pages read for the first time (10 rows, all brand sitelinks); Links 0 external. Shipped f1ff87d: lab note 'What is air gapped AI?' linking to /solutions/airgap/ and back; an Explore strip with the five locked terms as link text on home and /platform/; phones get a 1.0 MB hero clip instead of 4.1 MB and only that clip loads before scroll at 375 (1 of 26), closing home-weight and video-mobile; film header scrim deepened and tagline white under 600px, closing phero-tagline-bright; three copy lines moved to deployment wording and the gate widened. First deploy failed at GitHub and was rerun green. New defects: platform-hero-lanyard, note-table-phone. Reward 5."
+  },
+  {
+   "episode": 6,
+   "day": "2026-11-25",
+   "run_id": "aai-site-daily-2026-11-25",
+   "kind": "routine",
+   "backlog_done": [],
+   "channels": {
+    "google": {
+     "Arab American Instruments (brand)": 1,
+     "sovereign AI hardware": null,
+     "edge AI devices": null,
+     "air gapped AI": null,
+     "edge AI camera": null,
+     "sovereign edge AI": null
+    },
+    "gsc": {
+     "clicks": 0,
+     "impressions": 5,
+     "position": 1.8,
+     "window": "28d"
+    },
+    "links": "gsc external 0, bing null (Saturdays), github mentions 0, earned 0",
+    "design": "lab note tables stack as cards under 600px; control-room clip regated; 84991cb",
+    "ai_citations": null,
+    "inbound": "unmeasured"
+   },
+   "defects": [
+    "note-table-phone fixed",
+    "platform-hero-lanyard fixed (control-room clip blurred)",
+    "home description 208 characters (home frozen)",
+    "b1 brand answers unverified until Saturday 28 Nov"
+   ],
+   "decisions": [
+    {
+     "what": "question heading and table on five owning pages",
+     "why": "ep5 feedback",
+     "revert": "git revert 84991cb or empty TERM_QA"
+    },
+    {
+     "what": "control-room clip blurred in four regions",
+     "why": "readable signage",
+     "revert": "copy raw/pre-ep6/control-room.* back"
+    },
+    {
+     "what": "no /credits/ page; task file diff proposed",
+     "why": "no attribution needed",
+     "revert": "build it from CREDITS.md"
+    },
+    {
+     "what": "fresh workflow_dispatch deploy after three failed deploys",
+     "why": "reruns kept failing",
+     "revert": "none"
+    }
+   ],
+   "feedback_applied": [
+    "91ff47ac-ee6b-4ff6-b89f-666408a43c3f"
+   ],
+   "lessons_added": [
+    "[ep6 2026-11-25] deploy-pages 'No artifacts' after a good upload: start a fresh run with gh workflow run; regate clips from the full size poster"
+   ],
+   "gap_records": [],
+   "reward": 3,
+   "summary": "Episode 6. Brand position 1; five locked terms absent from top 30. GSC 0 clicks, 5 impressions, 1.8. Shipped 84991cb: question heading and table on five owning pages; lab note tables stack under 600px; control-room clip regated. Reward 3."
   }
  ],
  "feedback": [
@@ -433,6 +497,27 @@
     "Lab note tables scroll sideways at 375 and hide the third column. Next run: stack them like the hardware table, with before and after.",
     "The task file still lists a /credits/ page that the build never made. Next run: propose the one line diff in the report, or build the page from CREDITS.md.",
     "request-form and analytics are still open backlog. Next run: keep the two For you lines until Umar answers."
+   ]
+  },
+  {
+   "episode": 6,
+   "day": "2026-11-25",
+   "verdict": "pending",
+   "status": "open",
+   "id": "13283546-ab5c-4e0d-9726-9b87167e55f7",
+   "went_well": [
+    "All five ep5 fix lines closed and verified live",
+    "Caught readable signage in a live banner clip and fixed it",
+    "Lab note tables read as cards at 375",
+    "Got past a GitHub deploy failure through Actions"
+   ],
+   "not_good": [
+    "Five locked terms still absent from the top 30. Next run: add a stepping stone lab note for a longer query, linked both ways.",
+    "control-room clip shows soft blur patches. Next run: swap in a clean gated clip if a download is allowed.",
+    "Only one poster regated at full size. Next run: regate the five most used posters at full size.",
+    "Rotation shots for home and /lab/ not all read. Next run: read all three at both widths first.",
+    "keywords upsert added duplicate page rows. Next run: match the key form and merge.",
+    "request-form and analytics still open. Next run: keep the two For you lines."
    ]
   }
  ],

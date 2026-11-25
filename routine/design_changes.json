@@ -59,6 +59,18 @@
    "commit": "f1ff87d",
    "revert": "delete the max-width:600px .banner.phero block at the end of assets/site.css",
    "episode": 5
+  },
+  {
+   "day": "2026-11-25",
+   "page": "/lab/what-is-air-gapped-ai/ and /lab/what-a-truck-will-tell-you/",
+   "width": "375",
+   "what": "lab note tables stack as cards under 600px, each cell labelled with its column name",
+   "why": "tables were wider than the screen and hid the third column",
+   "before": "raw/shots/2026-11-25/before-note-airgap-375.png",
+   "after": "raw/shots/2026-11-25/live-after-note-airgap-375.png",
+   "commit": "84991cb",
+   "revert": "git revert 84991cb, or delete the .article .data block under max-width:600px in assets/site.css",
+   "episode": 6
   }
  ]
 }
