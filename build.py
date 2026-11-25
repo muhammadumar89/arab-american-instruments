@@ -655,6 +655,45 @@ ANSWERS = {
     "/products/cameras/": "An edge AI camera runs its vision model on the unit and sends only events and short clips, so the video stays on your site.",
     "/solutions/sovereignty/": "Sovereign edge AI keeps the models, the devices and the keys inside your perimeter: open weights, self hosted, owned outright.",
 }
+# One question in the term's own words with a short table, on each locked term's owning page (routine/locked.json).
+TERM_QA = {
+    "/hardware/": ("What makes AI hardware sovereign?", "Sovereign AI hardware is judged by who holds each layer. Four questions settle it.", [
+        ["Layer", "Rented AI hardware", "Sovereign AI hardware"],
+        ["The models", "Run in a provider's cloud", "Run on the device, as open weights you host"],
+        ["The data", "Leaves for someone else's servers", "Stays inside your perimeter"],
+        ["The keys", "Held by the vendor", "Held by you"],
+        ["The design", "Sealed", "Handed over whole"],
+    ]),
+    "/products/": ("What are edge AI devices?", "Edge AI devices are cameras, gateways, wearables and relays that run their models where the data is captured.", [
+        ["Device type", "What it does at the edge", "Device"],
+        ["Camera", "Runs vision models for people, vehicles and events", "Fleet Vision Unit, Site Camera"],
+        ["Vehicle gateway", "Reads the vehicle's own data and adds position", "Vehicle Interface Module"],
+        ["Wearable", "Reports position and heart rate, and calls for help", "Field Band"],
+        ["Relay and gateway", "Carries events over mesh links, stores and forwards", "Solar Relay, Patrol Gateway, Guide Hub"],
+    ]),
+    "/products/cameras/": ("What is an edge AI camera?", "An edge AI camera carries its vision model inside the unit. It watches, decides and alerts on its own, with or without a network.", [
+        ["Question", "Cloud camera", "Edge AI camera"],
+        ["Where the vision model runs", "In a data centre", "On the camera"],
+        ["What leaves the site", "The full video stream", "Events and short clips you choose"],
+        ["What happens with no signal", "Detection stops", "Detection continues; clips are stored and forwarded"],
+        ["Who keeps the video", "The service provider", "You, on your own site"],
+    ]),
+    "/solutions/airgap/": ("How does air gapped AI work?", "Air gapped AI works by keeping every step inside the perimeter.", [
+        ["Step", "Where it happens"],
+        ["The model sees the event", "On the device"],
+        ["The device decides and records", "On the device, with no network needed"],
+        ["The event travels", "Over mesh links you own"],
+        ["The operator reads it", "On Command, hosted on your servers"],
+        ["Updates arrive", "Carried in and approved by you"],
+    ]),
+    "/solutions/sovereignty/": ("What is sovereign edge AI?", "Sovereign edge AI puts the models, the devices and the keys in your hands.", [
+        ["What you hold", "What it means in the field"],
+        ["Open weights", "The models are yours to host, inspect and keep"],
+        ["The devices", "Built inside your perimeter and owned outright"],
+        ["The signing keys", "An update reaches a unit only when you approve it"],
+        ["The data", "Events and video stay on your servers"],
+    ]),
+}
 MONTHS = {m: i + 1 for i, m in enumerate("Jan Feb Mar Apr May Jun Jul Aug Sep Oct Nov Dec".split())}
 
 
@@ -848,6 +887,20 @@ def film_head(slug, kicker, title, tagline, text, actions="", path=""):
     return banner(slug, f'{label(kicker)}<h1>{title}</h1><p class="tagline">{e(tagline)}</p>{ans}<p class="lede">{text}</p>{actions}', "phero")
 
 
+def data_table(rows):
+    """A data table whose cells carry their column name, so it stacks as cards under 600px."""
+    hd = "".join(f"<th>{e(c)}</th>" for c in rows[0])
+    body = "".join("<tr>" + "".join(f"<td>{e(c)}</td>" if i == 0 else f'<td data-l="{e(rows[0][i])}">{e(c)}</td>' for i, c in enumerate(r)) + "</tr>" for r in rows[1:])
+    return f'<div class="tw"><table class="data"><thead><tr>{hd}</tr></thead><tbody>{body}</tbody></table></div>'
+
+
+def term_qa(path):
+    if path not in TERM_QA:
+        return ""
+    q, a, rows = TERM_QA[path]
+    return f'<section class="hwtable termqa"><div class="wrap"><h2>{e(q)}</h2><p class="lede">{e(a)}</p>{data_table(rows)}</div></section>'
+
+
 def pill(href, text, primary=False):
     return f'<a class="btn{"" if primary else " ghost"}" href="{href}">{e(text)}</a>'
 
@@ -1000,7 +1053,7 @@ def products():
         if c["slug"] == "command":
             devs = "".join(f'<div class="card flat"><div class="cb"><h3>{e(a)}</h3><p>{e(b)}</p></div></div>' for a, b in c["features"])
         secs += f'<div id="{c["slug"]}">' + split(f"0{i + 1} · {c['name']}", e(c["title"]), e(c["body"]), panel_video(c["film"]), pill(u("/products/" + c["slug"] + "/"), "Learn more"), side="right" if i % 2 == 0 else "left", cls="line") + f'<section class="cards tight"><div class="wrap"><div class="grid3">{devs}</div></div></section></div>'
-    page("/products/", "Products", "Arab American Instruments products: vision at the edge, vehicle telematics, people in the field, air gapped links, and the self hosted Command platform.", head + jump + secs + own_strip() + cta(), "/products/")
+    page("/products/", "Products", "Arab American Instruments products: vision at the edge, vehicle telematics, people in the field, air gapped links, and the self hosted Command platform.", head + jump + term_qa("/products/") + secs + own_strip() + cta(), "/products/")
 
 
 def category_page(c):
@@ -1015,7 +1068,7 @@ def category_page(c):
     solsec = f'<section class="cards"><div class="wrap"><div class="head">{label("Solutions")}<h2>What it is for.</h2></div><div class="grid3">{sols}</div></div></section>'
     others = "".join(cat_card(o) for o in CATEGORIES if o["slug"] != c["slug"])
     more = f'<section class="cards"><div class="wrap"><div class="head">{label("The rest of the stack")}<h2>Works with</h2></div><div class="grid4">{others}</div></div></section>'
-    page(f"/products/{c['slug']}/", c["name"], c["tag"], head + devsec + solsec + own_strip() + more + cta(), "/products/")
+    page(f"/products/{c['slug']}/", c["name"], c["tag"], head + term_qa(f"/products/{c['slug']}/") + devsec + solsec + own_strip() + more + cta(), "/products/")
 
 
 def hardware():
@@ -1031,7 +1084,7 @@ def hardware():
     table = f'<section class="hwtable"><div class="wrap"><div class="tw"><table class="data"><thead><tr><th>Device</th><th>Category</th><th>At a glance</th></tr></thead><tbody>{rows}</tbody></table></div></div></section>'
     cards = "".join(product_card(p) for p in PRODUCTS)
     grid = f'<section class="cards"><div class="wrap"><div class="grid3">{cards}</div></div></section>'
-    page("/hardware/", "All hardware", "Every Arab American Instruments device at a glance.", head + table + grid + own_strip() + cta(), "/products/")
+    page("/hardware/", "All hardware", "Every Arab American Instruments device at a glance.", head + term_qa("/hardware/") + table + grid + own_strip() + cta(), "/products/")
 
 
 def product_page(p):
@@ -1086,6 +1139,7 @@ def solution_page(s):
     inds = "".join(ind_tile(n, ibys[n]) for n in s["industries"])
     body = (
         head
+        + term_qa(f"/solutions/{s['slug']}/")
         + f'<section class="detail"><div class="wrap"><div class="cols"><div>{label("What you get")}<ul class="points">{pts}</ul></div><aside>{label("How it stays yours")}<p>The models run on the device. Events and clips go only where you send them. Command runs on your servers. The design files, the bill of materials and the keys are handed over at the end of the build.</p>{pill(u("/supply-chain/"), "How ownership works")}{pill(u("/lab/what-is-air-gapped-ai/"), "What is air gapped AI?") if s["slug"] == "airgap" else ""}</aside></div></div></section>'
         + f'<section class="cards"><div class="wrap"><div class="head">{label("Hardware")}<h2>The devices behind it.</h2><a class="btn ghost" href="{u("/hardware/")}">All hardware</a></div><div class="grid3">{devs}</div></div></section>'
         + f'<section class="cards"><div class="wrap"><div class="head">{label("Industries")}<h2>Where it runs.</h2></div><div class="grid3">{inds}</div></div></section>'
@@ -1117,9 +1171,7 @@ def lab():
             elif kind == "links":
                 out += '<p class="plinks">' + "".join(f'<a href="{u(h)}">{e(t)} <i>&rarr;</i></a>' for t, h in val) + "</p>"
             elif kind == "table":
-                hd = "".join(f"<th>{e(c)}</th>" for c in val[0])
-                rows = "".join("<tr>" + "".join(f"<td>{e(c)}</td>" for c in r) + "</tr>" for r in val[1:])
-                out += f'<div class="tw"><table class="data"><thead><tr>{hd}</tr></thead><tbody>{rows}</tbody></table></div>'
+                out += data_table(val)
         head = film_head(n["film"], f"Design Lab · {n['date']}", e(n["title"]), "", e(n["sub"]))
         art = f'<article class="article paper"><div class="wrap narrow">{out}<p class="byline mono">Design Lab, Arab American Instruments</p></div></article>'
         url = f"{SITE_URL}/lab/{n['slug']}/"

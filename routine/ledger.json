@@ -448,7 +448,9 @@
   "/hardware/site-camera/": "2026-11-23",
   "/hardware/solar-relay/": "2026-11-23",
   "/hardware/vehicle-interface-module/": "2026-11-24",
-  "/industries/": "2026-11-24"
+  "/industries/": "2026-11-24",
+  "/lab/": "2026-11-25",
+  "/lab/what-a-truck-will-tell-you/": "2026-11-25"
  },
  "backlog": {
   "gsc-bing": {

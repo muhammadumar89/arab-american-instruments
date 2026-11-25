@@ -37,7 +37,7 @@ Rejected at the gate: crane (container line names), port-night (ship name), prin
 - `military-exercise.mp4`: pexels-12762044, "Aerial Shot of Military Exercises at a Training Ground in a Desert", by Alan Andros, https://www.pexels.com/video/12762044/
 - `tactical.mp4`: pexels-34055207, "Tactical Operative in Specialized Gear Outdoors", by Gonzalo Garcia, https://www.pexels.com/video/34055207/
 - `truck-depot.mp4`: pexels-32794259, "Aerial View of Industrial Truck Depot Outdoors", by Toàn BDS, https://www.pexels.com/video/32794259/
-- `control-room.mp4`: pexels-38779107, "High-Tech Control Room Monitoring Operations", by Kiwi and Camera, https://www.pexels.com/video/38779107/
+- `control-room.mp4`: pexels-38779107, "High-Tech Control Room Monitoring Operations", by Kiwi and Camera, https://www.pexels.com/video/38779107/ Regated 25 Nov 2026: a desk sign, a second sign, a shirt print and a lanyard were readable, so those four regions are blurred in the clip and its poster (original kept in raw/pre-ep6).
 
 # Photo credits (assets/img/stock)
 
