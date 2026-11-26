@@ -117,6 +117,9 @@ def upsert(rows, day=None):
     idx = {key(r): r for r in d["rows"]}
     added = updated = 0
     for r in rows:
+        # page rows are keyed by path: a full URL from Search Console is cut to its path so it merges, never duplicates
+        if r.get("kind") == "page" and (r.get("term") or "").startswith("http"):
+            r["term"] = "/" + r["term"].split("://", 1)[1].partition("/")[2]
         k = key(r)
         if k in idx:
             old = idx[k]

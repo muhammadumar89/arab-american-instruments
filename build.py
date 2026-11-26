@@ -290,6 +290,35 @@ INDUSTRIES = [
 
 NOTES = [
     {
+        "slug": "how-to-choose-an-edge-ai-camera",
+        "title": "How to choose an edge AI camera",
+        "sub": "Six questions settle whether an edge AI camera fits a truck, a gate or a remote site, and who ends up holding the video.",
+        "date": "26 Nov 2026",
+        "film": "cams-sunset",
+        "body": [
+            ("p", "An edge AI camera runs its vision model inside the unit. That one fact changes what you should ask before you choose one."),
+            ("p", "Resolution and lens still matter. The questions below matter more, because they decide what the camera can do alone and who controls what it sees."),
+            ("h", "Six questions to ask about an edge AI camera"),
+            ("table", [
+                ["Question", "Why it matters", "A good answer"],
+                ["Where does the vision model run?", "A camera that sends video away to be read stops detecting when the link drops", "On the camera, at full frame rate"],
+                ["What leaves the site?", "A full video stream is costly to carry and hard to control", "Events and short clips you choose"],
+                ["What happens with no signal?", "Trucks, gates and remote lines lose coverage every day", "Detection continues; clips are stored and forwarded"],
+                ["Who holds the model weights?", "Whoever holds the weights decides what the camera can learn next", "You, as open weights you host"],
+                ["Who signs the updates?", "An update you did not approve is a change you cannot explain", "You, with keys you hold"],
+                ["How is it powered and linked?", "The mount decides the power and the link, and both limit the camera", "Vehicle power, mains or solar; your network, cellular or mesh"],
+            ]),
+            ("h", "Match the edge AI camera to where it mounts"),
+            ("p", "In a truck cab the camera watches the road and the driver, and has to ride through heat, vibration and long gaps in coverage."),
+            ("p", "At a gate or a yard it watches zones you draw, around the clock, and usually has mains power and your own network close by."),
+            ("p", "On a pole in open country it runs from a panel and a battery, and sends events over a mesh link because nothing else reaches it."),
+            ("h", "What a good edge AI camera gives the operator"),
+            ("p", "An alert within seconds of the event, with a short clip as evidence. A record that stays on your site. A system that keeps working when the network does not."),
+            ("p", "When the six answers above are yours, the camera is yours too: the model, the video and the keys stay inside your perimeter."),
+            ("links", [("Edge AI camera", "/products/cameras/"), ("Sovereign AI hardware", "/hardware/"), ("What is air gapped AI?", "/lab/what-is-air-gapped-ai/")]),
+        ],
+    },
+    {
         "slug": "what-is-air-gapped-ai",
         "title": "What is air gapped AI?",
         "sub": "Air gapped AI runs its models on devices and servers that never touch a public network. Here is what that takes in the field.",
@@ -646,7 +675,10 @@ SEO_TITLES = {
     "/solutions/security/": "Site Security with Edge AI Cameras",
     "/lab/what-a-truck-will-tell-you/": "What a Truck Will Tell You: Fleet Vehicle Data",
     "/lab/what-is-air-gapped-ai/": "What Is Air Gapped AI? Models That Never Touch a Public Network",
+    "/lab/how-to-choose-an-edge-ai-camera/": "How to Choose an Edge AI Camera: Six Questions to Ask",
 }
+# Lab notes that serve as stepping stones to a locked term: each is shown on the term's owning page and links back to it.
+LAB_FOR = {"/products/cameras/": ["how-to-choose-an-edge-ai-camera"]}
 # One sentence under the H1 of each locked term's owning page that answers the term in its own words (routine/locked.json).
 ANSWERS = {
     "/hardware/": "Sovereign AI hardware is a device that runs its vision and language models on the unit, with open weights you host and keys you hold.",
@@ -1068,7 +1100,9 @@ def category_page(c):
     solsec = f'<section class="cards"><div class="wrap"><div class="head">{label("Solutions")}<h2>What it is for.</h2></div><div class="grid3">{sols}</div></div></section>'
     others = "".join(cat_card(o) for o in CATEGORIES if o["slug"] != c["slug"])
     more = f'<section class="cards"><div class="wrap"><div class="head">{label("The rest of the stack")}<h2>Works with</h2></div><div class="grid4">{others}</div></div></section>'
-    page(f"/products/{c['slug']}/", c["name"], c["tag"], head + term_qa(f"/products/{c['slug']}/") + devsec + solsec + own_strip() + more + cta(), "/products/")
+    slugs = LAB_FOR.get(f"/products/{c['slug']}/", [])
+    labsec = f'<section class="cards"><div class="wrap"><div class="head">{label("Design Lab")}<h2>Read before you choose.</h2><a class="btn ghost" href="{u("/lab/")}">All notes</a></div><div class="grid3">{"".join(note_card(n) for n in NOTES if n["slug"] in slugs)}</div></div></section>' if slugs else ""
+    page(f"/products/{c['slug']}/", c["name"], c["tag"], head + term_qa(f"/products/{c['slug']}/") + devsec + labsec + solsec + own_strip() + more + cta(), "/products/")
 
 
 def hardware():

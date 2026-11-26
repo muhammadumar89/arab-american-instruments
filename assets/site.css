@@ -102,6 +102,8 @@ nav a:hover,nav .tab:hover,nav a.on,nav .tab.on{color:#fff}
 .banner.cta .label{justify-content:center}
 .banner.phero{min-height:80vh}
 .banner.phero .lede{max-width:560px}
+/* film headers above 600px: text sits bottom left, so the scrim also darkens from the left; bright footage (monitors, sky) stays readable */
+@media(min-width:601px){.banner.phero .scrim{background:linear-gradient(90deg,rgba(1,1,1,.66) 0%,rgba(1,1,1,.44) 42%,rgba(1,1,1,0) 78%),linear-gradient(180deg,rgba(1,1,1,.45) 0%,rgba(1,1,1,.18) 35%,rgba(1,1,1,.82) 100%)}.banner.phero .tagline{color:#fff}}
 .tagline{font-family:var(--sans);font-size:clamp(22px,2.6vw,40px);letter-spacing:-.02em;color:var(--text2);margin:0 0 .5em;line-height:1.1}
 
 /* section rhythm */
