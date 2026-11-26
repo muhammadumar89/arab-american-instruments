@@ -71,6 +71,18 @@
    "commit": "84991cb",
    "revert": "git revert 84991cb, or delete the .article .data block under max-width:600px in assets/site.css",
    "episode": 6
+  },
+  {
+   "day": "2026-11-26",
+   "page": "/platform/ (all film headers)",
+   "width": "1440",
+   "what": "above 600px the film header scrim also darkens from the left (.66, .44 at 42%, clear at 78%) and the tagline goes white",
+   "why": "the kicker, H1 and tagline on /platform/ sat on bright monitors and read poorly at desktop width",
+   "before": "raw/shots/2026-11-26/before-platform-1440.png",
+   "after": "raw/shots/2026-11-26/after-platform-1440.png",
+   "commit": "adfc9a0",
+   "revert": "delete the min-width:601px .banner.phero line in assets/site.css",
+   "episode": 7
   }
  ]
 }

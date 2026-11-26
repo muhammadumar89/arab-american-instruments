@@ -401,6 +401,49 @@
    "gap_records": [],
    "reward": 3,
    "summary": "Episode 6. Brand position 1; five locked terms absent from top 30. GSC 0 clicks, 5 impressions, 1.8. Shipped 84991cb: question heading and table on five owning pages; lab note tables stack under 600px; control-room clip regated. Reward 3."
+  },
+  {
+   "episode": 7,
+   "day": "2026-11-26",
+   "run_id": "aai-site-daily-2026-11-26",
+   "kind": "routine",
+   "backlog_done": [],
+   "channels": {
+    "google": {
+     "sovereign AI hardware": null,
+     "edge AI devices": null,
+     "air gapped AI": null,
+     "edge AI camera": null,
+     "sovereign edge AI": null,
+     "Arab American Instruments (brand)": 1
+    },
+    "gsc": {
+     "clicks": 0,
+     "impressions": 6,
+     "position": 1.8,
+     "window": "28d"
+    },
+    "links": "gsc external 0, bing null (Saturdays), github mentions 0, earned 0",
+    "design": "film header scrim darkens from the left above 600px, tagline white; adfc9a0",
+    "ai_citations": null,
+    "inbound": "unmeasured"
+   },
+   "defects": [
+    "phero-desktop-bright fixed adfc9a0",
+    "control-room blur patches visible at desktop width",
+    "home description 208 characters (home frozen)",
+    "b1 brand answers unverified until Saturday 28 Nov"
+   ],
+   "decisions": [],
+   "feedback_applied": [
+    "13283546-ab5c-4e0d-9726-9b87167e55f7"
+   ],
+   "lessons_added": [
+    "[ep7 2026-11-26] zsh ties a variable named path to PATH"
+   ],
+   "gap_records": [],
+   "reward": 3,
+   "summary": "Episode 7 (Thursday). Brand position 1; five locked terms absent from top 30. GSC 28d: 0 clicks, 6 impressions (+1), position 1.8; Links 0. Shipped adfc9a0 live: lab note How to choose an edge AI camera linked both ways with /products/cameras/; left side scrim on film headers above 600px; seven posters regated clean; ledger duplicates merged. Reward 3. Full decisions in Engram aai_episodes."
   }
  ],
  "feedback": [
@@ -518,6 +561,26 @@
     "Rotation shots for home and /lab/ not all read. Next run: read all three at both widths first.",
     "keywords upsert added duplicate page rows. Next run: match the key form and merge.",
     "request-form and analytics still open. Next run: keep the two For you lines."
+   ]
+  },
+  {
+   "episode": 7,
+   "day": "2026-11-26",
+   "verdict": "pending",
+   "status": "open",
+   "went_well": [
+    "All six ep6 fix lines acted on and verified on the domain",
+    "Deploy green on the first run",
+    "Seven posters opened at full size and found clean",
+    "Ledger duplicates merged and the upsert cause closed"
+   ],
+   "not_good": [
+    "Five locked terms still absent from the top 30. Next run: leave owning pages alone; check the camera note is indexed; second stepping stone under sovereign AI hardware on Tuesday 1 Dec.",
+    "Tall phone captures read only for the new note. Next run: cut each tall capture into 812 slices and read every slice.",
+    "Control room clip still shows blur patches. Next run: keep the For you line.",
+    "28 of 35 posters gated only from frames. Next run: open five more at full size.",
+    "Search Console Queries still empty. Next run: read again.",
+    "request-form and analytics open. Next run: keep the two For you lines."
    ]
   }
  ],

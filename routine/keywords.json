@@ -2,13 +2,13 @@
  "rows": [
   {
    "first_seen": "2026-11-22",
-   "last_seen": "2026-11-24",
+   "last_seen": "2026-11-26",
    "status": "open",
    "kind": "query",
    "term": "(all)",
    "page": "/",
    "clicks": 0,
-   "impressions": 4,
+   "impressions": 6,
    "position": 1.8,
    "window_days": 28
   },
@@ -57,10 +57,10 @@
    "first_seen": "2026-11-22",
    "last_seen": "2026-11-22",
    "last_fix": {
-    "commit": "84991cb",
-    "what": "question heading in the term's words with a short table under the hero of the owning page",
+    "commit": "adfc9a0",
+    "what": "stepping stone lab note How to choose an edge AI camera, shown on /products/cameras/ and linked back",
     "clicks_at_fix": 0,
-    "day": "2026-11-25"
+    "day": "2026-11-26"
    },
    "status": "open"
   },
@@ -79,25 +79,25 @@
   },
   {
    "first_seen": "2026-11-23",
-   "last_seen": "2026-11-23",
+   "last_seen": "2026-11-26",
    "status": "open",
    "kind": "page",
    "term": "site total",
    "page": "/",
    "clicks": 0,
-   "impressions": 4,
+   "impressions": 6,
    "position": 1.8,
    "window_days": 28
   },
   {
    "first_seen": "2026-11-25",
-   "last_seen": "2026-11-25",
+   "last_seen": "2026-11-26",
    "status": "open",
    "kind": "page",
    "term": "/",
    "page": "/",
    "clicks": 0,
-   "impressions": 5,
+   "impressions": 6,
    "position": 1.8,
    "window_days": 28
   },
@@ -861,6 +861,114 @@
   },
   {
    "day": "2026-11-25",
+   "term": "Arab American Instruments",
+   "google_position": 1,
+   "top10": [
+    "arabamerican.ai"
+   ],
+   "page": "/",
+   "gsc_impressions": null,
+   "gsc_position": null
+  },
+  {
+   "day": "2026-11-26",
+   "term": "sovereign AI hardware",
+   "google_position": null,
+   "top10": [
+    "cisco.com",
+    "amd.com",
+    "dell.com",
+    "redhat.com",
+    "premai.io",
+    "mistral.ai",
+    "oracle.com",
+    "hpe.com",
+    "lyzr.ai"
+   ],
+   "page": "/hardware/",
+   "gsc_impressions": null,
+   "gsc_position": null
+  },
+  {
+   "day": "2026-11-26",
+   "term": "edge AI devices",
+   "google_position": null,
+   "top10": [
+    "redhat.com",
+    "reddit.com",
+    "nvidia.com",
+    "ibm.com",
+    "arm.com",
+    "docs.edgeimpulse.com",
+    "aws.amazon.com",
+    "ti.com",
+    "intel.com",
+    "advantech.com"
+   ],
+   "page": "/products/",
+   "gsc_impressions": null,
+   "gsc_position": null
+  },
+  {
+   "day": "2026-11-26",
+   "term": "air gapped AI",
+   "google_position": null,
+   "top10": [
+    "h2o.ai",
+    "domino.ai",
+    "iternal.ai",
+    "f5.com",
+    "dspace.mit.edu",
+    "hpe.com",
+    "ibl.ai",
+    "reddit.com",
+    "cyberdefensemagazine.com"
+   ],
+   "page": "/solutions/airgap/",
+   "gsc_impressions": null,
+   "gsc_position": null
+  },
+  {
+   "day": "2026-11-26",
+   "term": "edge AI camera",
+   "google_position": null,
+   "top10": [
+    "advantech.com",
+    "everfocus.com",
+    "surveillancesecure.com",
+    "i-pro.com",
+    "hailo.ai",
+    "newsroom.axis.com",
+    "ieeexplore.ieee.org",
+    "camthink.ai",
+    "reddit.com",
+    "vvdntech.com"
+   ],
+   "page": "/products/cameras/",
+   "gsc_impressions": null,
+   "gsc_position": null
+  },
+  {
+   "day": "2026-11-26",
+   "term": "sovereign edge AI",
+   "google_position": null,
+   "top10": [
+    "nutanix.com",
+    "scalecomputing.com",
+    "redhat.com",
+    "cgi.com",
+    "azure.microsoft.com",
+    "cisco.com",
+    "soff.se",
+    "bdhcorporation.com",
+    "sovaihub.com"
+   ],
+   "page": "/solutions/sovereignty/",
+   "gsc_impressions": null,
+   "gsc_position": null
+  },
+  {
+   "day": "2026-11-26",
    "term": "Arab American Instruments",
    "google_position": 1,
    "top10": [

@@ -97,5 +97,14 @@
   "state": "fixed",
   "day": "2026-11-25",
   "note": "stacked as cards under 600px, 84991cb; raw/shots/2026-11-25/note-table-before-after.png"
+ },
+ {
+  "id": "phero-desktop-bright",
+  "page": "",
+  "defect": "film header text over bright monitors at 1440 on /platform/; left side scrim above 600px, adfc9a0; raw/shots/2026-11-26/after-platform-1440.png",
+  "fix": "",
+  "state": "fixed",
+  "day": "2026-11-26",
+  "note": "film header text over bright monitors at 1440 on /platform/; left side scrim above 600px, adfc9a0; raw/shots/2026-11-26/after-platform-1440.png"
  }
 ]

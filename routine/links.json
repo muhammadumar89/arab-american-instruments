@@ -57,6 +57,17 @@
    "github_mentions": 0,
    "github_repos": [],
    "note": "Search Console Links 0 external, 0 internal reported; Bing read on Saturdays"
+  },
+  {
+   "day": "2026-11-26",
+   "gsc": {
+    "external_links": 0,
+    "sites": []
+   },
+   "bing": null,
+   "github_mentions": 0,
+   "github_repos": [],
+   "note": "Search Console Links 0 external; Bing read on Saturdays"
   }
  ]
 }
