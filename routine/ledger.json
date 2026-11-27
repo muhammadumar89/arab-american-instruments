@@ -444,6 +444,72 @@
    "gap_records": [],
    "reward": 3,
    "summary": "Episode 7 (Thursday). Brand position 1; five locked terms absent from top 30. GSC 28d: 0 clicks, 6 impressions (+1), position 1.8; Links 0. Shipped adfc9a0 live: lab note How to choose an edge AI camera linked both ways with /products/cameras/; left side scrim on film headers above 600px; seven posters regated clean; ledger duplicates merged. Reward 3. Full decisions in Engram aai_episodes."
+  },
+  {
+   "episode": 8,
+   "day": "2026-11-27",
+   "run_id": "aai-site-daily-2026-11-27",
+   "kind": "routine",
+   "backlog_done": [],
+   "channels": {
+    "google": {
+     "sovereign AI hardware": null,
+     "edge AI devices": null,
+     "air gapped AI": null,
+     "edge AI camera": null,
+     "sovereign edge AI": null,
+     "Arab American Instruments (brand)": 1
+    },
+    "gsc": {
+     "clicks": 0,
+     "impressions": 11,
+     "position": 21.1,
+     "window": "28d",
+     "note": "first 3 queries; Pages 15 rows; camera note indexed"
+    },
+    "links": "gsc external 0, bing null (Saturdays), github mentions 0, earned 0",
+    "design": "video panel captions: deeper scrim, white 13px; c5406be",
+    "ai_citations": null,
+    "inbound": "unmeasured"
+   },
+   "defects": [
+    "hq-caption-bright fixed c5406be",
+    "riyadh-tower-emblem open",
+    "cameras-hero-repeat open",
+    "home description 208 characters (home frozen)",
+    "b1 brand answers unverified until Saturday 28 Nov"
+   ],
+   "decisions": [
+    {
+     "what": "No change to the five owning pages",
+     "why": "ep7 feedback",
+     "revert": "none"
+    },
+    {
+     "what": "Second stepping stone set for Tuesday 1 Dec: lab note 'What is sovereign AI hardware?'",
+     "why": "ep7 feedback",
+     "revert": "do not add the NOTES entry"
+    },
+    {
+     "what": "Tower emblem recorded as a defect, not blurred this run",
+     "why": "camera tilts; needs a frame by frame check",
+     "revert": "none"
+    },
+    {
+     "what": "Caption change applied to every video panel",
+     "why": "same component",
+     "revert": "git revert c5406be"
+    }
+   ],
+   "feedback_applied": [
+    "75f4d2e9-191e-4ebd-bef9-7f3ce9c65453"
+   ],
+   "lessons_added": [
+    "[ep8 2026-11-27] full length phone captures from a scratch copy with vh rewritten to px"
+   ],
+   "gap_records": [],
+   "reward": 3,
+   "summary": "Episode 8 (Friday). Brand position 1; five locked terms absent from the top 30. Search Console 28 days: 0 clicks, 11 impressions (+5), position 21.1; first three queries. Shipped c5406be: video panel captions deeper scrim and white text. Riyadh tower emblem and cameras hero repeat logged. Reward 3."
   }
  ],
  "feedback": [
@@ -580,6 +646,27 @@
     "Control room clip still shows blur patches. Next run: keep the For you line.",
     "28 of 35 posters gated only from frames. Next run: open five more at full size.",
     "Search Console Queries still empty. Next run: read again.",
+    "request-form and analytics open. Next run: keep the two For you lines."
+   ]
+  },
+  {
+   "episode": 8,
+   "day": "2026-11-27",
+   "verdict": "pending",
+   "status": "open",
+   "went_well": [
+    "Every ep7 fix line acted on and the caption fix verified on the domain",
+    "Deploy green first run",
+    "Full length phone read of three pages",
+    "First real Search Console queries recorded"
+   ],
+   "not_good": [
+    "Five locked terms still absent after eight runs. Next run: Saturday citation check, entity indexing requests, sovereign AI hardware note on 1 Dec.",
+    "Building emblem on a tower in riyadh-day and the home montage. Next run: time ranged blur that follows the tower, originals in raw/pre-ep9, checked frame by frame.",
+    "/products/cameras/ hero repeats a sentence. Next run: drop the repeated lede sentence.",
+    "23 of 35 posters ungated at full size. Next run: alula, mojave-hwy, truck-depot, substation, cell-tower.",
+    "Non brand queries off target. Next run: read Queries again.",
+    "Control room blur patches. Next run: keep the For you line.",
     "request-form and analytics open. Next run: keep the two For you lines."
    ]
   }

@@ -112,9 +112,9 @@
   "page": "",
   "defect": "home at 375: headquarters captions (grey 12.5px) over bright sky and buildings read under 4.5:1",
   "fix": "",
-  "state": "open",
+  "state": "fixed",
   "day": "2026-11-27",
-  "note": "home at 375: headquarters captions (grey 12.5px) over bright sky and buildings read under 4.5:1"
+  "note": "caption scrim deepened and text white 13px, c5406be; raw/shots/2026-11-27/hq-before-after.png"
  },
  {
   "id": "riyadh-tower-emblem",
