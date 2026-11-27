@@ -91,31 +91,31 @@
   },
   {
    "first_seen": "2026-11-25",
-   "last_seen": "2026-11-26",
+   "last_seen": "2026-11-27",
    "status": "open",
    "kind": "page",
    "term": "/",
    "page": "/",
    "clicks": 0,
-   "impressions": 6,
-   "position": 1.8,
-   "window_days": 28
-  },
-  {
-   "first_seen": "2026-11-24",
-   "last_seen": "2026-11-24",
-   "status": "open",
-   "kind": "page",
-   "term": "/solutions/",
-   "page": "/solutions/",
-   "clicks": 0,
-   "impressions": 1,
+   "impressions": 7,
    "position": 2.0,
    "window_days": 28
   },
   {
    "first_seen": "2026-11-24",
-   "last_seen": "2026-11-24",
+   "last_seen": "2026-11-27",
+   "status": "open",
+   "kind": "page",
+   "term": "/solutions/",
+   "page": "/solutions/",
+   "clicks": 0,
+   "impressions": 2,
+   "position": 16.0,
+   "window_days": 28
+  },
+  {
+   "first_seen": "2026-11-24",
+   "last_seen": "2026-11-27",
    "status": "open",
    "kind": "page",
    "term": "/build/",
@@ -127,19 +127,19 @@
   },
   {
    "first_seen": "2026-11-24",
-   "last_seen": "2026-11-24",
+   "last_seen": "2026-11-27",
    "status": "open",
    "kind": "page",
    "term": "/about/",
    "page": "/about/",
    "clicks": 0,
-   "impressions": 1,
-   "position": 4.0,
+   "impressions": 2,
+   "position": 3.0,
    "window_days": 28
   },
   {
    "first_seen": "2026-11-24",
-   "last_seen": "2026-11-24",
+   "last_seen": "2026-11-27",
    "status": "open",
    "kind": "page",
    "term": "/products/command/",
@@ -151,7 +151,7 @@
   },
   {
    "first_seen": "2026-11-25",
-   "last_seen": "2026-11-25",
+   "last_seen": "2026-11-27",
    "status": "open",
    "kind": "page",
    "term": "/solutions/airgap/",
@@ -163,7 +163,7 @@
   },
   {
    "first_seen": "2026-11-24",
-   "last_seen": "2026-11-24",
+   "last_seen": "2026-11-27",
    "status": "open",
    "kind": "page",
    "term": "/supply-chain/",
@@ -175,7 +175,7 @@
   },
   {
    "first_seen": "2026-11-25",
-   "last_seen": "2026-11-25",
+   "last_seen": "2026-11-27",
    "status": "open",
    "kind": "page",
    "term": "/products/cameras/",
@@ -187,7 +187,7 @@
   },
   {
    "first_seen": "2026-11-24",
-   "last_seen": "2026-11-24",
+   "last_seen": "2026-11-27",
    "status": "open",
    "kind": "page",
    "term": "/solutions/efficiency/",
@@ -199,7 +199,7 @@
   },
   {
    "first_seen": "2026-11-24",
-   "last_seen": "2026-11-24",
+   "last_seen": "2026-11-27",
    "status": "open",
    "kind": "page",
    "term": "/solutions/compliance/",
@@ -207,6 +207,90 @@
    "clicks": 0,
    "impressions": 1,
    "position": 10.0,
+   "window_days": 28
+  },
+  {
+   "first_seen": "2026-11-27",
+   "last_seen": "2026-11-27",
+   "status": "open",
+   "kind": "query",
+   "term": "arabic equipment for remote workers",
+   "page": "",
+   "clicks": 0,
+   "impressions": 1,
+   "position": 7.0,
+   "window_days": 28
+  },
+  {
+   "first_seen": "2026-11-27",
+   "last_seen": "2026-11-27",
+   "status": "open",
+   "kind": "query",
+   "term": "what is an avi truck",
+   "page": "/lab/what-a-truck-will-tell-you/",
+   "clicks": 0,
+   "impressions": 1,
+   "position": 88.0,
+   "window_days": 28
+  },
+  {
+   "first_seen": "2026-11-27",
+   "last_seen": "2026-11-27",
+   "status": "open",
+   "kind": "query",
+   "term": "technical option saudi arabia ai telematics",
+   "page": "/products/telematics/",
+   "clicks": 0,
+   "impressions": 1,
+   "position": 94.0,
+   "window_days": 28
+  },
+  {
+   "first_seen": "2026-11-27",
+   "last_seen": "2026-11-27",
+   "status": "open",
+   "kind": "page",
+   "term": "/products/workforce/",
+   "page": "/products/workforce/",
+   "clicks": 0,
+   "impressions": 1,
+   "position": 7.0,
+   "window_days": 28
+  },
+  {
+   "first_seen": "2026-11-27",
+   "last_seen": "2026-11-27",
+   "status": "open",
+   "kind": "page",
+   "term": "/hardware/guide-hub/",
+   "page": "/hardware/guide-hub/",
+   "clicks": 0,
+   "impressions": 1,
+   "position": 8.0,
+   "window_days": 28
+  },
+  {
+   "first_seen": "2026-11-27",
+   "last_seen": "2026-11-27",
+   "status": "open",
+   "kind": "page",
+   "term": "/lab/what-a-truck-will-tell-you/",
+   "page": "/lab/what-a-truck-will-tell-you/",
+   "clicks": 0,
+   "impressions": 1,
+   "position": 88.0,
+   "window_days": 28
+  },
+  {
+   "first_seen": "2026-11-27",
+   "last_seen": "2026-11-27",
+   "status": "open",
+   "kind": "page",
+   "term": "/products/telematics/",
+   "page": "/products/telematics/",
+   "clicks": 0,
+   "impressions": 1,
+   "position": 94.0,
    "window_days": 28
   }
  ],
@@ -973,6 +1057,126 @@
    "google_position": 1,
    "top10": [
     "arabamerican.ai"
+   ],
+   "page": "/",
+   "gsc_impressions": null,
+   "gsc_position": null
+  },
+  {
+   "day": "2026-11-27",
+   "term": "sovereign AI hardware",
+   "google_position": null,
+   "top10": [
+    "cisco.com",
+    "amd.com",
+    "dell.com",
+    "redhat.com",
+    "mistral.ai",
+    "premai.io",
+    "azure.microsoft.com",
+    "oracle.com",
+    "oracle.com",
+    "lyzr.ai"
+   ],
+   "page": "/hardware/",
+   "gsc_impressions": null,
+   "gsc_position": null
+  },
+  {
+   "day": "2026-11-27",
+   "term": "edge AI devices",
+   "google_position": null,
+   "top10": [
+    "redhat.com",
+    "reddit.com",
+    "nvidia.com",
+    "ultralytics.com",
+    "ibm.com",
+    "docs.edgeimpulse.com",
+    "arm.com",
+    "ti.com",
+    "aws.amazon.com",
+    "intel.com"
+   ],
+   "page": "/products/",
+   "gsc_impressions": null,
+   "gsc_position": null
+  },
+  {
+   "day": "2026-11-27",
+   "term": "air gapped AI",
+   "google_position": null,
+   "top10": [
+    "h2o.ai",
+    "iternal.ai",
+    "domino.ai",
+    "cyberdefensemagazine.com",
+    "dspace.mit.edu",
+    "hpe.com",
+    "mattermost.com",
+    "community.openai.com",
+    "ibl.ai",
+    "airgap.computer"
+   ],
+   "page": "/solutions/airgap/",
+   "gsc_impressions": null,
+   "gsc_position": null
+  },
+  {
+   "day": "2026-11-27",
+   "term": "edge AI camera",
+   "google_position": null,
+   "top10": [
+    "advantech.com",
+    "everfocus.com",
+    "surveillancesecure.com",
+    "i-pro.com",
+    "hailo.ai",
+    "ieeexplore.ieee.org",
+    "newsroom.axis.com",
+    "camthink.ai",
+    "reddit.com",
+    "vvdntech.com"
+   ],
+   "page": "/products/cameras/",
+   "gsc_impressions": null,
+   "gsc_position": null
+  },
+  {
+   "day": "2026-11-27",
+   "term": "sovereign edge AI",
+   "google_position": null,
+   "top10": [
+    "nutanix.com",
+    "redhat.com",
+    "scalecomputing.com",
+    "azure.microsoft.com",
+    "cgi.com",
+    "cisco.com",
+    "soff.se",
+    "bdhcorporation.com",
+    "reddit.com",
+    "bdhcorporation.com"
+   ],
+   "page": "/solutions/sovereignty/",
+   "gsc_impressions": null,
+   "gsc_position": null
+  },
+  {
+   "day": "2026-11-27",
+   "term": "Arab American Instruments",
+   "google_position": 1,
+   "top10": [
+    "arabamerican.ai",
+    "arabamerican.ai",
+    "towerphs.com",
+    "arabamerica.com",
+    "arabamericafoundation.org",
+    "en.wikipedia.org",
+    "scalar.usc.edu",
+    "arabamerican.ai",
+    "arabinstruments.com",
+    "cyso.org"
    ],
    "page": "/",
    "gsc_impressions": null,

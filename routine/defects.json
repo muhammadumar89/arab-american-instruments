@@ -106,5 +106,32 @@
   "state": "fixed",
   "day": "2026-11-26",
   "note": "film header text over bright monitors at 1440 on /platform/; left side scrim above 600px, adfc9a0; raw/shots/2026-11-26/after-platform-1440.png"
+ },
+ {
+  "id": "hq-caption-bright",
+  "page": "",
+  "defect": "home at 375: headquarters captions (grey 12.5px) over bright sky and buildings read under 4.5:1",
+  "fix": "",
+  "state": "open",
+  "day": "2026-11-27",
+  "note": "home at 375: headquarters captions (grey 12.5px) over bright sky and buildings read under 4.5:1"
+ },
+ {
+  "id": "riyadh-tower-emblem",
+  "page": "",
+  "defect": "riyadh-day clip and the first second of home-montage show a building emblem on a tower (letters unreadable, mark recognisable); camera tilts so a blur must follow the tower; next run: time ranged blur on both clips and posters, checked frame by frame",
+  "fix": "",
+  "state": "open",
+  "day": "2026-11-27",
+  "note": "riyadh-day clip and the first second of home-montage show a building emblem on a tower (letters unreadable, mark recognisable); camera tilts so a blur must follow the tower; next run: time ranged blur on both clips and posters, checked frame by frame"
+ },
+ {
+  "id": "cameras-hero-repeat",
+  "page": "",
+  "defect": "/products/cameras/ hero says the same sentence twice (answer line then lede); owning page left alone this run per ep7 feedback; merge when page work resumes",
+  "fix": "",
+  "state": "open",
+  "day": "2026-11-27",
+  "note": "/products/cameras/ hero says the same sentence twice (answer line then lede); owning page left alone this run per ep7 feedback; merge when page work resumes"
  }
 ]
