@@ -57,10 +57,10 @@
    "first_seen": "2026-11-22",
    "last_seen": "2026-11-22",
    "last_fix": {
-    "commit": "adfc9a0",
-    "what": "stepping stone lab note How to choose an edge AI camera, shown on /products/cameras/ and linked back",
+    "commit": "89c448a",
+    "what": "hero lede no longer repeats the answer sentence",
     "clicks_at_fix": 0,
-    "day": "2026-11-26"
+    "day": "2026-11-28"
    },
    "status": "open"
   },

@@ -510,6 +510,56 @@
    "gap_records": [],
    "reward": 3,
    "summary": "Episode 8 (Friday). Brand position 1; five locked terms absent from the top 30. Search Console 28 days: 0 clicks, 11 impressions (+5), position 21.1; first three queries. Shipped c5406be: video panel captions deeper scrim and white text. Riyadh tower emblem and cameras hero repeat logged. Reward 3."
+  },
+  {
+   "episode": 9,
+   "day": "2026-11-28",
+   "run_id": "aai-site-daily-2026-11-28",
+   "kind": "routine",
+   "backlog_done": [
+    "analytics",
+    "request-form"
+   ],
+   "channels": {
+    "google": {
+     "sovereign AI hardware": null,
+     "edge AI devices": null,
+     "air gapped AI": null,
+     "edge AI camera": null,
+     "sovereign edge AI": null,
+     "Arab American Instruments (brand)": 1
+    },
+    "gsc": {
+     "clicks": 0,
+     "impressions": 19,
+     "position": 31.2,
+     "window": "28d"
+    },
+    "links": "gsc external 0, bing null (signed out), github 0, earned 0",
+    "design": "tower emblem filled out of three clips and two posters; form states; 89c448a",
+    "ai_citations": {
+     "rows": 60,
+     "answered": 58,
+     "cited_home": 14
+    },
+    "inbound": "measured from 28 Nov; 0 real requests"
+   },
+   "defects": [
+    "riyadh-tower-emblem fixed",
+    "cameras-hero-repeat fixed",
+    "control-room-blur open",
+    "claude_websearch brand answers without us"
+   ],
+   "decisions": [],
+   "feedback_applied": [
+    "623226b5-91e7-410d-8489-bba0965f9404"
+   ],
+   "lessons_added": [
+    "ep9 batch timeouts"
+   ],
+   "gap_records": [],
+   "reward": 7,
+   "summary": "Episode 9: backlog 7 of 7; form endpoint, GA4, tower emblem, cameras lede live in 89c448a; 60 citation rows, cited in 14 of 58; full row in Engram 2fa6e77f"
   }
  ],
  "feedback": [
@@ -669,6 +719,30 @@
     "Control room blur patches. Next run: keep the For you line.",
     "request-form and analytics open. Next run: keep the two For you lines."
    ]
+  },
+  {
+   "episode": 9,
+   "day": "2026-11-28",
+   "verdict": "pending",
+   "status": "open",
+   "went_well": [
+    "backlog closed 7 of 7",
+    "four engines answer brand questions with us",
+    "tower emblem removed cleanly",
+    "deploy green first run",
+    "first locked term in Search Console"
+   ],
+   "not_good": [
+    "control room clip not replaced. Next run: search a different subject for Command and gate at full size",
+    "Claude web search answers b1 to b3 without us. Next run: check that index view; re-ask 5 Dec",
+    "locked terms absent from top 30. Next run: one fix on /solutions/airgap/; note on 1 Dec",
+    "Bing Webmaster Tools signed out. Next run: re-check",
+    "Perplexity stalled on c8 c9. Next run: ask them first on 5 Dec",
+    "GA4 no data yet, time zone Los Angeles. Next run: Realtime check, set Riyadh",
+    "form mail from codeatoms.ai sender. Next run: read Lambda log, propose arabamerican.ai sender DNS",
+    "truck-depot signboard. Next run: open other frames"
+   ],
+   "engram_id": "42da7ca6-5b00-43f8-abe7-7902404cdcf9"
   }
  ],
  "seen": {
@@ -718,6 +792,16 @@
    "status": "done",
    "day": "2026-11-24",
    "note": "24 Nov: live at 375 only the hero clip loads before scroll (1 of 26) and phones get home-montage-sm.mp4 1.0 MB instead of 4.1 MB (f1ff87d); posters on all; substation and truck-depot re-encoded 23 Nov"
+  },
+  "analytics": {
+   "status": "done",
+   "day": "2026-11-28",
+   "note": "28 Nov: own GA4 property 'Arab American Instruments (arabamerican.ai)' created in the signed in Analytics account, stream arabamerican.ai web, G-E429KMP9BY; tag live on every page (89c448a); first data not yet seen"
+  },
+  "request-form": {
+   "status": "done",
+   "day": "2026-11-28",
+   "note": "28 Nov: /build/ posts to Lambda aai-deployment-request (us-east-1, hyper-fde), SES to hello@codeninjaconsulting.com from noreply@codeatoms.ai; bot drop, validation, CORS and one real send tested (200); live 89c448a"
   }
  }
 }

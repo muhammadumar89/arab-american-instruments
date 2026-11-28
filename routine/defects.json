@@ -121,17 +121,26 @@
   "page": "",
   "defect": "riyadh-day clip and the first second of home-montage show a building emblem on a tower (letters unreadable, mark recognisable); camera tilts so a blur must follow the tower; next run: time ranged blur on both clips and posters, checked frame by frame",
   "fix": "",
-  "state": "open",
-  "day": "2026-11-27",
-  "note": "riyadh-day clip and the first second of home-montage show a building emblem on a tower (letters unreadable, mark recognisable); camera tilts so a blur must follow the tower; next run: time ranged blur on both clips and posters, checked frame by frame"
+  "state": "fixed",
+  "day": "2026-11-28",
+  "note": "emblem and lettering filled from the tower face on every frame in riyadh-day, home-montage, home-montage-sm and both posters, 89c448a; raw/shots/2026-11-28/tower-before.png, tower-after.png; originals raw/pre-ep9"
  },
  {
   "id": "cameras-hero-repeat",
   "page": "",
   "defect": "/products/cameras/ hero says the same sentence twice (answer line then lede); owning page left alone this run per ep7 feedback; merge when page work resumes",
   "fix": "",
+  "state": "fixed",
+  "day": "2026-11-28",
+  "note": "lede shortened so the sentence is said once, 89c448a; title and H1 untouched"
+ },
+ {
+  "id": "control-room-blur",
+  "page": "",
+  "defect": "blur patches in the control-room clip still visible at desktop width; 28 Nov two Pexels searches found no control room clip free of desk signs and readable screens; next run try a dark monitoring wall with no people or a different subject for Command",
+  "fix": "",
   "state": "open",
-  "day": "2026-11-27",
-  "note": "/products/cameras/ hero says the same sentence twice (answer line then lede); owning page left alone this run per ep7 feedback; merge when page work resumes"
+  "day": "2026-11-28",
+  "note": "blur patches in the control-room clip still visible at desktop width; 28 Nov two Pexels searches found no control room clip free of desk signs and readable screens; next run try a dark monitoring wall with no people or a different subject for Command"
  }
 ]
