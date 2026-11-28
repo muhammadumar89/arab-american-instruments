@@ -21,6 +21,9 @@ BASE = os.environ.get("AAI_BASE", "")
 SITE_URL = os.environ.get("AAI_SITE_URL", "https://arabamerican.ai")
 DOMAIN = "arabamerican.ai"
 CONTACT = "hello@codeninjaconsulting.com"  # inbound router; change when AAI has its own mailbox
+# /build/ posts here: Lambda aai-deployment-request (us-east-1, profile hyper-fde), source routine/request_lambda/handler.py,
+# SES to CONTACT. Empty string falls back to the visitor's email app (the behaviour before 28 Nov 2026).
+FORM_API = "https://rcf6q66ophmwuhi2cgtc4lwlvu0xxqtd.lambda-url.us-east-1.on.aws/"
 
 TAGLINE = "Low-power edge devices for sensing, Satcoms and RT controls in Air Gapped Environments."
 
@@ -415,7 +418,7 @@ CATEGORIES = [
         "slug": "cameras", "name": "Vision at the Edge", "film": "dashcam-desert",
         "tag": "Cameras that run vision models on the unit",
         "title": "Vision models on the device. Nothing leaves that you did not choose.",
-        "body": "Cab and road cameras, and fixed cameras for gates, yards and lines. The vision models run on the unit, so only events and short clips leave it, and the video stays on your site.",
+        "body": "Cab and road cameras, and fixed cameras for gates, yards and lines, each carrying its own vision model.",
         "devices": ["fleet-vision-unit", "site-camera"],
         "outcomes": ["safety", "security", "compliance"],
     },
@@ -632,14 +635,21 @@ SCRIPT = '''<script>
       if(x.isIntersecting){ load(v); var p=v.play(); if(p&&p.catch){p.catch(function(){});} } else { v.pause(); } }); },{rootMargin:'200px 0px'});
     vids.forEach(function(v){ io.observe(v); });
   }
-  var f=document.getElementById('buildform');
+  var f=document.getElementById('buildform'), t0=Date.now();
   if(f){ f.addEventListener('submit',function(ev){ ev.preventDefault();
-    var d=new FormData(f), lines=[]; d.forEach(function(val,k){ if(val) lines.push(k+': '+val); });
-    var subj='Build request: '+(d.get('Organisation')||'')+' '+(d.get('Platform')||'');
-    window.location.href='mailto:%s?subject='+encodeURIComponent(subj)+'&body='+encodeURIComponent(lines.join('\\n'));
-    f.querySelector('.sent').hidden=false; }); }
+    var d=new FormData(f), o={}, lines=[]; d.forEach(function(val,k){ if(val){ o[k]=val; if(k!=='website') lines.push(k+': '+val); } });
+    var sent=f.querySelector('.sent'), fail=f.querySelector('.fail'), b=f.querySelector('button[type=submit]'), api='%s';
+    if(!api){ var subj='Deployment request: '+(d.get('Organisation')||'')+' '+(d.get('Platform')||'');
+      window.location.href='mailto:%s?subject='+encodeURIComponent(subj)+'&body='+encodeURIComponent(lines.join('\\n')); sent.hidden=false; return; }
+    o.elapsed=Date.now()-t0; o.page=location.href; b.disabled=true; b.textContent='Sending'; fail.hidden=true;
+    fetch(api,{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify(o)})
+      .then(function(r){ return r.json().then(function(j){ return j; }); })
+      .then(function(j){ if(!j||!j.ok){ throw new Error((j&&j.error)||''); }
+        f.reset(); sent.hidden=false; b.textContent='Request sent'; if(window.gtag){ gtag('event','generate_lead',{form:'build'}); } })
+      .catch(function(err){ b.disabled=false; b.textContent='Send the request'; if(err&&err.message){ fail.textContent=err.message; } fail.hidden=false; });
+  }); }
 })();
-</script>''' % CONTACT
+</script>''' % (FORM_API, CONTACT)
 
 
 # Search engine ownership proofs (Search Console URL prefix property, Bing Webmaster Tools). Keep them: removal unverifies.
@@ -825,6 +835,12 @@ def to_md(path, full, desc, body):
     return f"# {full}\n\n> {desc}\n\nSource: {SITE_URL}{path}\n\n" + m.text()
 
 
+# Google Analytics 4: property "Arab American Instruments (arabamerican.ai)" in the signed in Analytics account, its own
+# property, created 28 Nov 2026 by the daily run. Empty GA4_ID removes the tag from every page.
+GA4_ID = "G-E429KMP9BY"
+GA4_TAG = (f'<script async src="https://www.googletagmanager.com/gtag/js?id={GA4_ID}"></script>'
+           f"<script>window.dataLayer=window.dataLayer||[];function gtag(){{dataLayer.push(arguments);}}gtag('js',new Date());gtag('config','{GA4_ID}');</script>") if GA4_ID else ""
+
 MD = []  # (path, full title, desc, markdown) for llms.txt, llms-full.txt and index.md copies
 
 
@@ -844,6 +860,7 @@ def page(path, title, desc, body, active="", ld=None):
 {f'<meta name="msvalidate.01" content="{BING_VERIFY}">' + chr(10) if path == "/" else ""}{ld_tags(path, title, ld)}<link rel="icon" href="{u("/assets/img/mark.svg")}" type="image/svg+xml">
 {FONTS}
 <link rel="stylesheet" href="{u("/assets/site.css")}">
+{GA4_TAG}
 </head><body>
 {header(active)}
 <main>{body}</main>
@@ -1326,8 +1343,10 @@ def build_page():
 <fieldset><legend>How many units to start?</legend>{qopts}</fieldset>
 <label>Timeline<input name="Timeline" placeholder="For example: pilot in Q1 2027"></label>
 <button class="btn" type="submit">Send the request</button>
-<p class="fine">This opens your email app with the request filled in, addressed to {CONTACT}. Nothing is stored on this site.</p>
-<p class="sent" hidden>Your email app should now be open. If it did not open, write to {CONTACT}.</p>
+<input class="hp" name="website" tabindex="-1" autocomplete="off" aria-hidden="true">
+<p class="fine">Your request goes straight to our engineers. Nothing is stored on this site.</p>
+<p class="sent" hidden>Request received. An engineer will reply by email.</p>
+<p class="fail" hidden>That did not send. Please write to {CONTACT}.</p>
 </form></div></div></section>
 <script>(function(){{var m=location.search.match(/platform=([a-z-]+)/);if(!m)return;var map={json.dumps({p["slug"]: p["name"] for p in PRODUCTS})};var s=document.querySelector('select[name=Platform]');if(map[m[1]])s.value=map[m[1]];}})();</script>'''
     head = page_head("Deployments", "Request a deployment.", "From a single pilot to a national fleet, built inside your perimeter. You keep the design, the parts list and the keys.")

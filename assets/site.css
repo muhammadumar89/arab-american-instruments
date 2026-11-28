@@ -332,6 +332,9 @@ legend{font-size:13.5px;font-weight:500;padding:0 6px}
 form .btn{align-self:flex-start;background:var(--ink);color:#fff;border-color:var(--ink)}
 form .fine{color:var(--pmute)!important}
 .sent{color:#1f6b4e!important}
+.fail{color:#a4262c!important;font-size:14px;margin-top:12px}
+.hp{position:absolute!important;left:-9999px;width:1px;height:1px;opacity:0}
+form button[disabled]{opacity:.6;cursor:default}
 
 /* footer */
 .foot{background:var(--bg);border-top:1px solid var(--rule);padding:64px 0 28px;font-size:14px}

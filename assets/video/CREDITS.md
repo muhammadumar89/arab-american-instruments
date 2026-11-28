@@ -66,3 +66,5 @@ Pexels License, chosen 14 Nov 2026, gated for brands, signage and insignia. Reje
 
 Team portraits in assets/img/team are the founders' own photographs, as used on codeatoms.ai/about.
 - `assets/img/team/ahsan-jamil.jpg`: portrait from https://saiventurecap.com/our-team/, used with the board member's role on CodeNinja's board.
+
+28 Nov 2026: riyadh-day, home-montage and home-montage-sm re-encoded with the tower emblem and lettering filled from the tower face on every frame it shows (posters too). Originals kept in raw/pre-ep9, method in raw/track_fill_ep9.py.
